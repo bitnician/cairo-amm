@@ -1,20 +1,20 @@
-import 'hardhat-typechain';
-import '@nomiclabs/hardhat-ethers';
-import '@nomiclabs/hardhat-waffle';
-import '@nomiclabs/hardhat-etherscan';
+import "@typechain/hardhat";
+import "@nomiclabs/hardhat-ethers";
+import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-etherscan";
 
-import env from 'dotenv';
+import env from "dotenv";
 env.config();
 
 const DEFAULT_COMPILER_SETTINGS = {
-  version: '0.8.6',
+  version: "0.8.6",
   settings: {
     optimizer: {
       enabled: true,
       runs: 1_000_000,
     },
     metadata: {
-      bytecodeHash: 'none',
+      bytecodeHash: "none",
     },
   },
 };
@@ -62,8 +62,8 @@ export default {
   },
   watcher: {
     test: {
-      tasks: [{ command: 'test', params: { testFiles: ['{path}'] } }],
-      files: ['./test/**/*'],
+      tasks: [{ command: "test", params: { testFiles: ["{path}"] } }],
+      files: ["./test/**/*"],
       verbose: true,
     },
   },
