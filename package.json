@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "hh run ./scripts/deploy-script.ts --network bsctest"
+    "deploy": "npx hardhat starknet-deploy starknet-artifacts/contracts/test/Account.cairo/  --inputs '1 2 3'",
+    "compile": "npx hardhat starknet-compile"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,8 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.3.2",
-    "dotenv": "^10.0.0"
+    "@shardlabs/starknet-hardhat-plugin": "^0.3.3",
+    "dotenv": "^10.0.0",
+    "starknet": "^2.3.1"
   }
 }
