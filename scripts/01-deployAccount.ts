@@ -37,14 +37,15 @@ async function main() {
     compiledArgentAccount,
     compileCalldata({
       signer: keys.admin.publicKey,
-      guardian: addresses.alpha.adminGuardian,
+      guardian: "0",
     }),
-    keys.admin.publicKey
+    addresses.alpha.adminAccount //salt
   );
 
   console.log("Deployed contract with status: ", accountCode);
   console.log("Account is deployed at: ", accountAddress);
   console.log("Transaction hash: ", accountTxHash);
+  console.log("get new status: ", `starknet tx_status --hash ${accountTxHash}`);
 }
 
 main()

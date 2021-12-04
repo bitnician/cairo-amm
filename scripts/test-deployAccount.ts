@@ -42,7 +42,7 @@ async function main() {
     addresses.alpha.adminAccount
   );
 
-  const token0 = new Contract(compiledErc20.abi, addresses.alpha.token0);
+  const token0 = new Contract(compiledErc20.abi, addresses.alpha.token1);
 
   const { res: nonceHex } = await account.call("get_nonce");
   const nonce = number.toBN(nonceHex as string).toString();
@@ -57,30 +57,7 @@ async function main() {
       .filter(([k]) => k !== "type")
       .map(([, v]) => number.toBN(v).toString())[0];
 
-    const msgHash = encode.addHexPrefix(
-      hash.hashMessage(
-        account.connectedTo,
-        addresses.alpha.token0,
-        stark.getSelectorFromName("transfer"),
-        [addresses.alpha.token0, "10"],
-        nonce.toString()
-      )
-    );
-
-    const starkKeyPair = ec.getKeyPair(admin.privateKey);
-
-    const { r, s } = ec.sign(starkKeyPair, msgHash);
-
-    // const { code, transaction_hash } = await account.invoke(
-    //   "execute",
-    //   {
-    //     to: addresses.alpha.token0,
-    //     selector: stark.getSelectorFromName("transfer"),
-    //     calldata: [erc20Address, "10"],
-    //     nonce: nonce.toString(),
-    //   },
-    //   [number.toHex(r), number.toHex(s)]
-    // );
+    console.log(adminBalance);
   }
 
   // const adminBalance = number.toBN(adminBalanceHex.low as string).toString();

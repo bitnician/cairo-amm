@@ -45,6 +45,7 @@ async function main() {
   console.log("Deployed contract with status: ", poolCode);
   console.log("Pool is deployed at: ", poolAddress);
   console.log("Transaction hash: ", poolTxHash);
+  console.log("get new status: ", `starknet tx_status --hash ${poolTxHash}`);
 }
 
 main()

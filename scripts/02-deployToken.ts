@@ -44,6 +44,7 @@ async function main() {
   console.log("Deployed contract with status: ", token0Code);
   console.log("Token0 is deployed at: ", token0Address);
   console.log("Transaction hash: ", token0TxHash);
+  console.log("get new status: ", `starknet tx_status --hash ${token0TxHash}`);
 
   const {
     code: token1Code,
@@ -60,6 +61,7 @@ async function main() {
   console.log("Deployed contract with status: ", token1Code);
   console.log("Token01 is deployed at: ", token1Address);
   console.log("Transaction hash: ", token1TxHash);
+  console.log("get new status: ", `starknet tx_status --hash ${token1TxHash}`);
 }
 
 main()

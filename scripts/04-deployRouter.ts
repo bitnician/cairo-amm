@@ -44,6 +44,7 @@ async function main() {
   console.log("Deployed contract with status: ", routerCode);
   console.log("Router is deployed at: ", routerAddress);
   console.log("Transaction hash: ", routerTxHash);
+  console.log("get new status: ", `starknet tx_status --hash ${routerTxHash}`);
 }
 
 main()

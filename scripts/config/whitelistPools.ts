@@ -10,8 +10,8 @@ import {
   hash,
   stark,
   ec,
+  number,
 } from "starknet";
-import { number } from "starknet/dist";
 import { addresses, keys } from "../data/data";
 
 async function main() {
@@ -34,10 +34,8 @@ async function main() {
 
   const adminKeyPair = ec.getKeyPair(keys.admin.privateKey);
 
-  const adminStarkKeyPub = ec.getStarkKey(adminKeyPair);
-
   const { nonce } = await account.call("get_nonce");
-
+  number.toBN;
   const msgHash = encode.addHexPrefix(
     hash.hashMessage(
       account.connectedTo as string,
@@ -66,6 +64,10 @@ async function main() {
   );
   console.log(`Transaction hash: ${transaction_hash}`);
   console.log(`Transaction status: ${code}`);
+  console.log(
+    "get new status: ",
+    `starknet tx_status --hash ${transaction_hash}`
+  );
 }
 
 main()

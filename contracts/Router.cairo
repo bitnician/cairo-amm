@@ -84,22 +84,22 @@ end
 func whitelist_pool{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         pool_contract_address) -> ():
     alloc_locals
-    # only_owner()
+    only_owner()
 
-    # let (token0) = IPool.get_token0(pool_contract_address)
-    # let (token1) = IPool.get_token1(pool_contract_address)
+    let (token0) = IPool.get_token0(pool_contract_address)
+    let (token1) = IPool.get_token1(pool_contract_address)
 
-    # assert_not_zero(token0)
-    # assert_not_zero(token1)
+    assert_not_zero(token0)
+    assert_not_zero(token1)
 
-    # # pool is not whitelisted yet
-    # let (res) = whitlisted_pool.read(pool_contract_address)
-    # assert res = 0
+    # pool is not whitelisted yet
+    let (res) = whitlisted_pool.read(pool_contract_address)
+    assert res = 0
 
-    # whitlisted_pool.write(pool_contract_address, 1)
+    whitlisted_pool.write(pool_contract_address, 1)
 
-    # pool_address.write(token0, token1, pool_contract_address)
-    # pool_address.write(token1, token0, pool_contract_address)
+    pool_address.write(token0, token1, pool_contract_address)
+    pool_address.write(token1, token0, pool_contract_address)
 
     return ()
 end
