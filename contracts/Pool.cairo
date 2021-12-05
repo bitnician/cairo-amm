@@ -86,15 +86,15 @@ end
 @view
 func get_token0{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
         res : felt):
-    let (_token0) = token0.read()
-    return (_token0)
+    let (res) = token0.read()
+    return (res)
 end
 
 @view
 func get_token1{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
         res : felt):
-    let (_token1) = token1.read()
-    return (_token1)
+    let (res) = token1.read()
+    return (res)
 end
 
 @external
@@ -217,6 +217,9 @@ end
 func swap{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         amount0_out : Uint256, amount1_out : Uint256, to : felt, pool_contract_address : felt) -> (
         ):
+
+        
+
     alloc_locals
 
     # Get pool reserves

@@ -22,25 +22,50 @@ const DEFAULT_COMPILER_SETTINGS = {
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
-export default {
+// export default {
+//   networks: {
+//     devnet: {
+//       url: "http://localhost:5000",
+//     },
+//     hardhat: {
+//       allowUnlimitedContractSize: false,
+//     },
+//   },
+//   mocha: {
+//     starknetNetwork: "devnet",
+//   },
+//   etherscan: {
+//     // Your API key for Etherscan
+//     // Obtain one at https://etherscan.io/
+//     apiKey: process.env.ETHERSCAN_API_KEY,
+//   },
+//   solidity: {
+//     compilers: [DEFAULT_COMPILER_SETTINGS],
+//   },
+//   cairo: {
+//     version: "0.6.1",
+//   },
+
+//   watcher: {
+//     test: {
+//       tasks: [{ command: "test", params: { testFiles: ["{path}"] } }],
+//       files: ["./test/**/*"],
+//       verbose: true,
+//     },
+//   },
+// };
+
+module.exports = {
+  cairo: {
+    version: "0.6.1",
+  },
   networks: {
-    hardhat: {
-      allowUnlimitedContractSize: false,
+    devnet: {
+      url: "http://localhost:5000",
     },
   },
-  etherscan: {
-    // Your API key for Etherscan
-    // Obtain one at https://etherscan.io/
-    apiKey: process.env.ETHERSCAN_API_KEY,
-  },
-  solidity: {
-    compilers: [DEFAULT_COMPILER_SETTINGS],
-  },
-  watcher: {
-    test: {
-      tasks: [{ command: "test", params: { testFiles: ["{path}"] } }],
-      files: ["./test/**/*"],
-      verbose: true,
-    },
+  // Delete it if you want to test with starknet alpha
+  mocha: {
+    starknetNetwork: "devnet",
   },
 };
