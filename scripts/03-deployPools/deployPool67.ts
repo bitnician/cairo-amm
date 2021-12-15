@@ -12,7 +12,7 @@ import {
   defaultProvider,
   compileCalldata,
 } from "starknet";
-import { addresses, keys } from "./data/data";
+import { addresses, keys } from "../data/data";
 
 async function main() {
   // Deploy the Account
@@ -22,7 +22,7 @@ async function main() {
       .readFileSync(
         path.resolve(
           __dirname,
-          "../starknet-artifacts/contracts/Pool.cairo/Pool.json"
+          "../../starknet-artifacts/contracts/Pool.cairo/Pool.json"
         )
       )
 
@@ -36,8 +36,8 @@ async function main() {
   } = await defaultProvider.deployContract(
     compiledPool,
     compileCalldata({
-      token0_address: addresses.alpha.token0,
-      token1_address: addresses.alpha.token1,
+      token0_address: addresses.alpha.token6,
+      token1_address: addresses.alpha.token7,
     }),
     keys.admin.publicKey //salt
   );

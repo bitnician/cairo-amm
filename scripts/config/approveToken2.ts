@@ -1,8 +1,6 @@
 import fs from "fs";
 import path from "path";
 import {
-  Signer,
-  defaultProvider,
   Contract,
   CompiledContract,
   json,
@@ -11,8 +9,9 @@ import {
   stark,
   ec,
   number,
+  uint256,
 } from "starknet";
-import { addresses, keys } from "../data/data";
+import { addresses, keys, pool } from "../data/data";
 
 async function main() {
   const compiledArgentAccount: CompiledContract = json.parse(
@@ -35,13 +34,13 @@ async function main() {
   const adminKeyPair = ec.getKeyPair(keys.admin.privateKey);
 
   const { nonce } = await account.call("get_nonce");
-  number.toBN;
+
   const msgHash = encode.addHexPrefix(
     hash.hashMessage(
       account.connectedTo as string,
-      addresses.alpha.router,
-      stark.getSelectorFromName("whitelist_pool"),
-      [addresses.alpha.pool],
+      addresses.alpha.token2,
+      stark.getSelectorFromName("approve"),
+      [addresses.alpha.router, pool.token2Balance, "0"],
       nonce.toString()
     )
   );
@@ -51,21 +50,18 @@ async function main() {
   const { code, transaction_hash } = await account.invoke(
     "execute",
     {
-      to: addresses.alpha.router,
-      selector: stark.getSelectorFromName("whitelist_pool"),
-      calldata: [addresses.alpha.pool],
+      to: addresses.alpha.token2,
+      selector: stark.getSelectorFromName("approve"),
+      calldata: [addresses.alpha.router, pool.token2Balance, "0"],
       nonce: nonce.toString(),
     },
     [number.toHex(r), number.toHex(s)]
   );
 
+  console.log(`Transaction hash approve tx for token 2: ${transaction_hash}`);
+  console.log(`Transaction status approve tx for token 2: ${code}`);
   console.log(
-    `The pool with address ${addresses.alpha.pool} has been whitelisted`
-  );
-  console.log(`Transaction hash: ${transaction_hash}`);
-  console.log(`Transaction status: ${code}`);
-  console.log(
-    "get new status: ",
+    "get new status approve tx for token 2: ",
     `starknet tx_status --hash ${transaction_hash}`
   );
 }

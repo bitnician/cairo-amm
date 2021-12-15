@@ -26,15 +26,22 @@ end
 func decimals() -> (res : felt):
 end
 
+@storage_var
+func symbol() -> (res : felt):
+end
+
 #
 # Constructor
 #
 
 @constructor
-func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(owner : felt):
-    decimals.write(18)
+func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        _owner : felt, _symbol : felt, _decimals : felt):
+    decimals.write(_decimals)
 
-    _mint(owner, Uint256(1000000000000000000000000000000, 0))
+    symbol.write(_symbol)
+
+    _mint(_owner, Uint256(1000000000000000000000000000000, 0))
     return ()
 end
 
@@ -53,6 +60,13 @@ end
 func get_decimals{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
         res : felt):
     let (res) = decimals.read()
+    return (res)
+end
+
+@view
+func get_symbol{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+        res : felt):
+    let (res) = symbol.read()
     return (res)
 end
 

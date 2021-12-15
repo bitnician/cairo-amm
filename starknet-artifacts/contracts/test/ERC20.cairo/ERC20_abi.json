@@ -19,7 +19,15 @@
     {
         "inputs": [
             {
-                "name": "owner",
+                "name": "_owner",
+                "type": "felt"
+            },
+            {
+                "name": "_symbol",
+                "type": "felt"
+            },
+            {
+                "name": "_decimals",
                 "type": "felt"
             }
         ],
@@ -42,6 +50,18 @@
     {
         "inputs": [],
         "name": "get_decimals",
+        "outputs": [
+            {
+                "name": "res",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "get_symbol",
         "outputs": [
             {
                 "name": "res",

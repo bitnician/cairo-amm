@@ -1,4 +1,4 @@
-import { pool } from "./../data/data";
+import { pool } from "../data/data";
 import fs from "fs";
 import path from "path";
 import {
@@ -43,13 +43,13 @@ async function main() {
       stark.getSelectorFromName("init_liquidity"),
       [
         addresses.alpha.adminAccount,
-        addresses.alpha.token0,
-        addresses.alpha.token1,
-        pool.token0Balance,
+        addresses.alpha.token6,
+        addresses.alpha.token7,
+        pool.token6Balance,
         "0",
-        pool.token1Balance,
+        pool.token7Balance,
         "0",
-        pool.amountsSqrt,
+        pool.amountsSqrt67,
         "0",
       ],
       nonce.toString()
@@ -65,13 +65,13 @@ async function main() {
       selector: stark.getSelectorFromName("init_liquidity"),
       calldata: [
         addresses.alpha.adminAccount,
-        addresses.alpha.token0,
-        addresses.alpha.token1,
-        pool.token0Balance,
+        addresses.alpha.token6,
+        addresses.alpha.token7,
+        pool.token6Balance,
         "0",
-        pool.token1Balance,
+        pool.token7Balance,
         "0",
-        pool.amountsSqrt,
+        pool.amountsSqrt67,
         "0",
       ],
       nonce: nonce.toString(),
@@ -80,7 +80,7 @@ async function main() {
   );
 
   console.log(
-    `The pool with address ${addresses.alpha.pool} has been whitelisted`
+    `The pool with address ${addresses.alpha.pool67} has been whitelisted`
   );
   console.log(`Transaction hash: ${transaction_hash}`);
   console.log(`Transaction status: ${code}`);

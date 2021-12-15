@@ -19,146 +19,149 @@ import {
 } from "starknet";
 import { starknet } from "hardhat";
 import { Signer } from "./utils/Signer";
+import { loadFixture } from "@ethereum-waffle/provider";
 
 describe("Pool", function () {
-  this.timeout(400000);
+  this.timeout(300_000);
 
-  const defaultProvider = new Provider({ baseUrl: "http://localhost:5000" });
-
-  let token0Contract: Contract;
-  let token1Contract: Contract;
-  let poolContract: Contract;
-  let accountContract: Contract;
-  let token0Address: string;
-  let token1Address: string;
-  let poolAddress: string;
-  let accountAddress: string;
-  let signer: Signer;
+  // let token0Contract: Contract;
+  // let token1Contract: Contract;
+  // let poolContract: Contract;
+  // let accountContract: Contract;
+  // let token0Address: string;
+  // let token1Address: string;
+  // let poolAddress: string;
+  // let accountAddress: string;
+  // let signer: Signer;
 
   before(async () => {
-    const defaultProvider = new Provider({ baseUrl: "http://localhost:5000" });
+    // const defaultProvider = new Provider({ baseUrl: "http://localhost:5000" });
+    console.log("create factory");
 
-    const compiledPool: CompiledContract = json.parse(
-      fs
-        .readFileSync(
-          path.resolve(
-            __dirname,
-            "../starknet-artifacts/contracts/Pool.cairo/Pool.json"
-          )
-        )
-        .toString("ascii")
-    );
-    const compiledErc20: CompiledContract = json.parse(
-      fs
-        .readFileSync(
-          path.resolve(
-            __dirname,
-            "../starknet-artifacts/contracts/test/ERC20.cairo/ERC20.json"
-          )
-        )
-        .toString("ascii")
-    );
-    const compiledAccount: CompiledContract = json.parse(
-      fs
-        .readFileSync(
-          path.resolve(
-            __dirname,
-            "../starknet-artifacts/contracts/test/Account.cairo/Account.json"
-          )
-        )
-        .toString("ascii")
-    );
+    const contractFactory = await starknet.getContractFactory("Account");
+    console.log("create contract");
 
-    const privateKey =
-      "0xb696427c0d79c5d28a1fa6f748bae1b98b3f4b86bd1a2505bab144673c856fa9";
-    signer = new Signer(privateKey);
+    const contract = await contractFactory.deploy({ signer: 1, guardian: 0 });
 
-    const {
-      code: codeAccount,
-      address: accountAddressLocal,
-      transaction_hash: accountTxHash,
-    } = await defaultProvider.deployContract(
-      compiledAccount,
-      compileCalldata({
-        signer: signer.publicKey,
-        guardian: "0",
-      }),
-      signer.publicKey
-    );
-    expect(codeAccount).to.eq("TRANSACTION_RECEIVED");
-    expect(accountAddressLocal).to.not.null;
-    await defaultProvider.waitForTx(accountTxHash);
+    console.log("Deployed at", contract.address);
 
-    const {
-      code: codeToken0,
-      address: token0AddressLocal,
-      transaction_hash: token0TxHash,
-    } = await defaultProvider.deployContract(
-      compiledErc20,
-      compileCalldata({
-        owner: "1",
-      }),
-      signer.publicKey
-    );
-    expect(codeToken0).to.eq("TRANSACTION_RECEIVED");
-    expect(token0AddressLocal).to.not.null;
-    await defaultProvider.waitForTx(token0TxHash);
+    //   const compiledPool: CompiledContract = json.parse(
+    //     fs
+    //       .readFileSync(
+    //         path.resolve(
+    //           __dirname,
+    //           "../starknet-artifacts/contracts/Pool.cairo/Pool.json"
+    //         )
+    //       )
+    //       .toString("ascii")
+    //   );
+    //   const compiledErc20: CompiledContract = json.parse(
+    //     fs
+    //       .readFileSync(
+    //         path.resolve(
+    //           __dirname,
+    //           "../starknet-artifacts/contracts/test/ERC20.cairo/ERC20.json"
+    //         )
+    //       )
+    //       .toString("ascii")
+    //   );
+    //   const compiledAccount: CompiledContract = json.parse(
+    //     fs
+    //       .readFileSync(
+    //         path.resolve(
+    //           __dirname,
+    //           "../starknet-artifacts/contracts/test/Account.cairo/Account.json"
+    //         )
+    //       )
+    //       .toString("ascii")
+    //   );
 
-    const {
-      code: codeToken1,
-      address: token1AddressLocal,
-      transaction_hash: token1TxHash,
-    } = await defaultProvider.deployContract(
-      compiledErc20,
-      compileCalldata({
-        owner: accountAddressLocal as string,
-      })
-    );
-    expect(codeToken1).to.eq("TRANSACTION_RECEIVED");
-    expect(token1AddressLocal).to.not.null;
-    await defaultProvider.waitForTx(token1TxHash);
+    //   const privateKey =
+    //     "0xb696427c0d79c5d28a1fa6f748bae1b98b3f4b86bd1a2505bab144673c856fa9";
+    //   signer = new Signer(privateKey);
 
-    const {
-      code: codePool,
-      address: poolAddressLocal,
-      transaction_hash: poolTxHash,
-    } = await defaultProvider.deployContract(
-      compiledPool,
-      compileCalldata({
-        token0_address: token0AddressLocal as string,
-        token1_address: token1AddressLocal as string,
-      })
-    );
-    expect(codePool).to.eq("TRANSACTION_RECEIVED");
-    expect(poolAddressLocal).to.not.null;
-    await defaultProvider.waitForTx(poolTxHash);
+    //   const {
+    //     code: codeAccount,
+    //     address: accountAddressLocal,
+    //     transaction_hash: accountTxHash,
+    //   } = await defaultProvider.deployContract(
+    //     compiledAccount,
+    //     compileCalldata({
+    //       signer: signer.publicKey,
+    //       guardian: "0",
+    //     }),
+    //     signer.publicKey
+    //   );
 
-    // init contracts
-    token0Contract = new Contract(compiledErc20.abi, token0AddressLocal);
-    token1Contract = new Contract(compiledErc20.abi, token1AddressLocal);
-    poolContract = new Contract(compiledPool.abi, poolAddressLocal);
-    accountContract = new Contract(compiledAccount.abi, accountAddressLocal);
+    //   expect(codeAccount).to.eq("TRANSACTION_RECEIVED");
+    //   expect(accountAddressLocal).to.not.null;
+    //   // await defaultProvider.waitForTx(accountTxHash);
 
-    token0Address = token0AddressLocal as string;
-    token1Address = token1AddressLocal as string;
-    poolAddress = poolAddressLocal as string;
-    accountAddress = accountAddressLocal as string;
+    //   const {
+    //     code: codeToken0,
+    //     address: token0AddressLocal,
+    //     transaction_hash: token0TxHash,
+    //   } = await defaultProvider.deployContract(
+    //     compiledErc20,
+    //     compileCalldata({
+    //       owner: accountAddressLocal as string,
+    //     }),
+    //     signer.publicKey
+    //   );
+    //   expect(codeToken0).to.eq("TRANSACTION_RECEIVED");
+    //   expect(token0AddressLocal).to.not.null;
+    //   // await defaultProvider.waitForTx(token0TxHash);
+
+    //   const {
+    //     code: codeToken1,
+    //     address: token1AddressLocal,
+    //     transaction_hash: token1TxHash,
+    //   } = await defaultProvider.deployContract(
+    //     compiledErc20,
+    //     compileCalldata({
+    //       owner: accountAddressLocal as string,
+    //     })
+    //   );
+    //   expect(codeToken1).to.eq("TRANSACTION_RECEIVED");
+    //   expect(token1AddressLocal).to.not.null;
+    //   // await defaultProvider.waitForTx(token1TxHash);
+
+    //   const {
+    //     code: codePool,
+    //     address: poolAddressLocal,
+    //     transaction_hash: poolTxHash,
+    //   } = await defaultProvider.deployContract(
+    //     compiledPool,
+    //     compileCalldata({
+    //       token0_address: token0AddressLocal as string,
+    //       token1_address: token1AddressLocal as string,
+    //     })
+    //   );
+    //   expect(codePool).to.eq("TRANSACTION_RECEIVED");
+    //   expect(poolAddressLocal).to.not.null;
+    //   // await defaultProvider.waitForTx(poolTxHash);
+
+    //   // init contracts
+    //   token0Contract = new Contract(compiledErc20.abi, token0AddressLocal);
+    //   token1Contract = new Contract(compiledErc20.abi, token1AddressLocal);
+    //   poolContract = new Contract(compiledPool.abi, poolAddressLocal);
+    //   accountContract = new Contract(compiledAccount.abi, accountAddressLocal);
+
+    //   token0Address = token0AddressLocal as string;
+    //   token1Address = token1AddressLocal as string;
+    //   poolAddress = poolAddressLocal as string;
+    //   accountAddress = accountAddressLocal as string;
   });
 
   describe("#view functions", () => {
     it("should read the view functions", async () => {
-      console.log("hi");
-
-      const { res: token0 } = await poolContract.call("get_token0");
-      const { res: token1 } = await poolContract.call("get_token1");
-
-      const { reserve0, reserve1 } = await poolContract.call("get_reserves");
-
-      expect(token0).to.eq(token0Address);
-      expect(token1).to.eq(token1Address);
-
-      expect(reserve0).to.deep.equal(uint256.bnToUint256("0"));
-      expect(reserve1).to.deep.equal(uint256.bnToUint256("0"));
+      // const { res: token0 } = await poolContract.call("get_token0");
+      // const { res: token1 } = await poolContract.call("get_token1");
+      // const { reserve0, reserve1 } = await poolContract.call("get_reserves");
+      // expect(token0).to.eq(token0Address);
+      // expect(token1).to.eq(token1Address);
+      // expect(reserve0).to.deep.equal(uint256.bnToUint256("0"));
+      // expect(reserve1).to.deep.equal(uint256.bnToUint256("0"));
     });
   });
 

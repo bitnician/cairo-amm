@@ -1,3 +1,4 @@
+import { symbolToFelt } from "../utils/symbol";
 import fs from "fs";
 import path from "path";
 import {
@@ -12,7 +13,7 @@ import {
   defaultProvider,
   compileCalldata,
 } from "starknet";
-import { addresses, keys } from "./data/data";
+import { addresses, keys, pool } from "../data/data";
 
 async function main() {
   // Deploy the Account
@@ -22,29 +23,14 @@ async function main() {
       .readFileSync(
         path.resolve(
           __dirname,
-          "../starknet-artifacts/contracts/test/ERC20.cairo/ERC20.json"
+          "../../starknet-artifacts/contracts/test/ERC20.cairo/ERC20.json"
         )
       )
 
       .toString("ascii")
   );
 
-  const {
-    code: token0Code,
-    address: token0Address,
-    transaction_hash: token0TxHash,
-  } = await defaultProvider.deployContract(
-    compiledErc20,
-    compileCalldata({
-      owner: addresses.alpha.adminAccount,
-    }),
-    keys.admin.publicKey //salt
-  );
-
-  console.log("Deployed contract with status: ", token0Code);
-  console.log("Token0 is deployed at: ", token0Address);
-  console.log("Transaction hash: ", token0TxHash);
-  console.log("get new status: ", `starknet tx_status --hash ${token0TxHash}`);
+  const symbol = symbolToFelt(pool.token1Symbol);
 
   const {
     code: token1Code,
@@ -53,13 +39,15 @@ async function main() {
   } = await defaultProvider.deployContract(
     compiledErc20,
     compileCalldata({
-      owner: addresses.alpha.adminAccount,
+      _owner: addresses.alpha.adminAccount,
+      _symbol: symbol,
+      _decimals: pool.token1Decimals,
     }),
-    addresses.alpha.adminAccount //salt
+    keys.admin.publicKey //salt
   );
 
   console.log("Deployed contract with status: ", token1Code);
-  console.log("Token01 is deployed at: ", token1Address);
+  console.log("Token1 is deployed at: ", token1Address);
   console.log("Transaction hash: ", token1TxHash);
   console.log("get new status: ", `starknet tx_status --hash ${token1TxHash}`);
 }
