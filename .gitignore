@@ -1,0 +1,6 @@
+.pytest_cache
+.env
+env
+__pycache__
+.history
+.hypothesis/
