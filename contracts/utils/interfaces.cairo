@@ -4,12 +4,31 @@ from starkware.cairo.common.uint256 import Uint256
 
 @contract_interface
 namespace IERC20:
-    func balance_of(account : felt) -> (res : Uint256):
-    end
-    func transfer(recipient : felt, amount : Uint256):
+    func name() -> (name : felt):
     end
 
-    func transfer_from(sender : felt, recipient : felt, amount : Uint256):
+    func symbol() -> (symbol : felt):
+    end
+
+    func decimals() -> (decimals : felt):
+    end
+
+    func totalSupply() -> (totalSupply : Uint256):
+    end
+
+    func balanceOf(account : felt) -> (balance : Uint256):
+    end
+
+    func allowance(owner : felt, spender : felt) -> (remaining : Uint256):
+    end
+
+    func transfer(recipient : felt, amount : Uint256) -> (success : felt):
+    end
+
+    func transferFrom(sender : felt, recipient : felt, amount : Uint256) -> (success : felt):
+    end
+
+    func approve(spender : felt, amount : Uint256) -> (success : felt):
     end
 end
 
@@ -27,7 +46,7 @@ namespace IPool:
     func burn(to : felt, pool_contract_address : felt) -> (amount_0 : Uint256, amount_1 : Uint256):
     end
 
-    func transfer_from(sender : felt, recipient : felt, amount : Uint256):
+    func transferFrom(sender : felt, recipient : felt, amount : Uint256):
     end
 
     func is_initialized() -> (res : felt):

@@ -17,21 +17,37 @@
             "__main__.IERC20": {
                 "type": "namespace"
             },
+            "__main__.IERC20.ALLOWANCE_SELECTOR": {
+                "type": "const",
+                "value": 863164345921111744606866654754108663958095967665259696902984674202985078753
+            },
+            "__main__.IERC20.APPROVE_SELECTOR": {
+                "type": "const",
+                "value": 949021990203918389843157787496164629863144228991510976554585288817234167820
+            },
             "__main__.IERC20.Args": {
                 "full_name": "__main__.IERC20.Args",
                 "members": {},
                 "size": 0,
                 "type": "struct"
             },
-            "__main__.IERC20.BALANCE_OF_SELECTOR": {
+            "__main__.IERC20.BALANCEOF_SELECTOR": {
                 "type": "const",
-                "value": 1516754014369808875012295842270199525215452866521012470027807093200784961331
+                "value": 1307730684388977109649524593492043083703013045633289330664425380824804018030
+            },
+            "__main__.IERC20.DECIMALS_SELECTOR": {
+                "type": "const",
+                "value": 134830404806214277570220174593674215737759987247891306080029841794115377321
             },
             "__main__.IERC20.ImplicitArgs": {
                 "full_name": "__main__.IERC20.ImplicitArgs",
                 "members": {},
                 "size": 0,
                 "type": "struct"
+            },
+            "__main__.IERC20.NAME_SELECTOR": {
+                "type": "const",
+                "value": 1528802474226268325865027367859591458315299653151958663884057507666229546336
             },
             "__main__.IERC20.Return": {
                 "full_name": "__main__.IERC20.Return",
@@ -43,9 +59,17 @@
                 "type": "const",
                 "value": 0
             },
-            "__main__.IERC20.TRANSFER_FROM_SELECTOR": {
+            "__main__.IERC20.SYMBOL_SELECTOR": {
                 "type": "const",
-                "value": 1555377517929037318987687899825758707538299441176447799544473656894800517992
+                "value": 944713526212149105522785400348068751682982210605126537021911324578866405028
+            },
+            "__main__.IERC20.TOTALSUPPLY_SELECTOR": {
+                "type": "const",
+                "value": 227334030968744315992796982100494617316223563777432855541120004521101595501
+            },
+            "__main__.IERC20.TRANSFERFROM_SELECTOR": {
+                "type": "const",
+                "value": 116061167288211781254449158074459916871457383008289084697957612485591092000
             },
             "__main__.IERC20.TRANSFER_SELECTOR": {
                 "type": "const",
@@ -128,9 +152,9 @@
                 "type": "const",
                 "value": 602962535134499854912799851629033993488593928113527484350375636311213640489
             },
-            "__main__.IPool.TRANSFER_FROM_SELECTOR": {
+            "__main__.IPool.TRANSFERFROM_SELECTOR": {
                 "type": "const",
-                "value": 1555377517929037318987687899825758707538299441176447799544473656894800517992
+                "value": 116061167288211781254449158074459916871457383008289084697957612485591092000
             },
             "__main__.IPool.alloc": {
                 "destination": "starkware.cairo.common.alloc.alloc",

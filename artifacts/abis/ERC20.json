@@ -19,15 +19,15 @@
     {
         "inputs": [
             {
-                "name": "_owner",
+                "name": "name",
                 "type": "felt"
             },
             {
-                "name": "_symbol",
+                "name": "symbol",
                 "type": "felt"
             },
             {
-                "name": "_decimals",
+                "name": "governance_account_address",
                 "type": "felt"
             }
         ],
@@ -37,22 +37,10 @@
     },
     {
         "inputs": [],
-        "name": "get_total_supply",
+        "name": "governance",
         "outputs": [
             {
-                "name": "res",
-                "type": "Uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "get_decimals",
-        "outputs": [
-            {
-                "name": "res",
+                "name": "governance",
                 "type": "felt"
             }
         ],
@@ -61,10 +49,58 @@
     },
     {
         "inputs": [],
-        "name": "get_symbol",
+        "name": "permittedMinter",
         "outputs": [
             {
-                "name": "res",
+                "name": "minter",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "name",
+        "outputs": [
+            {
+                "name": "name",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [
+            {
+                "name": "symbol",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [
+            {
+                "name": "totalSupply",
+                "type": "Uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [
+            {
+                "name": "decimals",
                 "type": "felt"
             }
         ],
@@ -78,10 +114,10 @@
                 "type": "felt"
             }
         ],
-        "name": "balance_of",
+        "name": "balanceOf",
         "outputs": [
             {
-                "name": "res",
+                "name": "balance",
                 "type": "Uint256"
             }
         ],
@@ -102,11 +138,52 @@
         "name": "allowance",
         "outputs": [
             {
-                "name": "res",
+                "name": "remaining",
                 "type": "Uint256"
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "minter_address",
+                "type": "felt"
+            }
+        ],
+        "name": "setPermittedMinter",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "recipient",
+                "type": "felt"
+            },
+            {
+                "name": "amount",
+                "type": "Uint256"
+            }
+        ],
+        "name": "permissionedMint",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "account",
+                "type": "felt"
+            },
+            {
+                "name": "amount",
+                "type": "Uint256"
+            }
+        ],
+        "name": "permissionedBurn",
+        "outputs": [],
         "type": "function"
     },
     {
@@ -121,7 +198,12 @@
             }
         ],
         "name": "transfer",
-        "outputs": [],
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
         "type": "function"
     },
     {
@@ -139,8 +221,13 @@
                 "type": "Uint256"
             }
         ],
-        "name": "transfer_from",
-        "outputs": [],
+        "name": "transferFrom",
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
         "type": "function"
     },
     {
@@ -155,7 +242,12 @@
             }
         ],
         "name": "approve",
-        "outputs": [],
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
         "type": "function"
     },
     {
@@ -169,8 +261,13 @@
                 "type": "Uint256"
             }
         ],
-        "name": "increase_allowance",
-        "outputs": [],
+        "name": "increaseAllowance",
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
         "type": "function"
     },
     {
@@ -184,23 +281,13 @@
                 "type": "Uint256"
             }
         ],
-        "name": "decrease_allowance",
-        "outputs": [],
-        "type": "function"
-    },
-    {
-        "inputs": [
+        "name": "decreaseAllowance",
+        "outputs": [
             {
-                "name": "recipient",
+                "name": "success",
                 "type": "felt"
-            },
-            {
-                "name": "amount",
-                "type": "Uint256"
             }
         ],
-        "name": "mint",
-        "outputs": [],
         "type": "function"
     }
 ]

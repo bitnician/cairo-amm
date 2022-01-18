@@ -153,8 +153,8 @@ func init_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_chec
     assert reserve_a_zero = 1
     assert reserve_b_zero = 1
 
-    IERC20.transfer_from(token_a_address, sender, pool_contract_address, amount_a_desired)
-    IERC20.transfer_from(token_b_address, sender, pool_contract_address, amount_b_desired)
+    IERC20.transferFrom(token_a_address, sender, pool_contract_address, amount_a_desired)
+    IERC20.transferFrom(token_b_address, sender, pool_contract_address, amount_b_desired)
 
     IPool.mint(pool_contract_address, _owner, amounts_sqrt, pool_contract_address)
     return ()
@@ -226,8 +226,8 @@ func add_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check
         tempvar range_check_ptr = range_check_ptr
     end
 
-    IERC20.transfer_from(token_a_address, caller, pool_contract_address, amount_a)
-    IERC20.transfer_from(token_b_address, caller, pool_contract_address, amount_b)
+    IERC20.transferFrom(token_a_address, caller, pool_contract_address, amount_a)
+    IERC20.transferFrom(token_b_address, caller, pool_contract_address, amount_b)
 
     IPool.mint(pool_contract_address, caller, Uint256(0, 0), pool_contract_address)
 
@@ -255,7 +255,7 @@ func remove_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_ch
 
     verify_pool_is_whitelisted(pool_contract_address)
 
-    IPool.transfer_from(pool_contract_address, caller, pool_contract_address, liquidity_amount)
+    IPool.transferFrom(pool_contract_address, caller, pool_contract_address, liquidity_amount)
     let (amount_0 : Uint256, amount_1 : Uint256) = IPool.burn(
         pool_contract_address, to, pool_contract_address)
 
@@ -422,7 +422,7 @@ func exact_input{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     assert (enough_amount_out) = 1
 
     let (local caller) = get_caller_address()
-    IERC20.transfer_from(token_in_address, caller, pool_contract_address, amount_in)
+    IERC20.transferFrom(token_in_address, caller, pool_contract_address, amount_in)
 
     _swap(amount_in, amount_out, token_in_address, token_out_address, caller, pool_contract_address)
 
@@ -452,7 +452,7 @@ func exact_output{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     assert (enough_amount_in) = 1
 
     let (local caller) = get_caller_address()
-    IERC20.transfer_from(token_in_address, caller, pool_contract_address, amount_in)
+    IERC20.transferFrom(token_in_address, caller, pool_contract_address, amount_in)
 
     _swap(amount_in, amount_out, token_in_address, token_out_address, caller, pool_contract_address)
 

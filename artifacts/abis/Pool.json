@@ -139,10 +139,34 @@
     },
     {
         "inputs": [],
-        "name": "get_total_supply",
+        "name": "name",
         "outputs": [
             {
-                "name": "res",
+                "name": "name",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [
+            {
+                "name": "symbol",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [
+            {
+                "name": "totalSupply",
                 "type": "Uint256"
             }
         ],
@@ -151,10 +175,10 @@
     },
     {
         "inputs": [],
-        "name": "get_decimals",
+        "name": "decimals",
         "outputs": [
             {
-                "name": "res",
+                "name": "decimals",
                 "type": "felt"
             }
         ],
@@ -168,10 +192,10 @@
                 "type": "felt"
             }
         ],
-        "name": "balance_of",
+        "name": "balanceOf",
         "outputs": [
             {
-                "name": "res",
+                "name": "balance",
                 "type": "Uint256"
             }
         ],
@@ -192,7 +216,7 @@
         "name": "allowance",
         "outputs": [
             {
-                "name": "res",
+                "name": "remaining",
                 "type": "Uint256"
             }
         ],
@@ -211,7 +235,12 @@
             }
         ],
         "name": "transfer",
-        "outputs": [],
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
         "type": "function"
     },
     {
@@ -229,8 +258,13 @@
                 "type": "Uint256"
             }
         ],
-        "name": "transfer_from",
-        "outputs": [],
+        "name": "transferFrom",
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
         "type": "function"
     },
     {
@@ -245,7 +279,12 @@
             }
         ],
         "name": "approve",
-        "outputs": [],
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
         "type": "function"
     },
     {
@@ -259,8 +298,13 @@
                 "type": "Uint256"
             }
         ],
-        "name": "increase_allowance",
-        "outputs": [],
+        "name": "increaseAllowance",
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
         "type": "function"
     },
     {
@@ -274,8 +318,13 @@
                 "type": "Uint256"
             }
         ],
-        "name": "decrease_allowance",
-        "outputs": [],
+        "name": "decreaseAllowance",
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
         "type": "function"
     }
 ]

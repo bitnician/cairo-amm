@@ -13,25 +13,14 @@ from starkware.cairo.common.uint256 import (
     uint256_unsigned_div_rem)
 from contracts.utils.interfaces import IERC20, IPool
 
+from contracts.token.ERC20_base import (
+    ERC20_name, ERC20_symbol, ERC20_totalSupply, ERC20_decimals, ERC20_balanceOf, ERC20_allowance,
+    ERC20_initializer, ERC20_approve, ERC20_increaseAllowance, ERC20_decreaseAllowance,
+    ERC20_transfer, ERC20_transferFrom, ERC20_mint, ERC20_burn)
+
 #
 # Storage
 #
-
-@storage_var
-func balances(account : felt) -> (res : Uint256):
-end
-
-@storage_var
-func allowances(owner : felt, spender : felt) -> (res : Uint256):
-end
-
-@storage_var
-func total_supply() -> (res : Uint256):
-end
-
-@storage_var
-func decimals() -> (res : felt):
-end
 
 @storage_var
 func token0() -> (res : felt):
@@ -66,7 +55,9 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
         token0_address : felt, token1_address : felt):
     token0.write(value=token0_address)
     token1.write(value=token1_address)
-    decimals.write(18)
+    # name : RA-Pool-Token
+    # symbol : RAP
+    ERC20_initializer(826545801111111084584111107101110, 826580, Uint256(0, 0), 0)
 
     return ()
 end
@@ -106,13 +97,13 @@ func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     let (_token_0) = token0.read()
     let (_token_1) = token1.read()
 
-    let (balance_0 : Uint256) = IERC20.balance_of(_token_0, pool_contract_address)
-    let (balance_1 : Uint256) = IERC20.balance_of(_token_1, pool_contract_address)
+    let (balance_0 : Uint256) = IERC20.balanceOf(_token_0, pool_contract_address)
+    let (balance_1 : Uint256) = IERC20.balanceOf(_token_1, pool_contract_address)
 
     let (amount_0 : Uint256) = uint256_sub(balance_0, _reserve_0)
     let (amount_1 : Uint256) = uint256_sub(balance_1, _reserve_1)
 
-    let (total_supply : Uint256) = get_total_supply()
+    let (total_supply : Uint256) = totalSupply()
 
     let (total_supply_eq_zero) = uint256_eq(total_supply, Uint256(0, 0))
     let (amounts_sqrt_eq_zero) = uint256_eq(amounts_sqrt, Uint256(0, 0))
@@ -122,7 +113,7 @@ func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     if total_supply_eq_zero == 1:
         assert amounts_sqrt_eq_zero = 0
 
-        _mint(to, amounts_sqrt)
+        ERC20_mint(to, amounts_sqrt)
         # liquidity = amounts_sqrt
         # _mint(ZERO_ADDRESS, Uint256(1000, 0))  # TODO: should lock MINIMUM_LIQUIDITY lp tokens?
         tempvar syscall_ptr = syscall_ptr
@@ -144,13 +135,13 @@ func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         tempvar range_check_ptr = range_check_ptr
 
         if a_lt_b == 1:
-            _mint(to, a)
+            ERC20_mint(to, a)
 
             tempvar syscall_ptr = syscall_ptr
             tempvar pedersen_ptr = pedersen_ptr
             tempvar range_check_ptr = range_check_ptr
         else:
-            _mint(to, b)
+            ERC20_mint(to, b)
 
             tempvar syscall_ptr = syscall_ptr
             tempvar pedersen_ptr = pedersen_ptr
@@ -174,12 +165,12 @@ func burn{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     let (_token_0) = token0.read()
     let (_token_1) = token1.read()
 
-    let (balance_0 : Uint256) = IERC20.balance_of(_token_0, pool_contract_address)
-    let (balance_1 : Uint256) = IERC20.balance_of(_token_1, pool_contract_address)
+    let (balance_0 : Uint256) = IERC20.balanceOf(_token_0, pool_contract_address)
+    let (balance_1 : Uint256) = IERC20.balanceOf(_token_1, pool_contract_address)
 
-    let (liquidity : Uint256) = balance_of(pool_contract_address)
+    let (liquidity : Uint256) = balanceOf(pool_contract_address)
 
-    let (total_supply : Uint256) = get_total_supply()
+    let (total_supply : Uint256) = totalSupply()
 
     let (numerator_a : Uint256, a_is_overflow) = uint256_mul(liquidity, balance_0)
     let (numerator_b : Uint256, b_is_overflow) = uint256_mul(liquidity, balance_1)
@@ -198,13 +189,13 @@ func burn{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     assert (amount_0_eq_zero) = 0
     assert (amount_1_eq_zero) = 0
 
-    _burn(pool_contract_address, liquidity)
+    ERC20_burn(pool_contract_address, liquidity)
 
     IERC20.transfer(_token_0, to, amount_0)
     IERC20.transfer(_token_1, to, amount_1)
 
-    let (new_balance_0 : Uint256) = IERC20.balance_of(_token_0, pool_contract_address)
-    let (new_balance_1 : Uint256) = IERC20.balance_of(_token_1, pool_contract_address)
+    let (new_balance_0 : Uint256) = IERC20.balanceOf(_token_0, pool_contract_address)
+    let (new_balance_1 : Uint256) = IERC20.balanceOf(_token_1, pool_contract_address)
 
     _update(_token_0, new_balance_0, new_balance_1)
 
@@ -273,8 +264,8 @@ func swap{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     # optimistically transfer output token
     IERC20.transfer(token_out, to, amount_out)
 
-    let (balance_token_in : Uint256) = IERC20.balance_of(token_in, pool_contract_address)
-    let (balance_token_out : Uint256) = IERC20.balance_of(token_out, pool_contract_address)
+    let (balance_token_in : Uint256) = IERC20.balanceOf(token_in, pool_contract_address)
+    let (balance_token_out : Uint256) = IERC20.balanceOf(token_out, pool_contract_address)
 
     let (amount_in : Uint256) = uint256_sub(balance_token_in, reserve_in)
 
@@ -331,110 +322,44 @@ end
 #
 # Getters
 #
-
 @view
-func get_total_supply{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
-        res : Uint256):
-    let (res : Uint256) = total_supply.read()
-    return (res)
+func name{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (name : felt):
+    let (name) = ERC20_name()
+    return (name)
 end
 
 @view
-func get_decimals{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
-        res : felt):
-    let (res) = decimals.read()
-    return (res)
+func symbol{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (symbol : felt):
+    let (symbol) = ERC20_symbol()
+    return (symbol)
 end
 
 @view
-func balance_of{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        account : felt) -> (res : Uint256):
-    let (res : Uint256) = balances.read(account=account)
-    return (res)
+func totalSupply{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+        totalSupply : Uint256):
+    let (totalSupply : Uint256) = ERC20_totalSupply()
+    return (totalSupply)
+end
+
+@view
+func decimals{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+        decimals : felt):
+    let (decimals) = ERC20_decimals()
+    return (decimals)
+end
+
+@view
+func balanceOf{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        account : felt) -> (balance : Uint256):
+    let (balance : Uint256) = ERC20_balanceOf(account)
+    return (balance)
 end
 
 @view
 func allowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        owner : felt, spender : felt) -> (res : Uint256):
-    let (res : Uint256) = allowances.read(owner=owner, spender=spender)
-    return (res)
-end
-
-#
-# Internals
-#
-
-func _mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        recipient : felt, amount : Uint256):
-    alloc_locals
-    assert_not_zero(recipient)
-
-    let (balance : Uint256) = balances.read(account=recipient)
-    # overflow is not possible because sum is guaranteed to be less than total supply
-    # which we check for overflow below
-    let (new_balance, _ : Uint256) = uint256_add(balance, amount)
-    balances.write(recipient, new_balance)
-
-    let (local supply : Uint256) = total_supply.read()
-    let (local new_supply : Uint256, is_overflow) = uint256_add(supply, amount)
-    assert (is_overflow) = 0
-
-    total_supply.write(new_supply)
-    return ()
-end
-
-func _burn{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        sender : felt, amount : Uint256):
-    alloc_locals
-    assert_not_zero(sender)
-
-    let (balance : Uint256) = balances.read(account=sender)
-
-    # validates amount <= sender_balance and returns 1 if true
-    let (enough_balance) = uint256_le(amount, balance)
-    assert_not_zero(enough_balance)
-
-    let (new_balance : Uint256) = uint256_sub(balance, amount)
-
-    balances.write(sender, new_balance)
-
-    let (local supply : Uint256) = total_supply.read()
-    let (local new_supply : Uint256) = uint256_sub(supply, amount)
-
-    total_supply.write(new_supply)
-    return ()
-end
-
-func _transfer{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        sender : felt, recipient : felt, amount : Uint256):
-    alloc_locals
-    assert_not_zero(sender)
-    assert_not_zero(recipient)
-
-    let (local sender_balance : Uint256) = balances.read(account=sender)
-
-    # validates amount <= sender_balance and returns 1 if true
-    let (enough_balance) = uint256_le(amount, sender_balance)
-    assert_not_zero(enough_balance)
-
-    # subtract from sender
-    let (new_sender_balance : Uint256) = uint256_sub(sender_balance, amount)
-    balances.write(sender, new_sender_balance)
-
-    # add to recipient
-    let (recipient_balance : Uint256) = balances.read(account=recipient)
-    # overflow is not possible because sum is guaranteed by mint to be less than total supply
-    let (new_recipient_balance, _ : Uint256) = uint256_add(recipient_balance, amount)
-    balances.write(recipient, new_recipient_balance)
-    return ()
-end
-
-func _approve{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        caller : felt, spender : felt, amount : Uint256):
-    assert_not_zero(caller)
-    assert_not_zero(spender)
-    allowances.write(caller, spender, amount)
-    return ()
+        owner : felt, spender : felt) -> (remaining : Uint256):
+    let (remaining : Uint256) = ERC20_allowance(owner, spender)
+    return (remaining)
 end
 
 #
@@ -443,68 +368,42 @@ end
 
 @external
 func transfer{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        recipient : felt, amount : Uint256):
-    let (sender) = get_caller_address()
-    _transfer(sender, recipient, amount)
-    return ()
+        recipient : felt, amount : Uint256) -> (success : felt):
+    ERC20_transfer(recipient, amount)
+    # Cairo equivalent to 'return (true)'
+    return (1)
 end
 
 @external
-func transfer_from{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        sender : felt, recipient : felt, amount : Uint256):
-    alloc_locals
-    let (local caller) = get_caller_address()
-    let (local caller_allowance : Uint256) = allowances.read(owner=sender, spender=caller)
-
-    # validates amount <= caller_allowance and returns 1 if true
-    let (enough_balance) = uint256_le(amount, caller_allowance)
-    assert_not_zero(enough_balance)
-
-    _transfer(sender, recipient, amount)
-
-    # subtract allowance
-    let (new_allowance : Uint256) = uint256_sub(caller_allowance, amount)
-    allowances.write(sender, caller, new_allowance)
-    return ()
+func transferFrom{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        sender : felt, recipient : felt, amount : Uint256) -> (success : felt):
+    ERC20_transferFrom(sender, recipient, amount)
+    # Cairo equivalent to 'return (true)'
+    return (1)
 end
 
 @external
 func approve{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        spender : felt, amount : Uint256):
-    let (caller) = get_caller_address()
-    _approve(caller, spender, amount)
-    return ()
+        spender : felt, amount : Uint256) -> (success : felt):
+    ERC20_approve(spender, amount)
+    # Cairo equivalent to 'return (true)'
+    return (1)
 end
 
 @external
-func increase_allowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        spender : felt, added_value : Uint256):
-    alloc_locals
-    let (local caller) = get_caller_address()
-    let (local current_allowance : Uint256) = allowances.read(caller, spender)
-
-    # add allowance
-    let (local new_allowance : Uint256, is_overflow) = uint256_add(current_allowance, added_value)
-    assert (is_overflow) = 0
-
-    _approve(caller, spender, new_allowance)
-    return ()
+func increaseAllowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        spender : felt, added_value : Uint256) -> (success : felt):
+    ERC20_increaseAllowance(spender, added_value)
+    # Cairo equivalent to 'return (true)'
+    return (1)
 end
 
 @external
-func decrease_allowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        spender : felt, subtracted_value : Uint256):
-    alloc_locals
-    let (local caller) = get_caller_address()
-    let (local current_allowance : Uint256) = allowances.read(owner=caller, spender=spender)
-    let (local new_allowance : Uint256) = uint256_sub(current_allowance, subtracted_value)
-
-    # validates new_allowance < current_allowance and returns 1 if true
-    let (enough_allowance) = uint256_lt(new_allowance, current_allowance)
-    assert_not_zero(enough_allowance)
-
-    _approve(caller, spender, new_allowance)
-    return ()
+func decreaseAllowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        spender : felt, subtracted_value : Uint256) -> (success : felt):
+    ERC20_decreaseAllowance(spender, subtracted_value)
+    # Cairo equivalent to 'return (true)'
+    return (1)
 end
 
 # #

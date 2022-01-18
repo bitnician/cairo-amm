@@ -50,7 +50,7 @@
                 "type": "felt"
             }
         ],
-        "name": "get_pool_id",
+        "name": "get_pool_address",
         "outputs": [
             {
                 "name": "pool_contract_address",
