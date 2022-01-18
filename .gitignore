@@ -1,6 +1,6 @@
-.pytest_cache
-.env
-env
+*cache
+*.deployments.txt
+*env
 __pycache__
 .history
 .hypothesis/

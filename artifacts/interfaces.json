@@ -225,6 +225,14 @@
                 "destination": "starkware.cairo.common.uint256.Uint256",
                 "type": "alias"
             },
+            "starkware.cairo.common.bitwise.ALL_ONES": {
+                "type": "const",
+                "value": -106710729501573572985208420194530329073740042555888586719234
+            },
+            "starkware.cairo.common.bitwise.BitwiseBuiltin": {
+                "destination": "starkware.cairo.common.cairo_builtins.BitwiseBuiltin",
+                "type": "alias"
+            },
             "starkware.cairo.common.cairo_builtins.BitwiseBuiltin": {
                 "full_name": "starkware.cairo.common.cairo_builtins.BitwiseBuiltin",
                 "members": {
@@ -379,6 +387,10 @@
                 "type": "const",
                 "value": 340282366920938463463374607431768211455
             },
+            "starkware.cairo.common.uint256.BitwiseBuiltin": {
+                "destination": "starkware.cairo.common.cairo_builtins.BitwiseBuiltin",
+                "type": "alias"
+            },
             "starkware.cairo.common.uint256.HALF_SHIFT": {
                 "type": "const",
                 "value": 18446744073709551616
@@ -412,6 +424,18 @@
             },
             "starkware.cairo.common.uint256.assert_not_zero": {
                 "destination": "starkware.cairo.common.math.assert_not_zero",
+                "type": "alias"
+            },
+            "starkware.cairo.common.uint256.bitwise_and": {
+                "destination": "starkware.cairo.common.bitwise.bitwise_and",
+                "type": "alias"
+            },
+            "starkware.cairo.common.uint256.bitwise_or": {
+                "destination": "starkware.cairo.common.bitwise.bitwise_or",
+                "type": "alias"
+            },
+            "starkware.cairo.common.uint256.bitwise_xor": {
+                "destination": "starkware.cairo.common.bitwise.bitwise_xor",
                 "type": "alias"
             },
             "starkware.cairo.common.uint256.get_ap": {
