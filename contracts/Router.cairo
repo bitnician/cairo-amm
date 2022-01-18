@@ -35,7 +35,8 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     return ()
 end
 
-# Assert that the person calling is admin.
+# @notice It checks if the caller is the owner of the contract.
+# @returns the owner address if the caller is the owner, otherwise it throws an error.
 func only_owner{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (_owner):
     alloc_locals
     let (local caller) = get_caller_address()
@@ -44,6 +45,9 @@ func only_owner{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_pt
     return (_owner)
 end
 
+# @notice It accepts a pool contract address as argument and check if the given address is whitelisted.
+# @param pool_contract_address the address of the pool contract.
+# @dev It throws an error if the given address is not whitelisted.
 @view
 func verify_pool_is_whitelisted{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         pool_contract_address : felt) -> ():
@@ -53,14 +57,25 @@ func verify_pool_is_whitelisted{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*
     return ()
 end
 
+# @notice It accepts the token0 and token1 addresses as arguments and returns the pool contract address.
+# @param token0 : the token0 address
+# @param token1 : the token1 address
+# @returns the pool contract address
+# @dev It return 0 if the pool contract address is not found.
 @view
-func get_pool_id{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+func get_pool_address{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         token_a_address : felt, token_b_address : felt) -> (pool_contract_address : felt):
     let (pool_contract_address : felt) = pool_address.read(token_a_address, token_b_address)
 
     return (pool_contract_address)
 end
 
+# @notice Given some asset amount and reserves, returns an amount of the other asset representing
+# equivalent value.
+# @param amount_a : the amount of asset A
+# @param reserve_a : the reserve of asset A
+# @param reserve_b : the reserve of asset B
+# @returns amount_b : the amount of asset B
 @view
 func quote{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         amount_a : Uint256, reserve_a : Uint256, reserve_b : Uint256) -> (amount_b : Uint256):
@@ -80,6 +95,9 @@ func quote{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     return (amount_b)
 end
 
+# @notice It whitelists a pool contract address.
+# @param pool_contract_address : the address of the pool contract.
+# @dev It throws an error if the given address is already whitelisted OR the caller is not Owner.
 @external
 func whitelist_pool{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         pool_contract_address) -> ():
@@ -103,7 +121,16 @@ func whitelist_pool{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_chec
 
     return ()
 end
-# amounts_sqrt = sqrt(amount_a_desired*amount_b_desired)
+
+# @notice It add the first amounts of liquidity to the pool.
+# @param sender : the address that receives lp tokens
+# @param token_a_address : the address of the token0
+# @param token_b_address : the address of the token1
+# @param amount_a : the amount of token0
+# @param amount_b : the amount of token1
+# @param amounts_sqrt : square_root(amount_a_desired * amount_b_desired)
+# @dev It throws an error if the caller is not the owner OR the pool is not whitelisted
+# OR the amount is not valid OR the pool has already some amounts of liquidity.
 @external
 func init_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         sender : felt, token_a_address : felt, token_b_address : felt, amount_a_desired : Uint256,
@@ -111,7 +138,7 @@ func init_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_chec
     alloc_locals
     let (_owner) = only_owner()
 
-    let (pool_contract_address) = get_pool_id(token_a_address, token_b_address)
+    let (pool_contract_address) = get_pool_address(token_a_address, token_b_address)
 
     verify_pool_is_whitelisted(pool_contract_address)
 
@@ -133,6 +160,17 @@ func init_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_chec
     return ()
 end
 
+# @notice It adds liquidity to the pool. can be called by anyone
+# @param token_a_address : the address of the token0
+# @param token_b_address : the address of the token1
+# @param amount_a_desired : The amount of tokenA to add as liquidity if
+# the B/A price is <= amountBDesired/amountADesired (A depreciates).
+# @param amount_b_desired : The amount of tokenB to add as liquidity if
+# the A/B price is <= amountADesired/amountBDesired (B depreciates).
+# @param amount_a_min : Bounds the extent to which the B/A price can go up before
+# the transaction reverts. Must be <= amountADesired.
+# @param amount_b_min : Bounds the extent to which the A/B price can go up before
+# the transaction reverts. Must be <= amountBDesired.
 @external
 func add_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         token_a_address : felt, token_b_address : felt, amount_a_desired : Uint256,
@@ -141,7 +179,7 @@ func add_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check
 
     let (local caller) = get_caller_address()
 
-    let (pool_contract_address) = get_pool_id(token_a_address, token_b_address)
+    let (pool_contract_address) = get_pool_address(token_a_address, token_b_address)
 
     verify_pool_is_whitelisted(pool_contract_address)
 
@@ -196,6 +234,15 @@ func add_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check
     return ()
 end
 
+# @notice It removes liquidity from the pool. can be called by anyone
+# @param token_a_address : the address of the token0
+# @param token_b_address : the address of the token1
+# @param liquidity_amount : The amount of liquidity tokens to remove.
+# @param amount_a_min : The minimum amount of tokenA that must be received for
+# the transaction not to revert.
+# @param amount_b_min : The minimum amount of tokenB that must be received for
+# the transaction not to revert.
+# @param to : Recipient of the underlying assets.
 @external
 func remove_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         token_a_address : felt, token_b_address : felt, liquidity_amount : Uint256,
@@ -204,7 +251,7 @@ func remove_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_ch
 
     let (local caller) = get_caller_address()
 
-    let (pool_contract_address) = get_pool_id(token_a_address, token_b_address)
+    let (pool_contract_address) = get_pool_address(token_a_address, token_b_address)
 
     verify_pool_is_whitelisted(pool_contract_address)
 
@@ -234,6 +281,10 @@ func remove_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_ch
     return ()
 end
 
+# @notice Getting the pool reserve of token.
+# @param pool_contract_address : address of the pool contract
+# @param token_address : address of the token
+# @return The reserve of the other token of pool.
 func get_pool_reserve{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         pool_contract_address : felt, token_address : felt) -> (balance : Uint256):
     let (_token0) = IPool.get_token0(pool_contract_address)
@@ -248,13 +299,19 @@ func get_pool_reserve{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_ch
     end
 end
 
+# @notice Given an output asset amount and token addresses, calculates all
+# preceding minimum input token amounts.
+# @param token_in_address : address of the input token
+# @param token_out_address : address of the output token
+# @param amount_out : the amount of the output token
+# @return The minimum input token amounts.
 @view
 func get_amount_in{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         token_in_address : felt, token_out_address : felt, amount_out : Uint256) -> (
         amount_in : Uint256):
     alloc_locals
 
-    let (pool_contract_address) = get_pool_id(token_in_address, token_out_address)
+    let (pool_contract_address) = get_pool_address(token_in_address, token_out_address)
 
     verify_pool_is_whitelisted(pool_contract_address)
 
@@ -281,13 +338,19 @@ func get_amount_in{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check
     return (amount_in=res)
 end
 
+# @notice Given an input asset amount and  token addresses, calculates all
+# subsequent maximum output token amounts.
+# @param token_in_address : address of the input token
+# @param token_out_address : address of the output token
+# @param amount_in : the amount of the input token
+# @return The maximum output token amounts.
 @view
 func get_amount_out{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         token_in_address : felt, token_out_address : felt, amount_in : Uint256) -> (
         amount_out : Uint256):
     alloc_locals
 
-    let (pool_contract_address) = get_pool_id(token_in_address, token_out_address)
+    let (pool_contract_address) = get_pool_address(token_in_address, token_out_address)
 
     verify_pool_is_whitelisted(pool_contract_address)
 
@@ -335,13 +398,19 @@ func _swap{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     return ()
 end
 
+# @notice Swaps an exact amount of input tokens for as many output tokens as possible
+# @param token_in_address : address of the input token
+# @param token_out_address : address of the output token
+# @param amount_in : the amount of the input token
+# @param amount_out_min : The minimum amount of output tokens that must be received for t
+# he transaction not to revert.
 @external
 func exact_input{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         token_in_address : felt, token_out_address : felt, amount_in : Uint256,
         amount_out_min : Uint256) -> ():
     alloc_locals
 
-    let (pool_contract_address) = get_pool_id(token_in_address, token_out_address)
+    let (pool_contract_address) = get_pool_address(token_in_address, token_out_address)
 
     verify_pool_is_whitelisted(pool_contract_address)
 
@@ -360,13 +429,20 @@ func exact_input{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     return ()
 end
 
+# @notice Receive an exact amount of output tokens for as few input tokens as possible
+# @param token_in_address : address of the input token
+# @param token_out_address : address of the output token
+# @param amount_out : The amount of output tokens to receive.
+# @param amount_in_max : The maximum amount of input tokens that can be required before
+# the transaction reverts.
+
 @external
 func exact_output{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         token_in_address : felt, token_out_address : felt, amount_out : Uint256,
         amount_in_max : Uint256) -> ():
     alloc_locals
 
-    let (pool_contract_address) = get_pool_id(token_in_address, token_out_address)
+    let (pool_contract_address) = get_pool_address(token_in_address, token_out_address)
 
     verify_pool_is_whitelisted(pool_contract_address)
 

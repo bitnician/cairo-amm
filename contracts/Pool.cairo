@@ -13,8 +13,6 @@ from starkware.cairo.common.uint256 import (
     uint256_unsigned_div_rem)
 from contracts.utils.interfaces import IERC20, IPool
 
-const ZERO_ADDRESS = 0x0000000000000000000000000000000000000000
-
 #
 # Storage
 #
@@ -217,9 +215,6 @@ end
 func swap{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         amount0_out : Uint256, amount1_out : Uint256, to : felt, pool_contract_address : felt) -> (
         ):
-
-        
-
     alloc_locals
 
     # Get pool reserves
