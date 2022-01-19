@@ -30,11 +30,11 @@
     {
         "inputs": [
             {
-                "name": "pool_contract_address",
+                "name": "poolAddress",
                 "type": "felt"
             }
         ],
-        "name": "verify_pool_is_whitelisted",
+        "name": "verifyPoolIsWhitelisted",
         "outputs": [],
         "stateMutability": "view",
         "type": "function"
@@ -50,10 +50,10 @@
                 "type": "felt"
             }
         ],
-        "name": "get_pool_address",
+        "name": "getPoolAddress",
         "outputs": [
             {
-                "name": "pool_contract_address",
+                "name": "address",
                 "type": "felt"
             }
         ],
@@ -88,11 +88,11 @@
     {
         "inputs": [
             {
-                "name": "pool_contract_address",
+                "name": "address",
                 "type": "felt"
             }
         ],
-        "name": "whitelist_pool",
+        "name": "whitelistPool",
         "outputs": [],
         "type": "function"
     },
@@ -119,11 +119,11 @@
                 "type": "Uint256"
             },
             {
-                "name": "amounts_sqrt",
+                "name": "amountsSqrt",
                 "type": "Uint256"
             }
         ],
-        "name": "init_liquidity",
+        "name": "initLiquidity",
         "outputs": [],
         "type": "function"
     },
@@ -154,7 +154,7 @@
                 "type": "Uint256"
             }
         ],
-        "name": "add_liquidity",
+        "name": "addLiquidity",
         "outputs": [],
         "type": "function"
     },
@@ -185,29 +185,29 @@
                 "type": "felt"
             }
         ],
-        "name": "remove_liquidity",
+        "name": "removeLiquidity",
         "outputs": [],
         "type": "function"
     },
     {
         "inputs": [
             {
-                "name": "token_in_address",
+                "name": "tokenInAddress",
                 "type": "felt"
             },
             {
-                "name": "token_out_address",
+                "name": "tokenOutAddress",
                 "type": "felt"
             },
             {
-                "name": "amount_out",
+                "name": "amountOut",
                 "type": "Uint256"
             }
         ],
-        "name": "get_amount_in",
+        "name": "getAmountIn",
         "outputs": [
             {
-                "name": "amount_in",
+                "name": "amountIn",
                 "type": "Uint256"
             }
         ],
@@ -217,22 +217,22 @@
     {
         "inputs": [
             {
-                "name": "token_in_address",
+                "name": "tokenInAddress",
                 "type": "felt"
             },
             {
-                "name": "token_out_address",
+                "name": "tokenOutAddress",
                 "type": "felt"
             },
             {
-                "name": "amount_in",
+                "name": "amountIn",
                 "type": "Uint256"
             }
         ],
-        "name": "get_amount_out",
+        "name": "getAmountOut",
         "outputs": [
             {
-                "name": "amount_out",
+                "name": "amountOut",
                 "type": "Uint256"
             }
         ],
@@ -242,46 +242,46 @@
     {
         "inputs": [
             {
-                "name": "token_in_address",
+                "name": "tokenInAddress",
                 "type": "felt"
             },
             {
-                "name": "token_out_address",
+                "name": "tokenOutAddress",
                 "type": "felt"
             },
             {
-                "name": "amount_in",
+                "name": "amountIn",
                 "type": "Uint256"
             },
             {
-                "name": "amount_out_min",
+                "name": "amountOutMin",
                 "type": "Uint256"
             }
         ],
-        "name": "exact_input",
+        "name": "exactInput",
         "outputs": [],
         "type": "function"
     },
     {
         "inputs": [
             {
-                "name": "token_in_address",
+                "name": "tokenInAddress",
                 "type": "felt"
             },
             {
-                "name": "token_out_address",
+                "name": "tokenOutAddress",
                 "type": "felt"
             },
             {
-                "name": "amount_out",
+                "name": "amountOut",
                 "type": "Uint256"
             },
             {
-                "name": "amount_in_max",
+                "name": "amountIn_max",
                 "type": "Uint256"
             }
         ],
-        "name": "exact_output",
+        "name": "exactOutput",
         "outputs": [],
         "type": "function"
     }

@@ -1,21 +1,21 @@
 
-def get_amount_in(amount_out, reserve_in, reserve_out):
+def getAmountIn(amountOut, reserveIn, reserve_out):
 
-    numerator = reserve_in[0] * amount_out[0] * 1000
-    denominator = (reserve_out[0] - amount_out[0]) * 997
-    amount_in = (numerator // denominator) + 1
+    numerator = reserveIn[0] * amountOut[0] * 1000
+    denominator = (reserve_out[0] - amountOut[0]) * 997
+    amountIn = (numerator // denominator) + 1
 
-    return (amount_in, 0)
+    return (amountIn, 0)
 
 
-def get_amount_out(amount_in, reserve_in, reserve_out):
+def getAmountOut(amountIn, reserveIn, reserve_out):
 
-    amount_in_with_fee = amount_in[0] * 997
-    numerator = amount_in_with_fee * reserve_out[0]
-    denominator = (reserve_in[0] * 1000) + amount_in_with_fee
-    amount_out = (numerator // denominator)
+    amountInWithFee = amountIn[0] * 997
+    numerator = amountInWithFee * reserve_out[0]
+    denominator = (reserveIn[0] * 1000) + amountInWithFee
+    amountOut = (numerator // denominator)
 
-    return (amount_out, 0)
+    return (amountOut, 0)
 
 
 def str_to_felt(text):

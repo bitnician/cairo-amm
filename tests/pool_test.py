@@ -6,7 +6,7 @@ from starkware.starknet.testing.starknet import Starknet
 from starkware.starkware_utils.error_handling import StarkException
 from starkware.starknet.definitions.error_codes import StarknetErrorCode
 from utils.Signer import Signer
-from utils.helper import get_amount_in, get_amount_out, uint, str_to_felt, assert_revert
+from utils.helper import getAmountIn, getAmountOut, uint, str_to_felt, assert_revert
 
 
 pool_creator_private_key = 123456789987654321
@@ -87,7 +87,7 @@ async def test_mint(contract_factory):
 
     token_0_amount = uint(1000000000000000000)  # 1e18
     token_1_amount = uint(4000000000000000000)  # 4e18
-    amounts_sqrt = uint(2000000000000000000)  # 2e18
+    amountsSqrt = uint(2000000000000000000)  # 2e18
     to = deployer_account.contract_address
 
     # Add liquidity
@@ -109,14 +109,14 @@ async def test_mint(contract_factory):
         deployer_account,
         pool.contract_address,
         "mint",
-        [to, *amounts_sqrt, pool.contract_address],
+        [to, *amountsSqrt, pool.contract_address],
     )
 
     execution_info = await pool.balanceOf(to).call()
-    assert execution_info.result.balance == amounts_sqrt
+    assert execution_info.result.balance == amountsSqrt
 
     execution_info = await pool.totalSupply().call()
-    assert execution_info.result.totalSupply == amounts_sqrt
+    assert execution_info.result.totalSupply == amountsSqrt
 
     execution_info = await token0.balanceOf(pool.contract_address).call()
     assert execution_info.result.balance == token_0_amount
@@ -133,7 +133,7 @@ async def test_burn(contract_factory):
 
     token_0_amount = uint(3000000000000000000)  # 3e18
     token_1_amount = uint(3000000000000000000)  # 3e18
-    amounts_sqrt = uint(3000000000000000000)  # 2e18
+    amountsSqrt = uint(3000000000000000000)  # 2e18
     to = deployer_account.contract_address
 
     # initial balance of liquidity provider
@@ -159,7 +159,7 @@ async def test_burn(contract_factory):
         deployer_account,
         pool.contract_address,
         "mint",
-        [to, *amounts_sqrt, pool.contract_address],
+        [to, *amountsSqrt, pool.contract_address],
     )
 
     # burn LP
@@ -168,7 +168,7 @@ async def test_burn(contract_factory):
         deployer_account,
         pool.contract_address,
         "transfer",
-        [pool.contract_address, *amounts_sqrt],
+        [pool.contract_address, *amountsSqrt],
     )
 
     await deployer.send_transaction(
@@ -196,16 +196,16 @@ async def test_burn(contract_factory):
 
 
 @pytest.mark.asyncio
-async def test_swap_exact_input(contract_factory):
+async def test_swap_exactInput(contract_factory):
     starknet, deployer_account, swapper_account, token0, token1 = contract_factory
 
     pool = await deploy_pool(contract_factory)
 
     token_0_amount = uint(5000000000000000000)  # 5e18
     token_1_amount = uint(10000000000000000000)  # 10e18
-    amounts_sqrt = uint(3000000000000000000)  # 3e18
+    amountsSqrt = uint(3000000000000000000)  # 3e18
     swapAmount = uint(1000000000000000000)  # 1e18
-    outputAmount = get_amount_out(swapAmount, token_0_amount, token_1_amount)
+    outputAmount = getAmountOut(swapAmount, token_0_amount, token_1_amount)
 
     # Add liquidity
     await deployer.send_transaction(
@@ -225,7 +225,7 @@ async def test_swap_exact_input(contract_factory):
         deployer_account,
         pool.contract_address,
         "mint",
-        [deployer_account.contract_address, *amounts_sqrt, pool.contract_address],
+        [deployer_account.contract_address, *amountsSqrt, pool.contract_address],
     )
 
     # Send input tokens
@@ -276,16 +276,16 @@ async def test_swap_exact_input(contract_factory):
 
 
 @pytest.mark.asyncio
-async def test_swap_exact_output(contract_factory):
+async def test_swap_exactOutput(contract_factory):
     starknet, deployer_account, swapper_account, token0, token1 = contract_factory
 
     pool = await deploy_pool(contract_factory)
 
     token_0_amount = uint(5000000000000000000)  # 5e18
     token_1_amount = uint(10000000000000000000)  # 10e18
-    amounts_sqrt = uint(3000000000000000000)  # 3e18
+    amountsSqrt = uint(3000000000000000000)  # 3e18
     swapAmount = uint(1000000000000000000)  # 1e18
-    inputAmount = get_amount_in(swapAmount, token_0_amount, token_1_amount)
+    inputAmount = getAmountIn(swapAmount, token_0_amount, token_1_amount)
 
     # Add liquidity
     await deployer.send_transaction(
@@ -305,7 +305,7 @@ async def test_swap_exact_output(contract_factory):
         deployer_account,
         pool.contract_address,
         "mint",
-        [deployer_account.contract_address, *amounts_sqrt, pool.contract_address],
+        [deployer_account.contract_address, *amountsSqrt, pool.contract_address],
     )
 
     await deployer.send_transaction(

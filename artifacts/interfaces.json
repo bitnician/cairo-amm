@@ -100,29 +100,17 @@
                 "type": "const",
                 "value": 110517590864022483288709273410208099989999878078159056510309951061542994625
             },
-            "__main__.IPool.CREATE_POOL_SELECTOR": {
+            "__main__.IPool.GETRESERVES_SELECTOR": {
                 "type": "const",
-                "value": 1787302865392366179825660179817781107130488421515471678510332101751692040521
+                "value": 1702419044747976007584230836122646470486578302666401771824479622279811552262
             },
-            "__main__.IPool.GET_POOL_ID_SELECTOR": {
+            "__main__.IPool.GETTOKEN0_SELECTOR": {
                 "type": "const",
-                "value": 883735765438286843212825708532298865570244480735855387537744202760495717955
+                "value": 1414475474014248891583421327414134934812009357746682408189827793715963334544
             },
-            "__main__.IPool.GET_RESERVES_SELECTOR": {
+            "__main__.IPool.GETTOKEN1_SELECTOR": {
                 "type": "const",
-                "value": 1715705677754146725544391220708589383422824993050994982749243481839397737234
-            },
-            "__main__.IPool.GET_TOKEN0_SELECTOR": {
-                "type": "const",
-                "value": 846845324818198991456814015748542985255191812802504058640224249073076814193
-            },
-            "__main__.IPool.GET_TOKEN1_SELECTOR": {
-                "type": "const",
-                "value": 836539960640620978060333901783912374828116215815796155403321855283342000237
-            },
-            "__main__.IPool.IS_INITIALIZED_SELECTOR": {
-                "type": "const",
-                "value": 497508713279407592014541147447246266200208639643015795656678736358116245650
+                "value": 1235450489370748615438826059147766378506940760095414007210022231011650847406
             },
             "__main__.IPool.ImplicitArgs": {
                 "full_name": "__main__.IPool.ImplicitArgs",
@@ -133,10 +121,6 @@
             "__main__.IPool.MINT_SELECTOR": {
                 "type": "const",
                 "value": 1329909728320632088402217562277154056711815095720684343816173432540100887380
-            },
-            "__main__.IPool.POOL_IS_CREATED_SELECTOR": {
-                "type": "const",
-                "value": 743133761470012306148491409306759073084554928539621717200367972727042786095
             },
             "__main__.IPool.Return": {
                 "full_name": "__main__.IPool.Return",
@@ -171,9 +155,9 @@
             "__main__.IRouter": {
                 "type": "namespace"
             },
-            "__main__.IRouter.ADD_LIQUIDITY_SELECTOR": {
+            "__main__.IRouter.ADDLIQUIDITY_SELECTOR": {
                 "type": "const",
-                "value": 1271585942111654734125606951221628240160430040413791527265389999851511344752
+                "value": 1786929337764331755288631088384162565804011657876312230156914670942513011210
             },
             "__main__.IRouter.Args": {
                 "full_name": "__main__.IRouter.Args",
@@ -181,29 +165,29 @@
                 "size": 0,
                 "type": "struct"
             },
-            "__main__.IRouter.EXACT_INPUT_SELECTOR": {
+            "__main__.IRouter.EXACTINPUT_SELECTOR": {
                 "type": "const",
-                "value": 97866921312277206078768339212823036590162040334617426879651964204030260152
+                "value": 680494635847898279823789193989073311554100408024736939015914975895940251082
             },
-            "__main__.IRouter.EXACT_OUTPUT_SELECTOR": {
+            "__main__.IRouter.EXACTOUTPUT_SELECTOR": {
                 "type": "const",
-                "value": 1460143401911543396744825490987579943054585670357643099474346590937972478658
+                "value": 392256850707696509212324179248622826750966241668536192220505533518373544602
             },
-            "__main__.IRouter.GET_AMOUNT_IN_SELECTOR": {
+            "__main__.IRouter.GETAMOUNTIN_SELECTOR": {
                 "type": "const",
-                "value": 1369314955784310940486616110116205110380568797587200238122714365430329737222
+                "value": 25771648112911077813623863085815711684750830206362748349002131379591862319
             },
-            "__main__.IRouter.GET_AMOUNT_OUT_SELECTOR": {
+            "__main__.IRouter.GETAMOUNTOUT_SELECTOR": {
                 "type": "const",
-                "value": 985351602711163636936891036462748731517852321990405299395721200665734703770
+                "value": 1647692170524927662824575722070532547943707424812990004302008033607933887818
             },
-            "__main__.IRouter.GET_POOL_ID_SELECTOR": {
+            "__main__.IRouter.GETPOOLADDRESS_SELECTOR": {
                 "type": "const",
-                "value": 883735765438286843212825708532298865570244480735855387537744202760495717955
+                "value": 901221281171213380660328594148527486500681453099617809761308091781837607150
             },
-            "__main__.IRouter.INIT_LIQUIDITY_SELECTOR": {
+            "__main__.IRouter.INITLIQUIDITY_SELECTOR": {
                 "type": "const",
-                "value": 500196403863192671035423092183641883010120817934323621392385281673729605797
+                "value": 991516016047791145274818540922199182967957900351580874177380736209067133296
             },
             "__main__.IRouter.ImplicitArgs": {
                 "full_name": "__main__.IRouter.ImplicitArgs",
@@ -211,9 +195,9 @@
                 "size": 0,
                 "type": "struct"
             },
-            "__main__.IRouter.REMOVE_LIQUIDITY_SELECTOR": {
+            "__main__.IRouter.REMOVELIQUIDITY_SELECTOR": {
                 "type": "const",
-                "value": 1315347376254230191889656603376417976475423939919294213114941367349674453722
+                "value": 579509000452441748561987543659273806280744713042676747900052335371877851386
             },
             "__main__.IRouter.Return": {
                 "full_name": "__main__.IRouter.Return",
@@ -225,13 +209,13 @@
                 "type": "const",
                 "value": 0
             },
-            "__main__.IRouter.VERIFY_POOL_IS_WHITELISTED_SELECTOR": {
+            "__main__.IRouter.VERIFYPOOLISWHITELISTED_SELECTOR": {
                 "type": "const",
-                "value": 1171366581171249452056970999785268591696245345139997922074028060598515144415
+                "value": 21512665420179895316347637672267211996308702613348372341117529083634296825
             },
-            "__main__.IRouter.WHITELIST_POOL_SELECTOR": {
+            "__main__.IRouter.WHITELISTPOOL_SELECTOR": {
                 "type": "const",
-                "value": 1051659478034147916251698498099593496457578923061449146188758639248024729343
+                "value": 517524367795556267085595363082429336317917752478459612235839217986899284677
             },
             "__main__.IRouter.alloc": {
                 "destination": "starkware.cairo.common.alloc.alloc",

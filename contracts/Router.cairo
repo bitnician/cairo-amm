@@ -21,11 +21,11 @@ func owner() -> (owner_address : felt):
 end
 
 @storage_var
-func whitlisted_pool(pool_contract_address : felt) -> (res : felt):
+func whitlistedPool(poolAddress : felt) -> (res : felt):
 end
 
 @storage_var
-func pool_address(token_0 : felt, token_1 : felt) -> (pool_contract_address : felt):
+func poolAddress(token_0 : felt, token_1 : felt) -> (poolAddress : felt):
 end
 
 @constructor
@@ -37,7 +37,7 @@ end
 
 # @notice It checks if the caller is the owner of the contract.
 # @returns the owner address if the caller is the owner, otherwise it throws an error.
-func only_owner{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (_owner):
+func onlyOwner{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (_owner):
     alloc_locals
     let (local caller) = get_caller_address()
     let (_owner) = owner.read()
@@ -46,12 +46,12 @@ func only_owner{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_pt
 end
 
 # @notice It accepts a pool contract address as argument and check if the given address is whitelisted.
-# @param pool_contract_address the address of the pool contract.
+# @param poolAddress the address of the pool contract.
 # @dev It throws an error if the given address is not whitelisted.
 @view
-func verify_pool_is_whitelisted{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        pool_contract_address : felt) -> ():
-    let (res) = whitlisted_pool.read(pool_contract_address)
+func verifyPoolIsWhitelisted{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        poolAddress : felt) -> ():
+    let (res) = whitlistedPool.read(poolAddress)
     assert_not_zero(res)
 
     return ()
@@ -63,11 +63,11 @@ end
 # @returns the pool contract address
 # @dev It return 0 if the pool contract address is not found.
 @view
-func get_pool_address{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        token_a_address : felt, token_b_address : felt) -> (pool_contract_address : felt):
-    let (pool_contract_address : felt) = pool_address.read(token_a_address, token_b_address)
+func getPoolAddress{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        token_a_address : felt, token_b_address : felt) -> (address : felt):
+    let (address : felt) = poolAddress.read(token_a_address, token_b_address)
 
-    return (pool_contract_address)
+    return (address)
 end
 
 # @notice Given some asset amount and reserves, returns an amount of the other asset representing
@@ -88,7 +88,7 @@ func quote{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     assert reserve_a_is_zero = 0
     assert reserve_b_is_zero = 0
 
-    let (amount_a_mul_reserve_b, is_overflow) = uint256_mul(amount_a, reserve_b)
+    let (amount_a_mul_reserve_b, isOverflow) = uint256_mul(amount_a, reserve_b)
 
     let (amount_b, _) = uint256_unsigned_div_rem(amount_a_mul_reserve_b, reserve_a)
 
@@ -96,28 +96,28 @@ func quote{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
 end
 
 # @notice It whitelists a pool contract address.
-# @param pool_contract_address : the address of the pool contract.
+# @param poolAddress : the address of the pool contract.
 # @dev It throws an error if the given address is already whitelisted OR the caller is not Owner.
 @external
-func whitelist_pool{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        pool_contract_address) -> ():
+func whitelistPool{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(address) -> (
+        ):
     alloc_locals
-    only_owner()
+    onlyOwner()
 
-    let (token0) = IPool.get_token0(pool_contract_address)
-    let (token1) = IPool.get_token1(pool_contract_address)
+    let (token0) = IPool.getToken0(address)
+    let (token1) = IPool.getToken1(address)
 
     assert_not_zero(token0)
     assert_not_zero(token1)
 
     # pool is not whitelisted yet
-    let (res) = whitlisted_pool.read(pool_contract_address)
+    let (res) = whitlistedPool.read(address)
     assert res = 0
 
-    whitlisted_pool.write(pool_contract_address, 1)
+    whitlistedPool.write(address, 1)
 
-    pool_address.write(token0, token1, pool_contract_address)
-    pool_address.write(token1, token0, pool_contract_address)
+    poolAddress.write(token0, token1, address)
+    poolAddress.write(token1, token0, address)
 
     return ()
 end
@@ -128,23 +128,23 @@ end
 # @param token_b_address : the address of the token1
 # @param amount_a : the amount of token0
 # @param amount_b : the amount of token1
-# @param amounts_sqrt : square_root(amount_a_desired * amount_b_desired)
+# @param amountsSqrt : square_root(amount_a_desired * amount_b_desired)
 # @dev It throws an error if the caller is not the owner OR the pool is not whitelisted
 # OR the amount is not valid OR the pool has already some amounts of liquidity.
 @external
-func init_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+func initLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         sender : felt, token_a_address : felt, token_b_address : felt, amount_a_desired : Uint256,
-        amount_b_desired : Uint256, amounts_sqrt : Uint256) -> ():
+        amount_b_desired : Uint256, amountsSqrt : Uint256) -> ():
     alloc_locals
-    let (_owner) = only_owner()
+    let (_owner) = onlyOwner()
 
-    let (pool_contract_address) = get_pool_address(token_a_address, token_b_address)
+    let (poolAddress) = getPoolAddress(token_a_address, token_b_address)
 
-    verify_pool_is_whitelisted(pool_contract_address)
+    verifyPoolIsWhitelisted(poolAddress)
 
-    let (local token_a_reserve : Uint256) = get_pool_reserve(pool_contract_address, token_a_address)
+    let (local token_a_reserve : Uint256) = getPoolReserve(poolAddress, token_a_address)
 
-    let (local token_b_reserve : Uint256) = get_pool_reserve(pool_contract_address, token_b_address)
+    let (local token_b_reserve : Uint256) = getPoolReserve(poolAddress, token_b_address)
 
     # Check to see if the pool balance is zero.
     let (reserve_a_zero) = uint256_eq(token_a_reserve, Uint256(0, 0))
@@ -153,10 +153,10 @@ func init_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_chec
     assert reserve_a_zero = 1
     assert reserve_b_zero = 1
 
-    IERC20.transferFrom(token_a_address, sender, pool_contract_address, amount_a_desired)
-    IERC20.transferFrom(token_b_address, sender, pool_contract_address, amount_b_desired)
+    IERC20.transferFrom(token_a_address, sender, poolAddress, amount_a_desired)
+    IERC20.transferFrom(token_b_address, sender, poolAddress, amount_b_desired)
 
-    IPool.mint(pool_contract_address, _owner, amounts_sqrt, pool_contract_address)
+    IPool.mint(poolAddress, _owner, amountsSqrt, poolAddress)
     return ()
 end
 
@@ -172,19 +172,19 @@ end
 # @param amount_b_min : Bounds the extent to which the A/B price can go up before
 # the transaction reverts. Must be <= amountBDesired.
 @external
-func add_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+func addLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         token_a_address : felt, token_b_address : felt, amount_a_desired : Uint256,
         amount_b_desired : Uint256, amount_a_min : Uint256, amount_b_min : Uint256) -> ():
     alloc_locals
 
     let (local caller) = get_caller_address()
 
-    let (pool_contract_address) = get_pool_address(token_a_address, token_b_address)
+    let (poolAddress) = getPoolAddress(token_a_address, token_b_address)
 
-    verify_pool_is_whitelisted(pool_contract_address)
+    verifyPoolIsWhitelisted(poolAddress)
 
-    let (local token_a_reserve : Uint256) = get_pool_reserve(pool_contract_address, token_a_address)
-    let (local token_b_reserve : Uint256) = get_pool_reserve(pool_contract_address, token_b_address)
+    let (local token_a_reserve : Uint256) = getPoolReserve(poolAddress, token_a_address)
+    let (local token_b_reserve : Uint256) = getPoolReserve(poolAddress, token_b_address)
 
     # Check to see if the pool balance is not zero.
     let (reserve_a_zero) = uint256_eq(token_a_reserve, Uint256(0, 0))
@@ -226,10 +226,10 @@ func add_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check
         tempvar range_check_ptr = range_check_ptr
     end
 
-    IERC20.transferFrom(token_a_address, caller, pool_contract_address, amount_a)
-    IERC20.transferFrom(token_b_address, caller, pool_contract_address, amount_b)
+    IERC20.transferFrom(token_a_address, caller, poolAddress, amount_a)
+    IERC20.transferFrom(token_b_address, caller, poolAddress, amount_b)
 
-    IPool.mint(pool_contract_address, caller, Uint256(0, 0), pool_contract_address)
+    IPool.mint(poolAddress, caller, Uint256(0, 0), poolAddress)
 
     return ()
 end
@@ -244,32 +244,31 @@ end
 # the transaction not to revert.
 # @param to : Recipient of the underlying assets.
 @external
-func remove_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+func removeLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         token_a_address : felt, token_b_address : felt, liquidity_amount : Uint256,
         amount_a_min : Uint256, amount_b_min : Uint256, to : felt) -> ():
     alloc_locals
 
     let (local caller) = get_caller_address()
 
-    let (pool_contract_address) = get_pool_address(token_a_address, token_b_address)
+    let (poolAddress) = getPoolAddress(token_a_address, token_b_address)
 
-    verify_pool_is_whitelisted(pool_contract_address)
+    verifyPoolIsWhitelisted(poolAddress)
 
-    IPool.transferFrom(pool_contract_address, caller, pool_contract_address, liquidity_amount)
-    let (amount_0 : Uint256, amount_1 : Uint256) = IPool.burn(
-        pool_contract_address, to, pool_contract_address)
+    IPool.transferFrom(poolAddress, caller, poolAddress, liquidity_amount)
+    let (amount0 : Uint256, amount1 : Uint256) = IPool.burn(poolAddress, to, poolAddress)
 
     local amount_a : Uint256
     local amount_b : Uint256
 
-    let (token_0) = IPool.get_token0(pool_contract_address)
+    let (token_0) = IPool.getToken0(poolAddress)
 
     if token_0 == token_a_address:
-        assert amount_a = amount_0
-        assert amount_b = amount_1
+        assert amount_a = amount0
+        assert amount_b = amount1
     else:
-        assert amount_a = amount_1
-        assert amount_b = amount_0
+        assert amount_a = amount1
+        assert amount_b = amount0
     end
 
     let (enough_amount_a) = uint256_le(amount_a_min, amount_a)
@@ -282,15 +281,14 @@ func remove_liquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_ch
 end
 
 # @notice Getting the pool reserve of token.
-# @param pool_contract_address : address of the pool contract
+# @param poolAddress : address of the pool contract
 # @param token_address : address of the token
 # @return The reserve of the other token of pool.
-func get_pool_reserve{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        pool_contract_address : felt, token_address : felt) -> (balance : Uint256):
-    let (_token0) = IPool.get_token0(pool_contract_address)
+func getPoolReserve{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        poolAddress : felt, token_address : felt) -> (balance : Uint256):
+    let (_token0) = IPool.getToken0(poolAddress)
 
-    let (token0_reserve : Uint256, token1_reserve : Uint256) = IPool.get_reserves(
-        pool_contract_address)
+    let (token0_reserve : Uint256, token1_reserve : Uint256) = IPool.getReserves(poolAddress)
 
     if token_address == _token0:
         return (token0_reserve)
@@ -301,160 +299,157 @@ end
 
 # @notice Given an output asset amount and token addresses, calculates all
 # preceding minimum input token amounts.
-# @param token_in_address : address of the input token
-# @param token_out_address : address of the output token
-# @param amount_out : the amount of the output token
+# @param tokenInAddress : address of the input token
+# @param tokenOutAddress : address of the output token
+# @param amountOut : the amount of the output token
 # @return The minimum input token amounts.
 @view
-func get_amount_in{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        token_in_address : felt, token_out_address : felt, amount_out : Uint256) -> (
-        amount_in : Uint256):
+func getAmountIn{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        tokenInAddress : felt, tokenOutAddress : felt, amountOut : Uint256) -> (amountIn : Uint256):
     alloc_locals
 
-    let (pool_contract_address) = get_pool_address(token_in_address, token_out_address)
+    let (poolAddress) = getPoolAddress(tokenInAddress, tokenOutAddress)
 
-    verify_pool_is_whitelisted(pool_contract_address)
+    verifyPoolIsWhitelisted(poolAddress)
 
-    let (reserve_out : Uint256) = get_pool_reserve(pool_contract_address, token_out_address)
-    let (reserve_in : Uint256) = get_pool_reserve(pool_contract_address, token_in_address)
+    let (reserve_out : Uint256) = getPoolReserve(poolAddress, tokenOutAddress)
+    let (reserveIn : Uint256) = getPoolReserve(poolAddress, tokenInAddress)
 
-    let (enough_reserve_in) = uint256_lt(Uint256(0, 0), reserve_in)
-    let (enough_reserve_out) = uint256_lt(Uint256(0, 0), reserve_out)
+    let (enoughReserveIn) = uint256_lt(Uint256(0, 0), reserveIn)
+    let (enoughReserveOut) = uint256_lt(Uint256(0, 0), reserve_out)
 
-    assert (enough_reserve_in) = 1
-    assert (enough_reserve_out) = 1
+    assert (enoughReserveIn) = 1
+    assert (enoughReserveOut) = 1
 
-    let (reserve_in_mul_amount_out, _) = uint256_mul(reserve_in, amount_out)
-    let (numerator, _) = uint256_mul(reserve_in_mul_amount_out, Uint256(1000, 0))
+    let (reserveInMulAmountOut, _) = uint256_mul(reserveIn, amountOut)
+    let (numerator, _) = uint256_mul(reserveInMulAmountOut, Uint256(1000, 0))
 
-    let (reserve_out_sub_amount_out) = uint256_sub(reserve_out, amount_out)
-    let (denominator, _) = uint256_mul(reserve_out_sub_amount_out, Uint256(997, 0))
+    let (reserveOutSubAmountOut) = uint256_sub(reserve_out, amountOut)
+    let (denominator, _) = uint256_mul(reserveOutSubAmountOut, Uint256(997, 0))
 
-    let (amount_in, _) = uint256_unsigned_div_rem(numerator, denominator)
+    let (amountIn, _) = uint256_unsigned_div_rem(numerator, denominator)
 
-    let (res, is_overflow) = uint256_add(amount_in, Uint256(1, 0))
-    assert (is_overflow) = 0
+    let (res, isOverflow) = uint256_add(amountIn, Uint256(1, 0))
+    assert (isOverflow) = 0
 
-    return (amount_in=res)
+    return (amountIn=res)
 end
 
 # @notice Given an input asset amount and  token addresses, calculates all
 # subsequent maximum output token amounts.
-# @param token_in_address : address of the input token
-# @param token_out_address : address of the output token
-# @param amount_in : the amount of the input token
+# @param tokenInAddress : address of the input token
+# @param tokenOutAddress : address of the output token
+# @param amountIn : the amount of the input token
 # @return The maximum output token amounts.
 @view
-func get_amount_out{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        token_in_address : felt, token_out_address : felt, amount_in : Uint256) -> (
-        amount_out : Uint256):
+func getAmountOut{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        tokenInAddress : felt, tokenOutAddress : felt, amountIn : Uint256) -> (amountOut : Uint256):
     alloc_locals
 
-    let (pool_contract_address) = get_pool_address(token_in_address, token_out_address)
+    let (poolAddress) = getPoolAddress(tokenInAddress, tokenOutAddress)
 
-    verify_pool_is_whitelisted(pool_contract_address)
+    verifyPoolIsWhitelisted(poolAddress)
 
-    let (reserve_out : Uint256) = get_pool_reserve(pool_contract_address, token_out_address)
-    let (reserve_in : Uint256) = get_pool_reserve(pool_contract_address, token_in_address)
+    let (reserve_out : Uint256) = getPoolReserve(poolAddress, tokenOutAddress)
+    let (reserveIn : Uint256) = getPoolReserve(poolAddress, tokenInAddress)
 
-    let (enough_reserve_in) = uint256_lt(Uint256(0, 0), reserve_in)
-    let (enough_reserve_out) = uint256_lt(Uint256(0, 0), reserve_out)
+    let (enoughReserveIn) = uint256_lt(Uint256(0, 0), reserveIn)
+    let (enoughReserveOut) = uint256_lt(Uint256(0, 0), reserve_out)
 
-    assert (enough_reserve_in) = 1
-    assert (enough_reserve_out) = 1
+    assert (enoughReserveIn) = 1
+    assert (enoughReserveOut) = 1
 
-    let (amount_in_with_fee, _) = uint256_mul(amount_in, Uint256(997, 0))
-    let (reserve_in_mul_1000, _) = uint256_mul(reserve_in, Uint256(1000, 0))
+    let (amountInWithFee, _) = uint256_mul(amountIn, Uint256(997, 0))
+    let (reserveInMul1000, _) = uint256_mul(reserveIn, Uint256(1000, 0))
 
-    let (numerator, _) = uint256_mul(amount_in_with_fee, reserve_out)
+    let (numerator, _) = uint256_mul(amountInWithFee, reserve_out)
 
-    let (denominator, _) = uint256_add(reserve_in_mul_1000, amount_in_with_fee)
+    let (denominator, _) = uint256_add(reserveInMul1000, amountInWithFee)
 
-    let (amount_out, _) = uint256_unsigned_div_rem(numerator, denominator)
+    let (amountOut, _) = uint256_unsigned_div_rem(numerator, denominator)
 
-    return (amount_out=amount_out)
+    return (amountOut=amountOut)
 end
 
 func _swap{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        amount_in : Uint256, amount_out : Uint256, token_in_address : felt,
-        token_out_address : felt, to : felt, pool_contract_address : felt) -> ():
+        amountIn : Uint256, amountOut : Uint256, tokenInAddress : felt, tokenOutAddress : felt,
+        to : felt, poolAddress : felt) -> ():
     alloc_locals
 
-    let (local token0) = IPool.get_token0(pool_contract_address)
-    local token_out
-    local amount1_out : Uint256
-    local amount0_out : Uint256
+    let (local token0) = IPool.getToken0(poolAddress)
+    local tokenOut
+    local amount1Out : Uint256
+    local amount0Out : Uint256
 
-    if token0 == token_out_address:
-        assert amount0_out = amount_out
-        assert amount1_out = Uint256(0, 0)
+    if token0 == tokenOutAddress:
+        assert amount0Out = amountOut
+        assert amount1Out = Uint256(0, 0)
     else:
-        assert amount0_out = Uint256(0, 0)
-        assert amount1_out = amount_out
+        assert amount0Out = Uint256(0, 0)
+        assert amount1Out = amountOut
     end
 
     # swap
-    IPool.swap(pool_contract_address, amount0_out, amount1_out, to, pool_contract_address)
+    IPool.swap(poolAddress, amount0Out, amount1Out, to, poolAddress)
     return ()
 end
 
 # @notice Swaps an exact amount of input tokens for as many output tokens as possible
-# @param token_in_address : address of the input token
-# @param token_out_address : address of the output token
-# @param amount_in : the amount of the input token
-# @param amount_out_min : The minimum amount of output tokens that must be received for t
+# @param tokenInAddress : address of the input token
+# @param tokenOutAddress : address of the output token
+# @param amountIn : the amount of the input token
+# @param amountOutMin : The minimum amount of output tokens that must be received for t
 # he transaction not to revert.
 @external
-func exact_input{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        token_in_address : felt, token_out_address : felt, amount_in : Uint256,
-        amount_out_min : Uint256) -> ():
+func exactInput{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        tokenInAddress : felt, tokenOutAddress : felt, amountIn : Uint256,
+        amountOutMin : Uint256) -> ():
     alloc_locals
 
-    let (pool_contract_address) = get_pool_address(token_in_address, token_out_address)
+    let (poolAddress) = getPoolAddress(tokenInAddress, tokenOutAddress)
 
-    verify_pool_is_whitelisted(pool_contract_address)
+    verifyPoolIsWhitelisted(poolAddress)
 
     # get amount out
-    let (local amount_out : Uint256) = get_amount_out(
-        token_in_address, token_out_address, amount_in)
+    let (local amountOut : Uint256) = getAmountOut(tokenInAddress, tokenOutAddress, amountIn)
 
-    let (enough_amount_out) = uint256_le(amount_out_min, amount_out)
-    assert (enough_amount_out) = 1
+    let (enoughAmountOut) = uint256_le(amountOutMin, amountOut)
+    assert (enoughAmountOut) = 1
 
     let (local caller) = get_caller_address()
-    IERC20.transferFrom(token_in_address, caller, pool_contract_address, amount_in)
+    IERC20.transferFrom(tokenInAddress, caller, poolAddress, amountIn)
 
-    _swap(amount_in, amount_out, token_in_address, token_out_address, caller, pool_contract_address)
+    _swap(amountIn, amountOut, tokenInAddress, tokenOutAddress, caller, poolAddress)
 
     return ()
 end
 
 # @notice Receive an exact amount of output tokens for as few input tokens as possible
-# @param token_in_address : address of the input token
-# @param token_out_address : address of the output token
-# @param amount_out : The amount of output tokens to receive.
-# @param amount_in_max : The maximum amount of input tokens that can be required before
+# @param tokenInAddress : address of the input token
+# @param tokenOutAddress : address of the output token
+# @param amountOut : The amount of output tokens to receive.
+# @param amountIn_max : The maximum amount of input tokens that can be required before
 # the transaction reverts.
 
 @external
-func exact_output{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        token_in_address : felt, token_out_address : felt, amount_out : Uint256,
-        amount_in_max : Uint256) -> ():
+func exactOutput{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        tokenInAddress : felt, tokenOutAddress : felt, amountOut : Uint256,
+        amountIn_max : Uint256) -> ():
     alloc_locals
 
-    let (pool_contract_address) = get_pool_address(token_in_address, token_out_address)
+    let (poolAddress) = getPoolAddress(tokenInAddress, tokenOutAddress)
 
-    verify_pool_is_whitelisted(pool_contract_address)
+    verifyPoolIsWhitelisted(poolAddress)
 
-    let (local amount_in : Uint256) = get_amount_in(token_in_address, token_out_address, amount_out)
+    let (local amountIn : Uint256) = getAmountIn(tokenInAddress, tokenOutAddress, amountOut)
 
-    let (enough_amount_in) = uint256_le(amount_in, amount_in_max)
-    assert (enough_amount_in) = 1
+    let (enough_amountIn) = uint256_le(amountIn, amountIn_max)
+    assert (enough_amountIn) = 1
 
     let (local caller) = get_caller_address()
-    IERC20.transferFrom(token_in_address, caller, pool_contract_address, amount_in)
+    IERC20.transferFrom(tokenInAddress, caller, poolAddress, amountIn)
 
-    _swap(amount_in, amount_out, token_in_address, token_out_address, caller, pool_contract_address)
+    _swap(amountIn, amountOut, tokenInAddress, tokenOutAddress, caller, poolAddress)
 
     return ()
 end

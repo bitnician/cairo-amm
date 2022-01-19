@@ -19,11 +19,11 @@
     {
         "inputs": [
             {
-                "name": "token0_address",
+                "name": "token0Address",
                 "type": "felt"
             },
             {
-                "name": "token1_address",
+                "name": "token1Address",
                 "type": "felt"
             }
         ],
@@ -33,7 +33,7 @@
     },
     {
         "inputs": [],
-        "name": "get_reserves",
+        "name": "getReserves",
         "outputs": [
             {
                 "name": "reserve0",
@@ -49,7 +49,7 @@
     },
     {
         "inputs": [],
-        "name": "get_token0",
+        "name": "getToken0",
         "outputs": [
             {
                 "name": "res",
@@ -61,7 +61,7 @@
     },
     {
         "inputs": [],
-        "name": "get_token1",
+        "name": "getToken1",
         "outputs": [
             {
                 "name": "res",
@@ -78,11 +78,11 @@
                 "type": "felt"
             },
             {
-                "name": "amounts_sqrt",
+                "name": "amountsSqrt",
                 "type": "Uint256"
             },
             {
-                "name": "pool_contract_address",
+                "name": "poolAddress",
                 "type": "felt"
             }
         ],
@@ -97,18 +97,18 @@
                 "type": "felt"
             },
             {
-                "name": "pool_contract_address",
+                "name": "poolAddress",
                 "type": "felt"
             }
         ],
         "name": "burn",
         "outputs": [
             {
-                "name": "amount_0",
+                "name": "amount0",
                 "type": "Uint256"
             },
             {
-                "name": "amount_1",
+                "name": "amount1",
                 "type": "Uint256"
             }
         ],
@@ -117,11 +117,11 @@
     {
         "inputs": [
             {
-                "name": "amount0_out",
+                "name": "amount0Out",
                 "type": "Uint256"
             },
             {
-                "name": "amount1_out",
+                "name": "amount1Out",
                 "type": "Uint256"
             },
             {
@@ -129,7 +129,7 @@
                 "type": "felt"
             },
             {
-                "name": "pool_contract_address",
+                "name": "poolAddress",
                 "type": "felt"
             }
         ],
