@@ -6,7 +6,7 @@ from starkware.starknet.testing.starknet import Starknet
 from starkware.starkware_utils.error_handling import StarkException
 from starkware.starknet.definitions.error_codes import StarknetErrorCode
 from utils.Signer import Signer
-from utils.helper import get_amount_in, get_amount_out
+from utils.helper import get_amount_in, get_amount_out, uint, str_to_felt, assert_revert
 
 
 pool_creator_private_key = 123456789987654321
@@ -16,10 +16,6 @@ swapper_private_key = 543215678954321567
 pool_creator = Signer(pool_creator_private_key)
 deployer = Signer(deployer_private_key)
 swapper = Signer(swapper_private_key)
-
-
-def uint(a):
-    return (a, 0)
 
 
 @pytest.fixture(scope="module")
@@ -41,21 +37,25 @@ async def contract_factory():
     starknet = await Starknet.empty()
 
     deployer_account = await starknet.deploy(
-        source=ACCOUNT_CONTRACT_FILE, constructor_calldata=[deployer.public_key, 0]
+        source=ACCOUNT_CONTRACT_FILE, constructor_calldata=[
+            deployer.public_key, 0]
     )
 
     swapper_account = await starknet.deploy(
-        source=ACCOUNT_CONTRACT_FILE, constructor_calldata=[swapper.public_key, 0]
+        source=ACCOUNT_CONTRACT_FILE, constructor_calldata=[
+            swapper.public_key, 0]
     )
 
     token0 = await starknet.deploy(
         source=ERC20_CONTRACT_FILE,
-        constructor_calldata=[deployer_account.contract_address, 0, 18],
+        constructor_calldata=[str_to_felt("Token0"), str_to_felt(
+            "TOK0"), 18, *uint(100000000000000000000000), deployer_account.contract_address],
     )
 
     token1 = await starknet.deploy(
         source=ERC20_CONTRACT_FILE,
-        constructor_calldata=[deployer_account.contract_address, 1, 18],
+        constructor_calldata=[str_to_felt("Token1"), str_to_felt(
+            "TOK1"), 18, *uint(100000000000000000000000), deployer_account.contract_address],
     )
 
     return starknet, deployer_account, swapper_account, token0, token1
@@ -112,17 +112,17 @@ async def test_mint(contract_factory):
         [to, *amounts_sqrt, pool.contract_address],
     )
 
-    execution_info = await pool.balance_of(to).call()
-    assert execution_info.result.res == amounts_sqrt
+    execution_info = await pool.balanceOf(to).call()
+    assert execution_info.result.balance == amounts_sqrt
 
-    execution_info = await pool.get_total_supply().call()
-    assert execution_info.result.res == amounts_sqrt
+    execution_info = await pool.totalSupply().call()
+    assert execution_info.result.totalSupply == amounts_sqrt
 
-    execution_info = await token0.balance_of(pool.contract_address).call()
-    assert execution_info.result.res == token_0_amount
+    execution_info = await token0.balanceOf(pool.contract_address).call()
+    assert execution_info.result.balance == token_0_amount
 
-    execution_info = await token1.balance_of(pool.contract_address).call()
-    assert execution_info.result.res == token_1_amount
+    execution_info = await token1.balanceOf(pool.contract_address).call()
+    assert execution_info.result.balance == token_1_amount
 
 
 @pytest.mark.asyncio
@@ -137,8 +137,8 @@ async def test_burn(contract_factory):
     to = deployer_account.contract_address
 
     # initial balance of liquidity provider
-    lp_token0_initial_balance = await token0.balance_of(to).call()
-    lp_token1_initial_balance = await token1.balance_of(to).call()
+    lp_token0_initial_balance = await token0.balanceOf(to).call()
+    lp_token1_initial_balance = await token1.balanceOf(to).call()
 
     # Add liquidity
     await deployer.send_transaction(
@@ -172,26 +172,27 @@ async def test_burn(contract_factory):
     )
 
     await deployer.send_transaction(
-        deployer_account, pool.contract_address, "burn", [to, pool.contract_address]
+        deployer_account, pool.contract_address, "burn", [
+            to, pool.contract_address]
     )
 
-    execution_info = await pool.balance_of(to).call()
-    assert execution_info.result.res == uint(0)
+    execution_info = await pool.balanceOf(to).call()
+    assert execution_info.result.balance == uint(0)
 
-    execution_info = await pool.get_total_supply().call()
-    assert execution_info.result.res == uint(0)
+    execution_info = await pool.totalSupply().call()
+    assert execution_info.result.totalSupply == uint(0)
 
-    execution_info = await token0.balance_of(pool.contract_address).call()
-    assert execution_info.result.res == uint(0)
+    execution_info = await token0.balanceOf(pool.contract_address).call()
+    assert execution_info.result.balance == uint(0)
 
-    execution_info = await token1.balance_of(pool.contract_address).call()
-    assert execution_info.result.res == uint(0)
+    execution_info = await token1.balanceOf(pool.contract_address).call()
+    assert execution_info.result.balance == uint(0)
 
-    lp_token0_updated_balance = await token0.balance_of(to).call()
-    lp_token1_updated_balance = await token1.balance_of(to).call()
+    lp_token0_updated_balance = await token0.balanceOf(to).call()
+    lp_token1_updated_balance = await token1.balanceOf(to).call()
 
-    assert lp_token0_initial_balance.result.res == lp_token0_updated_balance.result.res
-    assert lp_token1_initial_balance.result.res == lp_token1_updated_balance.result.res
+    assert lp_token0_initial_balance.result.balance == lp_token0_updated_balance.result.balance
+    assert lp_token1_initial_balance.result.balance == lp_token1_updated_balance.result.balance
 
 
 @pytest.mark.asyncio
@@ -236,7 +237,7 @@ async def test_swap_exact_input(contract_factory):
     )
 
     # getting initialize token balance for swapper
-    swapper_initial_balance = await token1.balance_of(
+    swapper_initial_balance = await token1.balanceOf(
         swapper_account.contract_address
     ).call()
 
@@ -253,30 +254,25 @@ async def test_swap_exact_input(contract_factory):
         ],
     )
 
-    swapper_updated_balance = await token1.balance_of(
+    swapper_updated_balance = await token1.balanceOf(
         swapper_account.contract_address
     ).call()
-    assert swapper_updated_balance.result.res == uint(
-        swapper_initial_balance.result.res[0] + outputAmount[0]
+    assert swapper_updated_balance.result.balance == uint(
+        swapper_initial_balance.result.balance[0] + outputAmount[0]
     )
 
-    try:
-        outputAmount = uint(outputAmount[0] + 1)
-        await deployer.send_transaction(
-            deployer_account,
+    outputAmount = uint(outputAmount[0] + 1)
+    assert_revert(deployer.send_transaction(
+        deployer_account,
+        pool.contract_address,
+        "swap",
+        [
+            *uint(0),
+            *outputAmount,
+            swapper_account.contract_address,
             pool.contract_address,
-            "swap",
-            [
-                *uint(0),
-                *outputAmount,
-                swapper_account.contract_address,
-                pool.contract_address,
-            ],
-        )
-        assert False
-    except StarkException as err:
-        _, error = err.args
-        assert error["code"] == StarknetErrorCode.TRANSACTION_FAILED
+        ],
+    ))
 
 
 @pytest.mark.asyncio
@@ -320,7 +316,7 @@ async def test_swap_exact_output(contract_factory):
     )
 
     # getting initialize token balance for swapper
-    swapper_initial_balance = await token1.balance_of(
+    swapper_initial_balance = await token1.balanceOf(
         swapper_account.contract_address
     ).call()
 
@@ -337,28 +333,22 @@ async def test_swap_exact_output(contract_factory):
         ],
     )
 
-    swapper_updated_balance = await token1.balance_of(
+    swapper_updated_balance = await token1.balanceOf(
         swapper_account.contract_address
     ).call()
-    assert swapper_updated_balance.result.res == uint(
-        swapper_initial_balance.result.res[0] + swapAmount[0]
+    assert swapper_updated_balance.result.balance == uint(
+        swapper_initial_balance.result.balance[0] + swapAmount[0]
     )
 
-    try:
-
-        swapAmount = uint(swapAmount[0] + 1)
-        await deployer.send_transaction(
-            deployer_account,
+    swapAmount = uint(swapAmount[0] + 1)
+    assert_revert(deployer.send_transaction(
+        deployer_account,
+        pool.contract_address,
+        "swap",
+        [
+            *uint(0),
+            *swapAmount,
+            swapper_account.contract_address,
             pool.contract_address,
-            "swap",
-            [
-                *uint(0),
-                *swapAmount,
-                swapper_account.contract_address,
-                pool.contract_address,
-            ],
-        )
-        assert False
-    except StarkException as err:
-        _, error = err.args
-        assert error["code"] == StarknetErrorCode.TRANSACTION_FAILED
+        ],
+    ))

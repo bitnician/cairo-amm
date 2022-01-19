@@ -16,3 +16,21 @@ def get_amount_out(amount_in, reserve_in, reserve_out):
     amount_out = (numerator // denominator)
 
     return (amount_out, 0)
+
+
+def str_to_felt(text):
+    b_text = bytes(text, 'UTF-8')
+    return int.from_bytes(b_text, "big")
+
+
+def uint(a):
+    return(a, 0)
+
+
+async def assert_revert(fun):
+    try:
+        await fun
+        assert False
+    except StarkException as err:
+        _, error = err.args
+        assert error['code'] == StarknetErrorCode.TRANSACTION_FAILED
