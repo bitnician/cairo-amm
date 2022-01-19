@@ -27,6 +27,14 @@
                 "type": "felt"
             },
             {
+                "name": "decimals",
+                "type": "felt"
+            },
+            {
+                "name": "initial_supply",
+                "type": "Uint256"
+            },
+            {
                 "name": "governance_account_address",
                 "type": "felt"
             }

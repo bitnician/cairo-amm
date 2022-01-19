@@ -45,14 +45,15 @@ end
 
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        name : felt, symbol : felt, governance_account_address : felt):
+        name : felt, symbol : felt, decimals : felt, initial_supply : Uint256,
+        governance_account_address : felt):
     _name.write(name)
     _symbol.write(symbol)
-    _decimals.write(18)
+    _decimals.write(decimals)
     assert_not_zero(governance_account_address)
     _governance_address.write(governance_account_address)
 
-    _mint(governance_account_address, Uint256(1000000000000000000000000000000, 0))
+    _mint(governance_account_address, initial_supply)
     return ()
 end
 

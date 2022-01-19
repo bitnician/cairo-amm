@@ -57,7 +57,7 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     token1.write(value=token1_address)
     # name : RA-Pool-Token
     # symbol : RAP
-    ERC20_initializer(826545801111111084584111107101110, 826580, Uint256(0, 0), 0)
+    ERC20_initializer(826545801111111084584111107101110, 826580, Uint256(0, 0), 1)
 
     return ()
 end
@@ -405,14 +405,3 @@ func decreaseAllowance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
     # Cairo equivalent to 'return (true)'
     return (1)
 end
-
-# #
-# # Test function — will remove once extensibility is resolved
-# #
-
-# @external
-# func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-#         recipient : felt, amount : Uint256):
-#     _mint(recipient, amount)
-#     return ()
-# end
