@@ -30,11 +30,11 @@
     {
         "inputs": [
             {
-                "name": "poolAddress",
+                "name": "pool",
                 "type": "felt"
             }
         ],
-        "name": "verifyPoolIsWhitelisted",
+        "name": "onlyWhitelistedPool",
         "outputs": [],
         "stateMutability": "view",
         "type": "function"
@@ -42,11 +42,11 @@
     {
         "inputs": [
             {
-                "name": "token_a_address",
+                "name": "tokenA",
                 "type": "felt"
             },
             {
-                "name": "token_b_address",
+                "name": "tokenB",
                 "type": "felt"
             }
         ],
@@ -63,22 +63,22 @@
     {
         "inputs": [
             {
-                "name": "amount_a",
+                "name": "amountA",
                 "type": "Uint256"
             },
             {
-                "name": "reserve_a",
+                "name": "reserveA",
                 "type": "Uint256"
             },
             {
-                "name": "reserve_b",
+                "name": "reserveB",
                 "type": "Uint256"
             }
         ],
         "name": "quote",
         "outputs": [
             {
-                "name": "amount_b",
+                "name": "amountB",
                 "type": "Uint256"
             }
         ],
@@ -88,7 +88,7 @@
     {
         "inputs": [
             {
-                "name": "address",
+                "name": "pool",
                 "type": "felt"
             }
         ],
@@ -99,23 +99,23 @@
     {
         "inputs": [
             {
-                "name": "sender",
+                "name": "to",
                 "type": "felt"
             },
             {
-                "name": "token_a_address",
+                "name": "tokenA",
                 "type": "felt"
             },
             {
-                "name": "token_b_address",
+                "name": "tokenB",
                 "type": "felt"
             },
             {
-                "name": "amount_a_desired",
+                "name": "amountADesired",
                 "type": "Uint256"
             },
             {
-                "name": "amount_b_desired",
+                "name": "amountBDesired",
                 "type": "Uint256"
             },
             {
@@ -130,27 +130,27 @@
     {
         "inputs": [
             {
-                "name": "token_a_address",
+                "name": "tokenA",
                 "type": "felt"
             },
             {
-                "name": "token_b_address",
+                "name": "tokenB",
                 "type": "felt"
             },
             {
-                "name": "amount_a_desired",
+                "name": "amountADesired",
                 "type": "Uint256"
             },
             {
-                "name": "amount_b_desired",
+                "name": "amountBDesired",
                 "type": "Uint256"
             },
             {
-                "name": "amount_a_min",
+                "name": "amountAMin",
                 "type": "Uint256"
             },
             {
-                "name": "amount_b_min",
+                "name": "amountBMin",
                 "type": "Uint256"
             }
         ],
@@ -161,23 +161,23 @@
     {
         "inputs": [
             {
-                "name": "token_a_address",
+                "name": "tokenA",
                 "type": "felt"
             },
             {
-                "name": "token_b_address",
+                "name": "tokenB",
                 "type": "felt"
             },
             {
-                "name": "liquidity_amount",
+                "name": "liquidityAmount",
                 "type": "Uint256"
             },
             {
-                "name": "amount_a_min",
+                "name": "amountAMin",
                 "type": "Uint256"
             },
             {
-                "name": "amount_b_min",
+                "name": "amountBMin",
                 "type": "Uint256"
             },
             {
@@ -192,11 +192,11 @@
     {
         "inputs": [
             {
-                "name": "tokenInAddress",
+                "name": "tokenIn",
                 "type": "felt"
             },
             {
-                "name": "tokenOutAddress",
+                "name": "tokenOut",
                 "type": "felt"
             },
             {
@@ -217,11 +217,11 @@
     {
         "inputs": [
             {
-                "name": "tokenInAddress",
+                "name": "tokenIn",
                 "type": "felt"
             },
             {
-                "name": "tokenOutAddress",
+                "name": "tokenOut",
                 "type": "felt"
             },
             {
@@ -242,11 +242,11 @@
     {
         "inputs": [
             {
-                "name": "tokenInAddress",
+                "name": "tokenIn",
                 "type": "felt"
             },
             {
-                "name": "tokenOutAddress",
+                "name": "tokenOut",
                 "type": "felt"
             },
             {
@@ -265,11 +265,11 @@
     {
         "inputs": [
             {
-                "name": "tokenInAddress",
+                "name": "tokenIn",
                 "type": "felt"
             },
             {
-                "name": "tokenOutAddress",
+                "name": "tokenOut",
                 "type": "felt"
             },
             {

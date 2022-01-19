@@ -185,6 +185,10 @@
                 "type": "const",
                 "value": 901221281171213380660328594148527486500681453099617809761308091781837607150
             },
+            "__main__.IRouter.GETPOOLRESERVE_SELECTOR": {
+                "type": "const",
+                "value": 1254466420644126893366422437002199428881081518539507733755758235934019467371
+            },
             "__main__.IRouter.INITLIQUIDITY_SELECTOR": {
                 "type": "const",
                 "value": 991516016047791145274818540922199182967957900351580874177380736209067133296
@@ -208,10 +212,6 @@
             "__main__.IRouter.SIZEOF_LOCALS": {
                 "type": "const",
                 "value": 0
-            },
-            "__main__.IRouter.VERIFYPOOLISWHITELISTED_SELECTOR": {
-                "type": "const",
-                "value": 21512665420179895316347637672267211996308702613348372341117529083634296825
             },
             "__main__.IRouter.WHITELISTPOOL_SELECTOR": {
                 "type": "const",

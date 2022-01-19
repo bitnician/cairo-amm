@@ -40,16 +40,16 @@ namespace IPool:
     func getToken1() -> (res : felt):
     end
 
-    func mint(to : felt, amountsSqrt : Uint256, poolAddress : felt):
+    func mint(to : felt, amountsSqrt : Uint256, pool : felt):
     end
 
-    func burn(to : felt, poolAddress : felt) -> (amount0 : Uint256, amount1 : Uint256):
+    func burn(to : felt, pool : felt) -> (amount0 : Uint256, amount1 : Uint256):
     end
 
     func transferFrom(sender : felt, recipient : felt, amount : Uint256):
     end
 
-    func swap(amount0Out : Uint256, amount1Out : Uint256, to : felt, poolAddress : felt) -> ():
+    func swap(amount0Out : Uint256, amount1Out : Uint256, to : felt, pool : felt) -> ():
     end
 
     func getReserves() -> (reserve0 : Uint256, reserve1 : Uint256):
@@ -58,45 +58,41 @@ end
 
 @contract_interface
 namespace IRouter:
-    func verifyPoolIsWhitelisted(poolAddress : felt):
+    func getPoolReserve(pool : felt, desiredToken : felt) -> (reserve : Uint256):
     end
 
-    func getPoolAddress(token_a_address : felt, token_b_address : felt) -> (poolAddress : felt):
+    func getPoolAddress(tokenA : felt, tokenB : felt) -> (pool : felt):
     end
 
-    func whitelistPool(poolAddress) -> ():
+    func whitelistPool(pool) -> ():
     end
 
     func initLiquidity(
-            sender : felt, token_a_address : felt, token_b_address : felt,
-            amount_a_desired : Uint256, amount_b_desired : Uint256, amountsSqrt : Uint256) -> ():
+            to : felt, tokenA : felt, tokenB : felt, amountADesired : Uint256,
+            amountBDesired : Uint256, amountsSqrt : Uint256) -> ():
     end
 
     func addLiquidity(
-            token_a_address : felt, token_b_address : felt, amount_a_desired : Uint256,
-            amount_b_desired : Uint256, amount_a_min : Uint256, amount_b_min : Uint256) -> ():
+            tokenA : felt, tokenB : felt, amountADesired : Uint256, amountBDesired : Uint256,
+            amountAMin : Uint256, amountBMin : Uint256) -> ():
     end
 
     func removeLiquidity(
-            token_a_address : felt, token_b_address : felt, liquidity_amount : Uint256,
-            amount_a_min : Uint256, amount_b_min : Uint256, to : felt) -> ():
+            tokenA : felt, tokenB : felt, liquidityAmount : Uint256, amountAMin : Uint256,
+            amountBMin : Uint256, to : felt) -> ():
     end
 
-    func getAmountIn(tokenInAddress : felt, tokenOutAddress : felt, amountOut : Uint256) -> (
-            amountIn : Uint256):
+    func getAmountIn(tokenIn : felt, tokenOut : felt, amountOut : Uint256) -> (amountIn : Uint256):
     end
 
-    func getAmountOut(tokenInAddress : felt, tokenOutAddress : felt, amountIn : Uint256) -> (
-            amountOut : Uint256):
+    func getAmountOut(tokenIn : felt, tokenOut : felt, amountIn : Uint256) -> (amountOut : Uint256):
     end
 
     func exactInput(
-            tokenInAddress : felt, tokenOutAddress : felt, amountIn : Uint256,
-            amountOutMin : Uint256) -> ():
+            tokenIn : felt, tokenOut : felt, amountIn : Uint256, amountOutMin : Uint256) -> ():
     end
 
     func exactOutput(
-            tokenInAddress : felt, tokenOutAddress : felt, amountOut : Uint256,
-            amountIn_max : Uint256) -> ():
+            tokenIn : felt, tokenOut : felt, amountOut : Uint256, amountIn_max : Uint256) -> ():
     end
 end

@@ -22876,12 +22876,12 @@
                                         },
                                         "parent_location": [
                                             {
-                                                "end_col": 98,
+                                                "end_col": 99,
                                                 "end_line": 129,
                                                 "input_file": {
                                                     "filename": "contracts/token/ERC20_base.cairo"
                                                 },
-                                                "start_col": 55,
+                                                "start_col": 56,
                                                 "start_line": 129
                                             },
                                             "While trying to retrieve the implicit argument 'range_check_ptr' in:"
@@ -22929,12 +22929,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 84,
+                                "end_col": 85,
                                 "end_line": 129,
                                 "input_file": {
                                     "filename": "contracts/token/ERC20_base.cairo"
                                 },
-                                "start_col": 67,
+                                "start_col": 68,
                                 "start_line": 129
                             },
                             "While expanding the reference 'current_allowance' in:"
@@ -22972,12 +22972,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 84,
+                                "end_col": 85,
                                 "end_line": 129,
                                 "input_file": {
                                     "filename": "contracts/token/ERC20_base.cairo"
                                 },
-                                "start_col": 67,
+                                "start_col": 68,
                                 "start_line": 129
                             },
                             "While expanding the reference 'current_allowance' in:"
@@ -23015,12 +23015,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 97,
+                                "end_col": 98,
                                 "end_line": 129,
                                 "input_file": {
                                     "filename": "contracts/token/ERC20_base.cairo"
                                 },
-                                "start_col": 86,
+                                "start_col": 87,
                                 "start_line": 129
                             },
                             "While expanding the reference 'added_value' in:"
@@ -23058,12 +23058,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 97,
+                                "end_col": 98,
                                 "end_line": 129,
                                 "input_file": {
                                     "filename": "contracts/token/ERC20_base.cairo"
                                 },
-                                "start_col": 86,
+                                "start_col": 87,
                                 "start_line": 129
                             },
                             "While expanding the reference 'added_value' in:"
@@ -23094,12 +23094,12 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 98,
+                        "end_col": 99,
                         "end_line": 129,
                         "input_file": {
                             "filename": "contracts/token/ERC20_base.cairo"
                         },
-                        "start_col": 55,
+                        "start_col": 56,
                         "start_line": 129
                     }
                 },
@@ -23117,7 +23117,7 @@
                             "__main__.ERC20_increaseAllowance.added_value": 415,
                             "__main__.ERC20_increaseAllowance.caller": 422,
                             "__main__.ERC20_increaseAllowance.current_allowance": 427,
-                            "__main__.ERC20_increaseAllowance.isOverflow": 430,
+                            "__main__.ERC20_increaseAllowance.is_overflow": 430,
                             "__main__.ERC20_increaseAllowance.new_allowance": 429,
                             "__main__.ERC20_increaseAllowance.pedersen_ptr": 424,
                             "__main__.ERC20_increaseAllowance.range_check_ptr": 428,
@@ -23150,7 +23150,7 @@
                             "__main__.ERC20_increaseAllowance.added_value": 415,
                             "__main__.ERC20_increaseAllowance.caller": 422,
                             "__main__.ERC20_increaseAllowance.current_allowance": 427,
-                            "__main__.ERC20_increaseAllowance.isOverflow": 430,
+                            "__main__.ERC20_increaseAllowance.is_overflow": 430,
                             "__main__.ERC20_increaseAllowance.new_allowance": 429,
                             "__main__.ERC20_increaseAllowance.pedersen_ptr": 424,
                             "__main__.ERC20_increaseAllowance.range_check_ptr": 428,
@@ -23183,7 +23183,7 @@
                             "__main__.ERC20_increaseAllowance.added_value": 415,
                             "__main__.ERC20_increaseAllowance.caller": 422,
                             "__main__.ERC20_increaseAllowance.current_allowance": 427,
-                            "__main__.ERC20_increaseAllowance.isOverflow": 430,
+                            "__main__.ERC20_increaseAllowance.is_overflow": 430,
                             "__main__.ERC20_increaseAllowance.new_allowance": 431,
                             "__main__.ERC20_increaseAllowance.pedersen_ptr": 424,
                             "__main__.ERC20_increaseAllowance.range_check_ptr": 428,
@@ -23193,7 +23193,7 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 28,
+                        "end_col": 29,
                         "end_line": 130,
                         "input_file": {
                             "filename": "contracts/token/ERC20_base.cairo"
@@ -23216,7 +23216,7 @@
                             "__main__.ERC20_increaseAllowance.added_value": 415,
                             "__main__.ERC20_increaseAllowance.caller": 422,
                             "__main__.ERC20_increaseAllowance.current_allowance": 427,
-                            "__main__.ERC20_increaseAllowance.isOverflow": 430,
+                            "__main__.ERC20_increaseAllowance.is_overflow": 430,
                             "__main__.ERC20_increaseAllowance.new_allowance": 431,
                             "__main__.ERC20_increaseAllowance.pedersen_ptr": 424,
                             "__main__.ERC20_increaseAllowance.range_check_ptr": 428,
@@ -23285,7 +23285,7 @@
                             "__main__.ERC20_increaseAllowance.added_value": 415,
                             "__main__.ERC20_increaseAllowance.caller": 422,
                             "__main__.ERC20_increaseAllowance.current_allowance": 427,
-                            "__main__.ERC20_increaseAllowance.isOverflow": 430,
+                            "__main__.ERC20_increaseAllowance.is_overflow": 430,
                             "__main__.ERC20_increaseAllowance.new_allowance": 431,
                             "__main__.ERC20_increaseAllowance.pedersen_ptr": 424,
                             "__main__.ERC20_increaseAllowance.range_check_ptr": 428,
@@ -23354,7 +23354,7 @@
                             "__main__.ERC20_increaseAllowance.added_value": 415,
                             "__main__.ERC20_increaseAllowance.caller": 422,
                             "__main__.ERC20_increaseAllowance.current_allowance": 427,
-                            "__main__.ERC20_increaseAllowance.isOverflow": 430,
+                            "__main__.ERC20_increaseAllowance.is_overflow": 430,
                             "__main__.ERC20_increaseAllowance.new_allowance": 431,
                             "__main__.ERC20_increaseAllowance.pedersen_ptr": 424,
                             "__main__.ERC20_increaseAllowance.range_check_ptr": 428,
@@ -23371,7 +23371,7 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 98,
+                                "end_col": 99,
                                 "end_line": 129,
                                 "input_file": {
                                     "filename": "contracts/token/ERC20_base.cairo"
@@ -23400,7 +23400,7 @@
                                     },
                                     "While expanding the reference 'range_check_ptr' in:"
                                 ],
-                                "start_col": 55,
+                                "start_col": 56,
                                 "start_line": 129
                             },
                             "While trying to update the implicit return value 'range_check_ptr' in:"
@@ -23423,7 +23423,7 @@
                             "__main__.ERC20_increaseAllowance.added_value": 415,
                             "__main__.ERC20_increaseAllowance.caller": 422,
                             "__main__.ERC20_increaseAllowance.current_allowance": 427,
-                            "__main__.ERC20_increaseAllowance.isOverflow": 430,
+                            "__main__.ERC20_increaseAllowance.is_overflow": 430,
                             "__main__.ERC20_increaseAllowance.new_allowance": 431,
                             "__main__.ERC20_increaseAllowance.pedersen_ptr": 424,
                             "__main__.ERC20_increaseAllowance.range_check_ptr": 428,
@@ -23468,7 +23468,7 @@
                             "__main__.ERC20_increaseAllowance.added_value": 415,
                             "__main__.ERC20_increaseAllowance.caller": 422,
                             "__main__.ERC20_increaseAllowance.current_allowance": 427,
-                            "__main__.ERC20_increaseAllowance.isOverflow": 430,
+                            "__main__.ERC20_increaseAllowance.is_overflow": 430,
                             "__main__.ERC20_increaseAllowance.new_allowance": 431,
                             "__main__.ERC20_increaseAllowance.pedersen_ptr": 424,
                             "__main__.ERC20_increaseAllowance.range_check_ptr": 428,
@@ -23513,7 +23513,7 @@
                             "__main__.ERC20_increaseAllowance.added_value": 415,
                             "__main__.ERC20_increaseAllowance.caller": 422,
                             "__main__.ERC20_increaseAllowance.current_allowance": 427,
-                            "__main__.ERC20_increaseAllowance.isOverflow": 430,
+                            "__main__.ERC20_increaseAllowance.is_overflow": 430,
                             "__main__.ERC20_increaseAllowance.new_allowance": 431,
                             "__main__.ERC20_increaseAllowance.pedersen_ptr": 424,
                             "__main__.ERC20_increaseAllowance.range_check_ptr": 428,
@@ -23558,7 +23558,7 @@
                             "__main__.ERC20_increaseAllowance.added_value": 415,
                             "__main__.ERC20_increaseAllowance.caller": 422,
                             "__main__.ERC20_increaseAllowance.current_allowance": 427,
-                            "__main__.ERC20_increaseAllowance.isOverflow": 430,
+                            "__main__.ERC20_increaseAllowance.is_overflow": 430,
                             "__main__.ERC20_increaseAllowance.new_allowance": 431,
                             "__main__.ERC20_increaseAllowance.pedersen_ptr": 424,
                             "__main__.ERC20_increaseAllowance.range_check_ptr": 428,
@@ -23591,7 +23591,7 @@
                             "__main__.ERC20_increaseAllowance.added_value": 415,
                             "__main__.ERC20_increaseAllowance.caller": 422,
                             "__main__.ERC20_increaseAllowance.current_allowance": 427,
-                            "__main__.ERC20_increaseAllowance.isOverflow": 430,
+                            "__main__.ERC20_increaseAllowance.is_overflow": 430,
                             "__main__.ERC20_increaseAllowance.new_allowance": 431,
                             "__main__.ERC20_increaseAllowance.pedersen_ptr": 433,
                             "__main__.ERC20_increaseAllowance.range_check_ptr": 434,
@@ -26628,12 +26628,12 @@
                                         },
                                         "parent_location": [
                                             {
-                                                "end_col": 79,
+                                                "end_col": 80,
                                                 "end_line": 165,
                                                 "input_file": {
                                                     "filename": "contracts/token/ERC20_base.cairo"
                                                 },
-                                                "start_col": 52,
+                                                "start_col": 53,
                                                 "start_line": 165
                                             },
                                             "While trying to retrieve the implicit argument 'range_check_ptr' in:"
@@ -26682,12 +26682,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 70,
+                                "end_col": 71,
                                 "end_line": 165,
                                 "input_file": {
                                     "filename": "contracts/token/ERC20_base.cairo"
                                 },
-                                "start_col": 64,
+                                "start_col": 65,
                                 "start_line": 165
                             },
                             "While expanding the reference 'supply' in:"
@@ -26726,12 +26726,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 70,
+                                "end_col": 71,
                                 "end_line": 165,
                                 "input_file": {
                                     "filename": "contracts/token/ERC20_base.cairo"
                                 },
-                                "start_col": 64,
+                                "start_col": 65,
                                 "start_line": 165
                             },
                             "While expanding the reference 'supply' in:"
@@ -26770,12 +26770,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 78,
+                                "end_col": 79,
                                 "end_line": 165,
                                 "input_file": {
                                     "filename": "contracts/token/ERC20_base.cairo"
                                 },
-                                "start_col": 72,
+                                "start_col": 73,
                                 "start_line": 165
                             },
                             "While expanding the reference 'amount' in:"
@@ -26814,12 +26814,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 78,
+                                "end_col": 79,
                                 "end_line": 165,
                                 "input_file": {
                                     "filename": "contracts/token/ERC20_base.cairo"
                                 },
-                                "start_col": 72,
+                                "start_col": 73,
                                 "start_line": 165
                             },
                             "While expanding the reference 'amount' in:"
@@ -26851,12 +26851,12 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 79,
+                        "end_col": 80,
                         "end_line": 165,
                         "input_file": {
                             "filename": "contracts/token/ERC20_base.cairo"
                         },
-                        "start_col": 52,
+                        "start_col": 53,
                         "start_line": 165
                     }
                 },
@@ -26873,7 +26873,7 @@
                         "reference_ids": {
                             "__main__.ERC20_mint.amount": 460,
                             "__main__.ERC20_mint.balance": 468,
-                            "__main__.ERC20_mint.isOverflow": 481,
+                            "__main__.ERC20_mint.is_overflow": 481,
                             "__main__.ERC20_mint.new_balance": 470,
                             "__main__.ERC20_mint.new_supply": 480,
                             "__main__.ERC20_mint.pedersen_ptr": 475,
@@ -26907,7 +26907,7 @@
                         "reference_ids": {
                             "__main__.ERC20_mint.amount": 460,
                             "__main__.ERC20_mint.balance": 468,
-                            "__main__.ERC20_mint.isOverflow": 481,
+                            "__main__.ERC20_mint.is_overflow": 481,
                             "__main__.ERC20_mint.new_balance": 470,
                             "__main__.ERC20_mint.new_supply": 480,
                             "__main__.ERC20_mint.pedersen_ptr": 475,
@@ -26941,7 +26941,7 @@
                         "reference_ids": {
                             "__main__.ERC20_mint.amount": 460,
                             "__main__.ERC20_mint.balance": 468,
-                            "__main__.ERC20_mint.isOverflow": 481,
+                            "__main__.ERC20_mint.is_overflow": 481,
                             "__main__.ERC20_mint.new_balance": 470,
                             "__main__.ERC20_mint.new_supply": 482,
                             "__main__.ERC20_mint.pedersen_ptr": 475,
@@ -26953,7 +26953,7 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 28,
+                        "end_col": 29,
                         "end_line": 166,
                         "input_file": {
                             "filename": "contracts/token/ERC20_base.cairo"
@@ -26975,7 +26975,7 @@
                         "reference_ids": {
                             "__main__.ERC20_mint.amount": 460,
                             "__main__.ERC20_mint.balance": 468,
-                            "__main__.ERC20_mint.isOverflow": 481,
+                            "__main__.ERC20_mint.is_overflow": 481,
                             "__main__.ERC20_mint.new_balance": 470,
                             "__main__.ERC20_mint.new_supply": 482,
                             "__main__.ERC20_mint.pedersen_ptr": 475,
@@ -27045,7 +27045,7 @@
                         "reference_ids": {
                             "__main__.ERC20_mint.amount": 460,
                             "__main__.ERC20_mint.balance": 468,
-                            "__main__.ERC20_mint.isOverflow": 481,
+                            "__main__.ERC20_mint.is_overflow": 481,
                             "__main__.ERC20_mint.new_balance": 470,
                             "__main__.ERC20_mint.new_supply": 482,
                             "__main__.ERC20_mint.pedersen_ptr": 475,
@@ -27115,7 +27115,7 @@
                         "reference_ids": {
                             "__main__.ERC20_mint.amount": 460,
                             "__main__.ERC20_mint.balance": 468,
-                            "__main__.ERC20_mint.isOverflow": 481,
+                            "__main__.ERC20_mint.is_overflow": 481,
                             "__main__.ERC20_mint.new_balance": 470,
                             "__main__.ERC20_mint.new_supply": 482,
                             "__main__.ERC20_mint.pedersen_ptr": 475,
@@ -27134,7 +27134,7 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 79,
+                                "end_col": 80,
                                 "end_line": 165,
                                 "input_file": {
                                     "filename": "contracts/token/ERC20_base.cairo"
@@ -27163,7 +27163,7 @@
                                     },
                                     "While expanding the reference 'range_check_ptr' in:"
                                 ],
-                                "start_col": 52,
+                                "start_col": 53,
                                 "start_line": 165
                             },
                             "While trying to update the implicit return value 'range_check_ptr' in:"
@@ -27185,7 +27185,7 @@
                         "reference_ids": {
                             "__main__.ERC20_mint.amount": 460,
                             "__main__.ERC20_mint.balance": 468,
-                            "__main__.ERC20_mint.isOverflow": 481,
+                            "__main__.ERC20_mint.is_overflow": 481,
                             "__main__.ERC20_mint.new_balance": 470,
                             "__main__.ERC20_mint.new_supply": 482,
                             "__main__.ERC20_mint.pedersen_ptr": 475,
@@ -27231,7 +27231,7 @@
                         "reference_ids": {
                             "__main__.ERC20_mint.amount": 460,
                             "__main__.ERC20_mint.balance": 468,
-                            "__main__.ERC20_mint.isOverflow": 481,
+                            "__main__.ERC20_mint.is_overflow": 481,
                             "__main__.ERC20_mint.new_balance": 470,
                             "__main__.ERC20_mint.new_supply": 482,
                             "__main__.ERC20_mint.pedersen_ptr": 475,
@@ -27277,7 +27277,7 @@
                         "reference_ids": {
                             "__main__.ERC20_mint.amount": 460,
                             "__main__.ERC20_mint.balance": 468,
-                            "__main__.ERC20_mint.isOverflow": 481,
+                            "__main__.ERC20_mint.is_overflow": 481,
                             "__main__.ERC20_mint.new_balance": 470,
                             "__main__.ERC20_mint.new_supply": 482,
                             "__main__.ERC20_mint.pedersen_ptr": 475,
@@ -27311,7 +27311,7 @@
                         "reference_ids": {
                             "__main__.ERC20_mint.amount": 460,
                             "__main__.ERC20_mint.balance": 468,
-                            "__main__.ERC20_mint.isOverflow": 481,
+                            "__main__.ERC20_mint.is_overflow": 481,
                             "__main__.ERC20_mint.new_balance": 470,
                             "__main__.ERC20_mint.new_supply": 482,
                             "__main__.ERC20_mint.pedersen_ptr": 484,
@@ -35571,9 +35571,9 @@
                 ],
                 "type": "reference"
             },
-            "__main__.ERC20_increaseAllowance.isOverflow": {
+            "__main__.ERC20_increaseAllowance.is_overflow": {
                 "cairo_type": "felt",
-                "full_name": "__main__.ERC20_increaseAllowance.isOverflow",
+                "full_name": "__main__.ERC20_increaseAllowance.is_overflow",
                 "references": [
                     {
                         "ap_tracking_data": {
@@ -36078,9 +36078,9 @@
                 ],
                 "type": "reference"
             },
-            "__main__.ERC20_mint.isOverflow": {
+            "__main__.ERC20_mint.is_overflow": {
                 "cairo_type": "felt",
-                "full_name": "__main__.ERC20_mint.isOverflow",
+                "full_name": "__main__.ERC20_mint.is_overflow",
                 "references": [
                     {
                         "ap_tracking_data": {

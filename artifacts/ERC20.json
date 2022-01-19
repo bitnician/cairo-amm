@@ -50325,12 +50325,12 @@
                                         },
                                         "parent_location": [
                                             {
-                                                "end_col": 98,
+                                                "end_col": 99,
                                                 "end_line": 216,
                                                 "input_file": {
                                                     "filename": "contracts/test/ERC20.cairo"
                                                 },
-                                                "start_col": 55,
+                                                "start_col": 56,
                                                 "start_line": 216
                                             },
                                             "While trying to retrieve the implicit argument 'range_check_ptr' in:"
@@ -50379,12 +50379,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 84,
+                                "end_col": 85,
                                 "end_line": 216,
                                 "input_file": {
                                     "filename": "contracts/test/ERC20.cairo"
                                 },
-                                "start_col": 67,
+                                "start_col": 68,
                                 "start_line": 216
                             },
                             "While expanding the reference 'current_allowance' in:"
@@ -50423,12 +50423,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 84,
+                                "end_col": 85,
                                 "end_line": 216,
                                 "input_file": {
                                     "filename": "contracts/test/ERC20.cairo"
                                 },
-                                "start_col": 67,
+                                "start_col": 68,
                                 "start_line": 216
                             },
                             "While expanding the reference 'current_allowance' in:"
@@ -50467,12 +50467,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 97,
+                                "end_col": 98,
                                 "end_line": 216,
                                 "input_file": {
                                     "filename": "contracts/test/ERC20.cairo"
                                 },
-                                "start_col": 86,
+                                "start_col": 87,
                                 "start_line": 216
                             },
                             "While expanding the reference 'added_value' in:"
@@ -50511,12 +50511,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 97,
+                                "end_col": 98,
                                 "end_line": 216,
                                 "input_file": {
                                     "filename": "contracts/test/ERC20.cairo"
                                 },
-                                "start_col": 86,
+                                "start_col": 87,
                                 "start_line": 216
                             },
                             "While expanding the reference 'added_value' in:"
@@ -50548,12 +50548,12 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 98,
+                        "end_col": 99,
                         "end_line": 216,
                         "input_file": {
                             "filename": "contracts/test/ERC20.cairo"
                         },
-                        "start_col": 55,
+                        "start_col": 56,
                         "start_line": 216
                     }
                 },
@@ -50572,7 +50572,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 855,
                             "__main__.increaseAllowance.pedersen_ptr": 850,
                             "__main__.increaseAllowance.range_check_ptr": 854,
@@ -50606,7 +50606,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 855,
                             "__main__.increaseAllowance.pedersen_ptr": 850,
                             "__main__.increaseAllowance.range_check_ptr": 854,
@@ -50640,7 +50640,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 857,
                             "__main__.increaseAllowance.pedersen_ptr": 850,
                             "__main__.increaseAllowance.range_check_ptr": 854,
@@ -50650,7 +50650,7 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 28,
+                        "end_col": 29,
                         "end_line": 217,
                         "input_file": {
                             "filename": "contracts/test/ERC20.cairo"
@@ -50674,7 +50674,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 857,
                             "__main__.increaseAllowance.pedersen_ptr": 850,
                             "__main__.increaseAllowance.range_check_ptr": 854,
@@ -50744,7 +50744,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 857,
                             "__main__.increaseAllowance.pedersen_ptr": 850,
                             "__main__.increaseAllowance.range_check_ptr": 854,
@@ -50814,7 +50814,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 857,
                             "__main__.increaseAllowance.pedersen_ptr": 850,
                             "__main__.increaseAllowance.range_check_ptr": 854,
@@ -50831,7 +50831,7 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 98,
+                                "end_col": 99,
                                 "end_line": 216,
                                 "input_file": {
                                     "filename": "contracts/test/ERC20.cairo"
@@ -50860,7 +50860,7 @@
                                     },
                                     "While expanding the reference 'range_check_ptr' in:"
                                 ],
-                                "start_col": 55,
+                                "start_col": 56,
                                 "start_line": 216
                             },
                             "While trying to update the implicit return value 'range_check_ptr' in:"
@@ -50884,7 +50884,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 857,
                             "__main__.increaseAllowance.pedersen_ptr": 850,
                             "__main__.increaseAllowance.range_check_ptr": 854,
@@ -50930,7 +50930,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 857,
                             "__main__.increaseAllowance.pedersen_ptr": 850,
                             "__main__.increaseAllowance.range_check_ptr": 854,
@@ -50976,7 +50976,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 857,
                             "__main__.increaseAllowance.pedersen_ptr": 850,
                             "__main__.increaseAllowance.range_check_ptr": 854,
@@ -51022,7 +51022,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 857,
                             "__main__.increaseAllowance.pedersen_ptr": 850,
                             "__main__.increaseAllowance.range_check_ptr": 854,
@@ -51068,7 +51068,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 857,
                             "__main__.increaseAllowance.pedersen_ptr": 850,
                             "__main__.increaseAllowance.range_check_ptr": 854,
@@ -51102,7 +51102,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 857,
                             "__main__.increaseAllowance.pedersen_ptr": 859,
                             "__main__.increaseAllowance.range_check_ptr": 860,
@@ -51136,7 +51136,7 @@
                             "__main__.increaseAllowance.added_value": 841,
                             "__main__.increaseAllowance.caller": 848,
                             "__main__.increaseAllowance.current_allowance": 853,
-                            "__main__.increaseAllowance.isOverflow": 856,
+                            "__main__.increaseAllowance.is_overflow": 856,
                             "__main__.increaseAllowance.new_allowance": 857,
                             "__main__.increaseAllowance.pedersen_ptr": 859,
                             "__main__.increaseAllowance.range_check_ptr": 860,
@@ -57512,12 +57512,12 @@
                                         },
                                         "parent_location": [
                                             {
-                                                "end_col": 79,
+                                                "end_col": 80,
                                                 "end_line": 259,
                                                 "input_file": {
                                                     "filename": "contracts/test/ERC20.cairo"
                                                 },
-                                                "start_col": 52,
+                                                "start_col": 53,
                                                 "start_line": 259
                                             },
                                             "While trying to retrieve the implicit argument 'range_check_ptr' in:"
@@ -57566,12 +57566,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 70,
+                                "end_col": 71,
                                 "end_line": 259,
                                 "input_file": {
                                     "filename": "contracts/test/ERC20.cairo"
                                 },
-                                "start_col": 64,
+                                "start_col": 65,
                                 "start_line": 259
                             },
                             "While expanding the reference 'supply' in:"
@@ -57610,12 +57610,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 70,
+                                "end_col": 71,
                                 "end_line": 259,
                                 "input_file": {
                                     "filename": "contracts/test/ERC20.cairo"
                                 },
-                                "start_col": 64,
+                                "start_col": 65,
                                 "start_line": 259
                             },
                             "While expanding the reference 'supply' in:"
@@ -57654,12 +57654,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 78,
+                                "end_col": 79,
                                 "end_line": 259,
                                 "input_file": {
                                     "filename": "contracts/test/ERC20.cairo"
                                 },
-                                "start_col": 72,
+                                "start_col": 73,
                                 "start_line": 259
                             },
                             "While expanding the reference 'amount' in:"
@@ -57698,12 +57698,12 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 78,
+                                "end_col": 79,
                                 "end_line": 259,
                                 "input_file": {
                                     "filename": "contracts/test/ERC20.cairo"
                                 },
-                                "start_col": 72,
+                                "start_col": 73,
                                 "start_line": 259
                             },
                             "While expanding the reference 'amount' in:"
@@ -57735,12 +57735,12 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 79,
+                        "end_col": 80,
                         "end_line": 259,
                         "input_file": {
                             "filename": "contracts/test/ERC20.cairo"
                         },
-                        "start_col": 52,
+                        "start_col": 53,
                         "start_line": 259
                     }
                 },
@@ -57757,7 +57757,7 @@
                         "reference_ids": {
                             "__main__._mint.amount": 934,
                             "__main__._mint.balance": 942,
-                            "__main__._mint.isOverflow": 955,
+                            "__main__._mint.is_overflow": 955,
                             "__main__._mint.new_balance": 944,
                             "__main__._mint.new_supply": 954,
                             "__main__._mint.pedersen_ptr": 949,
@@ -57791,7 +57791,7 @@
                         "reference_ids": {
                             "__main__._mint.amount": 934,
                             "__main__._mint.balance": 942,
-                            "__main__._mint.isOverflow": 955,
+                            "__main__._mint.is_overflow": 955,
                             "__main__._mint.new_balance": 944,
                             "__main__._mint.new_supply": 954,
                             "__main__._mint.pedersen_ptr": 949,
@@ -57825,7 +57825,7 @@
                         "reference_ids": {
                             "__main__._mint.amount": 934,
                             "__main__._mint.balance": 942,
-                            "__main__._mint.isOverflow": 955,
+                            "__main__._mint.is_overflow": 955,
                             "__main__._mint.new_balance": 944,
                             "__main__._mint.new_supply": 956,
                             "__main__._mint.pedersen_ptr": 949,
@@ -57837,7 +57837,7 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 28,
+                        "end_col": 29,
                         "end_line": 260,
                         "input_file": {
                             "filename": "contracts/test/ERC20.cairo"
@@ -57859,7 +57859,7 @@
                         "reference_ids": {
                             "__main__._mint.amount": 934,
                             "__main__._mint.balance": 942,
-                            "__main__._mint.isOverflow": 955,
+                            "__main__._mint.is_overflow": 955,
                             "__main__._mint.new_balance": 944,
                             "__main__._mint.new_supply": 956,
                             "__main__._mint.pedersen_ptr": 949,
@@ -57929,7 +57929,7 @@
                         "reference_ids": {
                             "__main__._mint.amount": 934,
                             "__main__._mint.balance": 942,
-                            "__main__._mint.isOverflow": 955,
+                            "__main__._mint.is_overflow": 955,
                             "__main__._mint.new_balance": 944,
                             "__main__._mint.new_supply": 956,
                             "__main__._mint.pedersen_ptr": 949,
@@ -57999,7 +57999,7 @@
                         "reference_ids": {
                             "__main__._mint.amount": 934,
                             "__main__._mint.balance": 942,
-                            "__main__._mint.isOverflow": 955,
+                            "__main__._mint.is_overflow": 955,
                             "__main__._mint.new_balance": 944,
                             "__main__._mint.new_supply": 956,
                             "__main__._mint.pedersen_ptr": 949,
@@ -58018,7 +58018,7 @@
                         },
                         "parent_location": [
                             {
-                                "end_col": 79,
+                                "end_col": 80,
                                 "end_line": 259,
                                 "input_file": {
                                     "filename": "contracts/test/ERC20.cairo"
@@ -58047,7 +58047,7 @@
                                     },
                                     "While expanding the reference 'range_check_ptr' in:"
                                 ],
-                                "start_col": 52,
+                                "start_col": 53,
                                 "start_line": 259
                             },
                             "While trying to update the implicit return value 'range_check_ptr' in:"
@@ -58069,7 +58069,7 @@
                         "reference_ids": {
                             "__main__._mint.amount": 934,
                             "__main__._mint.balance": 942,
-                            "__main__._mint.isOverflow": 955,
+                            "__main__._mint.is_overflow": 955,
                             "__main__._mint.new_balance": 944,
                             "__main__._mint.new_supply": 956,
                             "__main__._mint.pedersen_ptr": 949,
@@ -58115,7 +58115,7 @@
                         "reference_ids": {
                             "__main__._mint.amount": 934,
                             "__main__._mint.balance": 942,
-                            "__main__._mint.isOverflow": 955,
+                            "__main__._mint.is_overflow": 955,
                             "__main__._mint.new_balance": 944,
                             "__main__._mint.new_supply": 956,
                             "__main__._mint.pedersen_ptr": 949,
@@ -58161,7 +58161,7 @@
                         "reference_ids": {
                             "__main__._mint.amount": 934,
                             "__main__._mint.balance": 942,
-                            "__main__._mint.isOverflow": 955,
+                            "__main__._mint.is_overflow": 955,
                             "__main__._mint.new_balance": 944,
                             "__main__._mint.new_supply": 956,
                             "__main__._mint.pedersen_ptr": 949,
@@ -58195,7 +58195,7 @@
                         "reference_ids": {
                             "__main__._mint.amount": 934,
                             "__main__._mint.balance": 942,
-                            "__main__._mint.isOverflow": 955,
+                            "__main__._mint.is_overflow": 955,
                             "__main__._mint.new_balance": 944,
                             "__main__._mint.new_supply": 956,
                             "__main__._mint.pedersen_ptr": 958,
@@ -65923,9 +65923,9 @@
                 ],
                 "type": "reference"
             },
-            "__main__._mint.isOverflow": {
+            "__main__._mint.is_overflow": {
                 "cairo_type": "felt",
-                "full_name": "__main__._mint.isOverflow",
+                "full_name": "__main__._mint.is_overflow",
                 "references": [
                     {
                         "ap_tracking_data": {
@@ -70845,9 +70845,9 @@
                 ],
                 "type": "reference"
             },
-            "__main__.increaseAllowance.isOverflow": {
+            "__main__.increaseAllowance.is_overflow": {
                 "cairo_type": "felt",
-                "full_name": "__main__.increaseAllowance.isOverflow",
+                "full_name": "__main__.increaseAllowance.is_overflow",
                 "references": [
                     {
                         "ap_tracking_data": {

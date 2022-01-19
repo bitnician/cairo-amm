@@ -205,9 +205,9 @@ async def test_whitelistPool(contract_factory):
     ).call()
     assert execution_result.result.address == pool.contract_address
 
-    await router.verifyPoolIsWhitelisted(pool.contract_address).call()
+    await router.onlyWhitelistedPool(pool.contract_address).call()
 
-    assert_revert(router.verifyPoolIsWhitelisted(123).call())
+    assert_revert(router.onlyWhitelistedPool(123).call())
 
 
 @pytest.mark.asyncio
@@ -273,8 +273,8 @@ async def test_removeLiquidity(contract_factory):
 
     await addLiquidity(contract_factory, token_0_amount, token_1_amount, amountsSqrt)
 
-    amount_a_min = uint(token_0_amount[0] - 100)
-    amount_b_min = uint(token_1_amount[0] - 100)
+    amountAMin = uint(token_0_amount[0] - 100)
+    amountBMin = uint(token_1_amount[0] - 100)
     spender = router.contract_address
 
     lp_token0_initial_balance = await token_0.balanceOf(
@@ -297,8 +297,8 @@ async def test_removeLiquidity(contract_factory):
             token_0.contract_address,
             token_1.contract_address,
             *amountsSqrt,
-            *amount_a_min,
-            *amount_b_min,
+            *amountAMin,
+            *amountBMin,
             deployer_account.contract_address,
         ],
     )

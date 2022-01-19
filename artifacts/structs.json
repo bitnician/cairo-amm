@@ -21,11 +21,11 @@
                         "cairo_type": "felt",
                         "offset": 2
                     },
-                    "token_a_address": {
+                    "tokenAAddress": {
                         "cairo_type": "felt",
                         "offset": 0
                     },
-                    "token_b_address": {
+                    "tokenBAddress": {
                         "cairo_type": "felt",
                         "offset": 1
                     }
