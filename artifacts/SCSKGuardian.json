@@ -95,6 +95,7 @@
         "L1_HANDLER": []
     },
     "program": {
+        "attributes": [],
         "builtins": [
             "pedersen",
             "range_check",
@@ -373,46 +374,46 @@
         "debug_info": {
             "file_contents": {
                 "autogen/starknet/arg_processor/1872a5d2a21c8a6de414c1e2e3baf257d1020d584fae0b160104776b4a38b755.cairo": "assert [__return_value_ptr] = ret_struct.signing_key\nlet __return_value_ptr = __return_value_ptr + 1\n",
-                "autogen/starknet/arg_processor/29637b66643568891912d1ed3f5b810e37fc6dff63d2db9fba473c1883482e6f.cairo": "let __calldata_actual_size =  __calldata_ptr - cast([fp + (-3)], felt*)\n",
+                "autogen/starknet/arg_processor/1b562308a65653425ce06491fa4b4539466f3251a07e73e099d0afe86a48900e.cairo": "assert [cast(fp + (-4), felt*)] = __calldata_actual_size\n",
+                "autogen/starknet/arg_processor/3df46cbf6e1c961bf960d5e6d3ae6be29b265ebfbb64fde4e77f50e6604cac78.cairo": "# Check that the length is non-negative.\nassert [range_check_ptr] = __calldata_arg_sig_len\nlet range_check_ptr = range_check_ptr + 1\n# Create the reference.\nlet __calldata_arg_sig = cast(__calldata_ptr, felt*)\n# Use 'tempvar' instead of 'let' to avoid repeating this computation for the\n# following arguments.\ntempvar __calldata_ptr = __calldata_ptr + __calldata_arg_sig_len * 1\n",
                 "autogen/starknet/arg_processor/5ac2f6d2182f7306217f49619c242b53ee33c4687ef216664fd85278cd6497de.cairo": "assert [__return_value_ptr] = ret_struct.weight\nlet __return_value_ptr = __return_value_ptr + 1\n",
-                "autogen/starknet/arg_processor/7f0b238f4e526821a97d8aaa2f9484df4b5bd00cbad10a761ae4225314096a56.cairo": "assert [fp + (-4)] = __calldata_actual_size\n",
+                "autogen/starknet/arg_processor/5e1cc73f0b484f90bb02da164d88332b40c6f698801aa4d3c603dab22157e902.cairo": "let __calldata_actual_size =  __calldata_ptr - cast([cast(fp + (-3), felt**)], felt*)\n",
                 "autogen/starknet/arg_processor/816a1dcb01efb502eaa94e3e908f012344b713d1cb6eca46688ac7b2b2a82609.cairo": "let __calldata_arg_sig_len = [__calldata_ptr]\nlet __calldata_ptr = __calldata_ptr + 1\n",
                 "autogen/starknet/arg_processor/8fdcad12b6c20ed53fe2a8be937349491729351841b8a84fe8b4b4b51dda8bb9.cairo": "let __calldata_arg_new_signing_key = [__calldata_ptr]\nlet __calldata_ptr = __calldata_ptr + 1\n",
                 "autogen/starknet/arg_processor/beb6d8f047c8183c2f16acbd91b97fb48b063f56cc0a8b28e3b6e1e4416d7bc8.cairo": "let __calldata_arg_signing_key = [__calldata_ptr]\nlet __calldata_ptr = __calldata_ptr + 1\n",
-                "autogen/starknet/arg_processor/c80f2b4c1255618f4d2814b5aaf6356801f3519e3324c6e99cf5ef3fa2a2e246.cairo": "# Check that the length is non-negative.\nassert [range_check_ptr] = __calldata_arg_sig_len\nlet range_check_ptr = range_check_ptr + 1\n# Create the reference.\nlet __calldata_arg_sig : felt* = __calldata_ptr\n# Use 'tempvar' instead of 'let' to avoid repeating this computation for the\n# following arguments.\ntempvar __calldata_ptr = __calldata_ptr + __calldata_arg_sig_len\n",
                 "autogen/starknet/arg_processor/f3c2d3942f0f75ba7fab7e0c13e6cee1d1be8a6d9e771412e1ff56c7484dd3f4.cairo": "let __calldata_arg_hash = [__calldata_ptr]\nlet __calldata_ptr = __calldata_ptr + 1\n",
-                "autogen/starknet/external/constructor/7998f829c4aa5ea19acd9325ec8f13445bd7eb3660e26c1acda6a694c86b221a.cairo": "let ecdsa_ptr = [cast([fp + (-5)] + 3, felt*)]\n",
+                "autogen/starknet/external/constructor/06e2dac6fec7b0245dd168190069dcb92ed8c79c7a1ccebce7b1343c3e526229.cairo": "let ecdsa_ptr = [cast([cast(fp + (-5), felt**)] + 3, felt*)]\n",
+                "autogen/starknet/external/constructor/424b26e79f70343cc02557f1fbd25745138efb26a3dc5c8b593ca765b73138b7.cairo": "let pedersen_ptr = [cast([cast(fp + (-5), felt**)] + 1, starkware.cairo.common.cairo_builtins.HashBuiltin**)]\n",
                 "autogen/starknet/external/constructor/aa526043a8db9187624857305b1409f029aec9f9c85f47438b55e65b3afc0639.cairo": "return (syscall_ptr,pedersen_ptr,range_check_ptr,ecdsa_ptr,retdata_size,retdata)\n",
-                "autogen/starknet/external/constructor/bf54f65e3c6b81daf1c2b60a8cb4034b53ce30386ebc03b148a9de60d6f5dd57.cairo": "let pedersen_ptr = [cast([fp + (-5)] + 1, starkware.cairo.common.cairo_builtins.HashBuiltin**)]\n",
-                "autogen/starknet/external/constructor/d5f67cc7e69abbde284d945f017319bd8e156adfab63895c8d652f5c3e4f6c3a.cairo": "let range_check_ptr = [cast([fp + (-5)] + 2, felt*)]\n",
-                "autogen/starknet/external/constructor/f4a8893cfc7cc4f313b0c426fa25c38c6c57664957bc56a170a27945759c5102.cairo": "let syscall_ptr = [cast([fp + (-5)] + 0, felt**)]\n",
+                "autogen/starknet/external/constructor/c7060df96cb0acca1380ae43bf758cab727bfdf73cb5d34a93e24a9742817fda.cairo": "let syscall_ptr = [cast([cast(fp + (-5), felt**)] + 0, felt**)]\n",
+                "autogen/starknet/external/constructor/e651458745e7cd218121c342e0915890767e2f59ddc2e315b8844ad0f47d582e.cairo": "let range_check_ptr = [cast([cast(fp + (-5), felt**)] + 2, felt*)]\n",
                 "autogen/starknet/external/constructor/f4af426c29105eaeae680e795c33d2ea265d4e4e8d5d870583e8738a85d0b388.cairo": "let ret_struct = __wrapped_func{syscall_ptr=syscall_ptr, pedersen_ptr=pedersen_ptr, range_check_ptr=range_check_ptr}(signing_key=__calldata_arg_signing_key,)\n%{ memory[ap] = segments.add() %}        # Allocate memory for return value.\ntempvar retdata : felt*\nlet retdata_size = 0\n",
+                "autogen/starknet/external/get_signing_key/06e2dac6fec7b0245dd168190069dcb92ed8c79c7a1ccebce7b1343c3e526229.cairo": "let ecdsa_ptr = [cast([cast(fp + (-5), felt**)] + 3, felt*)]\n",
                 "autogen/starknet/external/get_signing_key/34ac8ab884a044debac098cc29ec50b05a7949c01f0f482a1e4ed3f57820dc81.cairo": "let ret_struct = __wrapped_func{syscall_ptr=syscall_ptr, pedersen_ptr=pedersen_ptr, range_check_ptr=range_check_ptr}()\nlet (range_check_ptr, retdata_size, retdata) = get_signing_key_encode_return(ret_struct, range_check_ptr)\n",
-                "autogen/starknet/external/get_signing_key/7998f829c4aa5ea19acd9325ec8f13445bd7eb3660e26c1acda6a694c86b221a.cairo": "let ecdsa_ptr = [cast([fp + (-5)] + 3, felt*)]\n",
+                "autogen/starknet/external/get_signing_key/424b26e79f70343cc02557f1fbd25745138efb26a3dc5c8b593ca765b73138b7.cairo": "let pedersen_ptr = [cast([cast(fp + (-5), felt**)] + 1, starkware.cairo.common.cairo_builtins.HashBuiltin**)]\n",
                 "autogen/starknet/external/get_signing_key/aa526043a8db9187624857305b1409f029aec9f9c85f47438b55e65b3afc0639.cairo": "return (syscall_ptr,pedersen_ptr,range_check_ptr,ecdsa_ptr,retdata_size,retdata)\n",
-                "autogen/starknet/external/get_signing_key/bf54f65e3c6b81daf1c2b60a8cb4034b53ce30386ebc03b148a9de60d6f5dd57.cairo": "let pedersen_ptr = [cast([fp + (-5)] + 1, starkware.cairo.common.cairo_builtins.HashBuiltin**)]\n",
-                "autogen/starknet/external/get_signing_key/d5f67cc7e69abbde284d945f017319bd8e156adfab63895c8d652f5c3e4f6c3a.cairo": "let range_check_ptr = [cast([fp + (-5)] + 2, felt*)]\n",
-                "autogen/starknet/external/get_signing_key/f4a8893cfc7cc4f313b0c426fa25c38c6c57664957bc56a170a27945759c5102.cairo": "let syscall_ptr = [cast([fp + (-5)] + 0, felt**)]\n",
+                "autogen/starknet/external/get_signing_key/c7060df96cb0acca1380ae43bf758cab727bfdf73cb5d34a93e24a9742817fda.cairo": "let syscall_ptr = [cast([cast(fp + (-5), felt**)] + 0, felt**)]\n",
+                "autogen/starknet/external/get_signing_key/e651458745e7cd218121c342e0915890767e2f59ddc2e315b8844ad0f47d582e.cairo": "let range_check_ptr = [cast([cast(fp + (-5), felt**)] + 2, felt*)]\n",
                 "autogen/starknet/external/is_valid_signature/13fa325d8674aee108ad592202dc79d674a0c9d1874360c8595f0598ad772c71.cairo": "let ret_struct = __wrapped_func{syscall_ptr=syscall_ptr, pedersen_ptr=pedersen_ptr, ecdsa_ptr=ecdsa_ptr, range_check_ptr=range_check_ptr}(hash=__calldata_arg_hash, sig_len=__calldata_arg_sig_len, sig=__calldata_arg_sig,)\n%{ memory[ap] = segments.add() %}        # Allocate memory for return value.\ntempvar retdata : felt*\nlet retdata_size = 0\n",
-                "autogen/starknet/external/is_valid_signature/5fc167c3d8ad62579d6fff3348b16b5008843c3afd00129ecab00674256d9e3c.cairo": "let ecdsa_ptr = [cast([fp + (-5)] + 3, starkware.cairo.common.cairo_builtins.SignatureBuiltin**)]\n",
+                "autogen/starknet/external/is_valid_signature/424b26e79f70343cc02557f1fbd25745138efb26a3dc5c8b593ca765b73138b7.cairo": "let pedersen_ptr = [cast([cast(fp + (-5), felt**)] + 1, starkware.cairo.common.cairo_builtins.HashBuiltin**)]\n",
+                "autogen/starknet/external/is_valid_signature/9aa866da402dc1b34ae86751a3cabb224b0d9ac08fe13c58bb079af4cd281bec.cairo": "let ecdsa_ptr = [cast([cast(fp + (-5), felt**)] + 3, starkware.cairo.common.cairo_builtins.SignatureBuiltin**)]\n",
                 "autogen/starknet/external/is_valid_signature/aa526043a8db9187624857305b1409f029aec9f9c85f47438b55e65b3afc0639.cairo": "return (syscall_ptr,pedersen_ptr,range_check_ptr,ecdsa_ptr,retdata_size,retdata)\n",
-                "autogen/starknet/external/is_valid_signature/bf54f65e3c6b81daf1c2b60a8cb4034b53ce30386ebc03b148a9de60d6f5dd57.cairo": "let pedersen_ptr = [cast([fp + (-5)] + 1, starkware.cairo.common.cairo_builtins.HashBuiltin**)]\n",
-                "autogen/starknet/external/is_valid_signature/d5f67cc7e69abbde284d945f017319bd8e156adfab63895c8d652f5c3e4f6c3a.cairo": "let range_check_ptr = [cast([fp + (-5)] + 2, felt*)]\n",
-                "autogen/starknet/external/is_valid_signature/f4a8893cfc7cc4f313b0c426fa25c38c6c57664957bc56a170a27945759c5102.cairo": "let syscall_ptr = [cast([fp + (-5)] + 0, felt**)]\n",
+                "autogen/starknet/external/is_valid_signature/c7060df96cb0acca1380ae43bf758cab727bfdf73cb5d34a93e24a9742817fda.cairo": "let syscall_ptr = [cast([cast(fp + (-5), felt**)] + 0, felt**)]\n",
+                "autogen/starknet/external/is_valid_signature/e651458745e7cd218121c342e0915890767e2f59ddc2e315b8844ad0f47d582e.cairo": "let range_check_ptr = [cast([cast(fp + (-5), felt**)] + 2, felt*)]\n",
                 "autogen/starknet/external/return/get_signing_key/7f2b0c412e5d970ad2354941a0815229b1981ef5ced25d2682d7bdbe52a64246.cairo": "func get_signing_key_encode_return(ret_struct : __main__.get_signing_key.Return, range_check_ptr) -> (\n        range_check_ptr, data_len : felt, data : felt*):\n    %{ memory[ap] = segments.add() %}\n    alloc_locals\n    local __return_value_ptr_start : felt*\n    let __return_value_ptr = __return_value_ptr_start\n    with range_check_ptr:\n    end\n    return (\n        range_check_ptr=range_check_ptr,\n        data_len=__return_value_ptr - __return_value_ptr_start,\n        data=__return_value_ptr_start)\nend\n",
                 "autogen/starknet/external/return/weight/b65d973e6f10003fcb20fd7309f48bb7f6d04b9a67e7d2c7cd1d0db2a7a4c9ba.cairo": "func weight_encode_return(ret_struct : __main__.weight.Return, range_check_ptr) -> (\n        range_check_ptr, data_len : felt, data : felt*):\n    %{ memory[ap] = segments.add() %}\n    alloc_locals\n    local __return_value_ptr_start : felt*\n    let __return_value_ptr = __return_value_ptr_start\n    with range_check_ptr:\n    end\n    return (\n        range_check_ptr=range_check_ptr,\n        data_len=__return_value_ptr - __return_value_ptr_start,\n        data=__return_value_ptr_start)\nend\n",
-                "autogen/starknet/external/set_signing_key/5fc167c3d8ad62579d6fff3348b16b5008843c3afd00129ecab00674256d9e3c.cairo": "let ecdsa_ptr = [cast([fp + (-5)] + 3, starkware.cairo.common.cairo_builtins.SignatureBuiltin**)]\n",
+                "autogen/starknet/external/set_signing_key/424b26e79f70343cc02557f1fbd25745138efb26a3dc5c8b593ca765b73138b7.cairo": "let pedersen_ptr = [cast([cast(fp + (-5), felt**)] + 1, starkware.cairo.common.cairo_builtins.HashBuiltin**)]\n",
                 "autogen/starknet/external/set_signing_key/6bb633775874068c27bca00db126601dd7e947897102417bebebe3a1f8e48420.cairo": "let ret_struct = __wrapped_func{syscall_ptr=syscall_ptr, pedersen_ptr=pedersen_ptr, ecdsa_ptr=ecdsa_ptr, range_check_ptr=range_check_ptr}(new_signing_key=__calldata_arg_new_signing_key,)\n%{ memory[ap] = segments.add() %}        # Allocate memory for return value.\ntempvar retdata : felt*\nlet retdata_size = 0\n",
+                "autogen/starknet/external/set_signing_key/9aa866da402dc1b34ae86751a3cabb224b0d9ac08fe13c58bb079af4cd281bec.cairo": "let ecdsa_ptr = [cast([cast(fp + (-5), felt**)] + 3, starkware.cairo.common.cairo_builtins.SignatureBuiltin**)]\n",
                 "autogen/starknet/external/set_signing_key/aa526043a8db9187624857305b1409f029aec9f9c85f47438b55e65b3afc0639.cairo": "return (syscall_ptr,pedersen_ptr,range_check_ptr,ecdsa_ptr,retdata_size,retdata)\n",
-                "autogen/starknet/external/set_signing_key/bf54f65e3c6b81daf1c2b60a8cb4034b53ce30386ebc03b148a9de60d6f5dd57.cairo": "let pedersen_ptr = [cast([fp + (-5)] + 1, starkware.cairo.common.cairo_builtins.HashBuiltin**)]\n",
-                "autogen/starknet/external/set_signing_key/d5f67cc7e69abbde284d945f017319bd8e156adfab63895c8d652f5c3e4f6c3a.cairo": "let range_check_ptr = [cast([fp + (-5)] + 2, felt*)]\n",
-                "autogen/starknet/external/set_signing_key/f4a8893cfc7cc4f313b0c426fa25c38c6c57664957bc56a170a27945759c5102.cairo": "let syscall_ptr = [cast([fp + (-5)] + 0, felt**)]\n",
+                "autogen/starknet/external/set_signing_key/c7060df96cb0acca1380ae43bf758cab727bfdf73cb5d34a93e24a9742817fda.cairo": "let syscall_ptr = [cast([cast(fp + (-5), felt**)] + 0, felt**)]\n",
+                "autogen/starknet/external/set_signing_key/e651458745e7cd218121c342e0915890767e2f59ddc2e315b8844ad0f47d582e.cairo": "let range_check_ptr = [cast([cast(fp + (-5), felt**)] + 2, felt*)]\n",
+                "autogen/starknet/external/weight/06e2dac6fec7b0245dd168190069dcb92ed8c79c7a1ccebce7b1343c3e526229.cairo": "let ecdsa_ptr = [cast([cast(fp + (-5), felt**)] + 3, felt*)]\n",
                 "autogen/starknet/external/weight/17d1248c1c2f4d284809c46842ee67a77ee3f6a2829cd02666b1b4591504d7a7.cairo": "let ret_struct = __wrapped_func{}()\nlet (range_check_ptr, retdata_size, retdata) = weight_encode_return(ret_struct, range_check_ptr)\n",
-                "autogen/starknet/external/weight/2b2b112e26c3beede5b9972951116a97636fe75acd4b9f33c1ffe390f55843c4.cairo": "let pedersen_ptr = [cast([fp + (-5)] + 1, felt*)]\n",
-                "autogen/starknet/external/weight/5fde12919a619b4f3b6db54e029b6f16cf362872762815d37c1ecd8dc9763296.cairo": "let syscall_ptr = [cast([fp + (-5)] + 0, felt*)]\n",
-                "autogen/starknet/external/weight/7998f829c4aa5ea19acd9325ec8f13445bd7eb3660e26c1acda6a694c86b221a.cairo": "let ecdsa_ptr = [cast([fp + (-5)] + 3, felt*)]\n",
+                "autogen/starknet/external/weight/6629798b6d541e54a9dc778ffa54e7ef20b4f98b088671dd5070b7e0b547f0e6.cairo": "let pedersen_ptr = [cast([cast(fp + (-5), felt**)] + 1, felt*)]\n",
+                "autogen/starknet/external/weight/910226883b5574b28ea2537fe13a3852f331a56beabe1d4fd14748a9b4dbd7d0.cairo": "let syscall_ptr = [cast([cast(fp + (-5), felt**)] + 0, felt*)]\n",
                 "autogen/starknet/external/weight/aa526043a8db9187624857305b1409f029aec9f9c85f47438b55e65b3afc0639.cairo": "return (syscall_ptr,pedersen_ptr,range_check_ptr,ecdsa_ptr,retdata_size,retdata)\n",
-                "autogen/starknet/external/weight/d5f67cc7e69abbde284d945f017319bd8e156adfab63895c8d652f5c3e4f6c3a.cairo": "let range_check_ptr = [cast([fp + (-5)] + 2, felt*)]\n",
+                "autogen/starknet/external/weight/e651458745e7cd218121c342e0915890767e2f59ddc2e315b8844ad0f47d582e.cairo": "let range_check_ptr = [cast([cast(fp + (-5), felt**)] + 2, felt*)]\n",
                 "autogen/starknet/storage_var/_signing_key/decl.cairo": "namespace _signing_key:\n    from starkware.starknet.common.storage import normalize_address\n    from starkware.starknet.common.syscalls import storage_read, storage_write\n    from starkware.cairo.common.cairo_builtins import HashBuiltin\n    from starkware.cairo.common.hash import hash2\n\n    func addr{pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (res : felt):\n        let res = 0\n        call hash2\n        call normalize_address\n    end\n\n    func read{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (res : felt):\n        let storage_addr = 0\n        call addr\n        call storage_read\n    end\n\n    func write{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(value : felt):\n        let storage_addr = 0\n        call addr\n        call storage_write\n    end\nend",
                 "autogen/starknet/storage_var/_signing_key/impl.cairo": "namespace _signing_key:\n    from starkware.starknet.common.storage import normalize_address\n    from starkware.starknet.common.syscalls import storage_read, storage_write\n    from starkware.cairo.common.cairo_builtins import HashBuiltin\n    from starkware.cairo.common.hash import hash2\n\n    func addr{pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (res : felt):\n        let res = 806987386374835019704333032402928089595733229676546611424511668676239316383\n        return (res=res)\n    end\n\n    func read{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (res : felt):\n        let (storage_addr) = addr()\n        let (__storage_var_temp0) = storage_read(address=storage_addr + 0)\n\n        tempvar syscall_ptr = syscall_ptr\n        tempvar pedersen_ptr = pedersen_ptr\n        tempvar range_check_ptr = range_check_ptr\n        tempvar __storage_var_temp0 : felt = __storage_var_temp0\n        return ([cast(&__storage_var_temp0, felt*)])\n    end\n\n    func write{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(value : felt):\n        let (storage_addr) = addr()\n        storage_write(address=storage_addr + 0, value=[cast(&value, felt) + 0])\n        return ()\n    end\nend"
             },
@@ -812,12 +813,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 86,
-                        "end_line": 175,
+                        "end_line": 241,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 61,
-                        "start_line": 175
+                        "start_line": 241
                     }
                 },
                 "17": {
@@ -839,12 +840,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 87,
-                        "end_line": 175,
+                        "end_line": 241,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 5,
-                        "start_line": 175
+                        "start_line": 241
                     }
                 },
                 "18": {
@@ -867,48 +868,48 @@
                         {
                             "location": {
                                 "end_col": 91,
-                                "end_line": 176,
+                                "end_line": 242,
                                 "input_file": {
                                     "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                 },
                                 "start_col": 5,
-                                "start_line": 176
+                                "start_line": 242
                             },
                             "n_prefix_newlines": 0
                         }
                     ],
                     "inst": {
                         "end_col": 56,
-                        "end_line": 177,
+                        "end_line": 243,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "parent_location": [
                             {
                                 "end_col": 42,
-                                "end_line": 173,
+                                "end_line": 239,
                                 "input_file": {
                                     "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                 },
                                 "parent_location": [
                                     {
                                         "end_col": 96,
-                                        "end_line": 178,
+                                        "end_line": 244,
                                         "input_file": {
                                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                         },
                                         "start_col": 5,
-                                        "start_line": 178
+                                        "start_line": 244
                                     },
                                     "While trying to retrieve the implicit argument 'syscall_ptr' in:"
                                 ],
                                 "start_col": 23,
-                                "start_line": 173
+                                "start_line": 239
                             },
                             "While expanding the reference 'syscall_ptr' in:"
                         ],
                         "start_col": 23,
-                        "start_line": 177
+                        "start_line": 243
                     }
                 },
                 "20": {
@@ -930,12 +931,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 57,
-                        "end_line": 178,
+                        "end_line": 244,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 27,
-                        "start_line": 178
+                        "start_line": 244
                     }
                 },
                 "21": {
@@ -957,12 +958,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 95,
-                        "end_line": 178,
+                        "end_line": 244,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 69,
-                        "start_line": 178
+                        "start_line": 244
                     }
                 },
                 "22": {
@@ -984,12 +985,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 96,
-                        "end_line": 178,
+                        "end_line": 244,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 5,
-                        "start_line": 178
+                        "start_line": 244
                     }
                 },
                 "23": {
@@ -1011,12 +1012,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 79,
-                        "end_line": 201,
+                        "end_line": 267,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 58,
-                        "start_line": 201
+                        "start_line": 267
                     }
                 },
                 "25": {
@@ -1039,12 +1040,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 97,
-                        "end_line": 201,
+                        "end_line": 267,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 5,
-                        "start_line": 201
+                        "start_line": 267
                     }
                 },
                 "26": {
@@ -1067,12 +1068,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 97,
-                        "end_line": 201,
+                        "end_line": 267,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 5,
-                        "start_line": 201
+                        "start_line": 267
                     }
                 },
                 "27": {
@@ -1097,48 +1098,48 @@
                         {
                             "location": {
                                 "end_col": 87,
-                                "end_line": 202,
+                                "end_line": 268,
                                 "input_file": {
                                     "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                 },
                                 "start_col": 5,
-                                "start_line": 202
+                                "start_line": 268
                             },
                             "n_prefix_newlines": 0
                         }
                     ],
                     "inst": {
                         "end_col": 53,
-                        "end_line": 204,
+                        "end_line": 270,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "parent_location": [
                             {
                                 "end_col": 38,
-                                "end_line": 199,
+                                "end_line": 265,
                                 "input_file": {
                                     "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                 },
                                 "parent_location": [
                                     {
                                         "end_col": 34,
-                                        "end_line": 205,
+                                        "end_line": 271,
                                         "input_file": {
                                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                         },
                                         "start_col": 5,
-                                        "start_line": 205
+                                        "start_line": 271
                                     },
                                     "While trying to retrieve the implicit argument 'syscall_ptr' in:"
                                 ],
                                 "start_col": 19,
-                                "start_line": 199
+                                "start_line": 265
                             },
                             "While expanding the reference 'syscall_ptr' in:"
                         ],
                         "start_col": 23,
-                        "start_line": 204
+                        "start_line": 270
                     }
                 },
                 "29": {
@@ -1162,12 +1163,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 33,
-                        "end_line": 205,
+                        "end_line": 271,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 19,
-                        "start_line": 205
+                        "start_line": 271
                     }
                 },
                 "30": {
@@ -1191,12 +1192,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 34,
-                        "end_line": 205,
+                        "end_line": 271,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 5,
-                        "start_line": 205
+                        "start_line": 271
                     }
                 },
                 "31": {
@@ -1218,12 +1219,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 40,
-                        "end_line": 219,
+                        "end_line": 285,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 18,
-                        "start_line": 219
+                        "start_line": 285
                     }
                 },
                 "33": {
@@ -1246,12 +1247,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 71,
-                        "end_line": 219,
+                        "end_line": 285,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 5,
-                        "start_line": 218
+                        "start_line": 284
                     }
                 },
                 "34": {
@@ -1274,12 +1275,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 71,
-                        "end_line": 219,
+                        "end_line": 285,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 5,
-                        "start_line": 218
+                        "start_line": 284
                     }
                 },
                 "35": {
@@ -1302,12 +1303,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 71,
-                        "end_line": 219,
+                        "end_line": 285,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 5,
-                        "start_line": 218
+                        "start_line": 284
                     }
                 },
                 "36": {
@@ -1331,48 +1332,48 @@
                         {
                             "location": {
                                 "end_col": 88,
-                                "end_line": 220,
+                                "end_line": 286,
                                 "input_file": {
                                     "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                 },
                                 "start_col": 5,
-                                "start_line": 220
+                                "start_line": 286
                             },
                             "n_prefix_newlines": 0
                         }
                     ],
                     "inst": {
                         "end_col": 54,
-                        "end_line": 221,
+                        "end_line": 287,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "parent_location": [
                             {
                                 "end_col": 39,
-                                "end_line": 217,
+                                "end_line": 283,
                                 "input_file": {
                                     "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                 },
                                 "parent_location": [
                                     {
                                         "end_col": 14,
-                                        "end_line": 222,
+                                        "end_line": 288,
                                         "input_file": {
                                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                         },
                                         "start_col": 5,
-                                        "start_line": 222
+                                        "start_line": 288
                                     },
                                     "While trying to retrieve the implicit argument 'syscall_ptr' in:"
                                 ],
                                 "start_col": 20,
-                                "start_line": 217
+                                "start_line": 283
                             },
                             "While expanding the reference 'syscall_ptr' in:"
                         ],
                         "start_col": 23,
-                        "start_line": 221
+                        "start_line": 287
                     }
                 },
                 "38": {
@@ -1395,12 +1396,12 @@
                     "hints": [],
                     "inst": {
                         "end_col": 14,
-                        "end_line": 222,
+                        "end_line": 288,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
                         "start_col": 5,
-                        "start_line": 222
+                        "start_line": 288
                     }
                 },
                 "39": {
@@ -1888,7 +1889,7 @@
                         "parent_location": [
                             {
                                 "end_col": 38,
-                                "end_line": 199,
+                                "end_line": 265,
                                 "input_file": {
                                     "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                 },
@@ -1905,7 +1906,7 @@
                                     "While trying to retrieve the implicit argument 'syscall_ptr' in:"
                                 ],
                                 "start_col": 19,
-                                "start_line": 199
+                                "start_line": 265
                             },
                             "While expanding the reference 'syscall_ptr' in:"
                         ],
@@ -2005,7 +2006,7 @@
                     "hints": [],
                     "inst": {
                         "end_col": 38,
-                        "end_line": 199,
+                        "end_line": 265,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
@@ -2034,7 +2035,7 @@
                             "While trying to update the implicit return value 'syscall_ptr' in:"
                         ],
                         "start_col": 19,
-                        "start_line": 199
+                        "start_line": 265
                     }
                 },
                 "58": {
@@ -2381,7 +2382,7 @@
                         "parent_location": [
                             {
                                 "end_col": 39,
-                                "end_line": 217,
+                                "end_line": 283,
                                 "input_file": {
                                     "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                 },
@@ -2398,7 +2399,7 @@
                                     "While trying to retrieve the implicit argument 'syscall_ptr' in:"
                                 ],
                                 "start_col": 20,
-                                "start_line": 217
+                                "start_line": 283
                             },
                             "While expanding the reference 'syscall_ptr' in:"
                         ],
@@ -3039,7 +3040,7 @@
                                         "end_col": 45,
                                         "end_line": 1,
                                         "input_file": {
-                                            "filename": "autogen/starknet/arg_processor/29637b66643568891912d1ed3f5b810e37fc6dff63d2db9fba473c1883482e6f.cairo"
+                                            "filename": "autogen/starknet/arg_processor/5e1cc73f0b484f90bb02da164d88332b40c6f698801aa4d3c603dab22157e902.cairo"
                                         },
                                         "parent_location": [
                                             {
@@ -3050,10 +3051,10 @@
                                                 },
                                                 "parent_location": [
                                                     {
-                                                        "end_col": 44,
+                                                        "end_col": 57,
                                                         "end_line": 1,
                                                         "input_file": {
-                                                            "filename": "autogen/starknet/arg_processor/7f0b238f4e526821a97d8aaa2f9484df4b5bd00cbad10a761ae4225314096a56.cairo"
+                                                            "filename": "autogen/starknet/arg_processor/1b562308a65653425ce06491fa4b4539466f3251a07e73e099d0afe86a48900e.cairo"
                                                         },
                                                         "parent_location": [
                                                             {
@@ -3067,7 +3068,7 @@
                                                             },
                                                             "While handling calldata of"
                                                         ],
-                                                        "start_col": 22,
+                                                        "start_col": 35,
                                                         "start_line": 1
                                                     },
                                                     "While expanding the reference '__calldata_actual_size' in:"
@@ -3116,10 +3117,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 44,
+                        "end_col": 57,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/arg_processor/7f0b238f4e526821a97d8aaa2f9484df4b5bd00cbad10a761ae4225314096a56.cairo"
+                            "filename": "autogen/starknet/arg_processor/1b562308a65653425ce06491fa4b4539466f3251a07e73e099d0afe86a48900e.cairo"
                         },
                         "parent_location": [
                             {
@@ -3162,10 +3163,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 50,
+                        "end_col": 64,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/constructor/f4a8893cfc7cc4f313b0c426fa25c38c6c57664957bc56a170a27945759c5102.cairo"
+                            "filename": "autogen/starknet/external/constructor/c7060df96cb0acca1380ae43bf758cab727bfdf73cb5d34a93e24a9742817fda.cairo"
                         },
                         "parent_location": [
                             {
@@ -3232,10 +3233,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 96,
+                        "end_col": 110,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/constructor/bf54f65e3c6b81daf1c2b60a8cb4034b53ce30386ebc03b148a9de60d6f5dd57.cairo"
+                            "filename": "autogen/starknet/external/constructor/424b26e79f70343cc02557f1fbd25745138efb26a3dc5c8b593ca765b73138b7.cairo"
                         },
                         "parent_location": [
                             {
@@ -3302,10 +3303,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 53,
+                        "end_col": 67,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/constructor/d5f67cc7e69abbde284d945f017319bd8e156adfab63895c8d652f5c3e4f6c3a.cairo"
+                            "filename": "autogen/starknet/external/constructor/e651458745e7cd218121c342e0915890767e2f59ddc2e315b8844ad0f47d582e.cairo"
                         },
                         "parent_location": [
                             {
@@ -3770,10 +3771,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 47,
+                        "end_col": 61,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/constructor/7998f829c4aa5ea19acd9325ec8f13445bd7eb3660e26c1acda6a694c86b221a.cairo"
+                            "filename": "autogen/starknet/external/constructor/06e2dac6fec7b0245dd168190069dcb92ed8c79c7a1ccebce7b1343c3e526229.cairo"
                         },
                         "parent_location": [
                             {
@@ -4039,7 +4040,7 @@
                         "parent_location": [
                             {
                                 "end_col": 42,
-                                "end_line": 173,
+                                "end_line": 239,
                                 "input_file": {
                                     "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                                 },
@@ -4056,7 +4057,7 @@
                                     "While trying to retrieve the implicit argument 'syscall_ptr' in:"
                                 ],
                                 "start_col": 23,
-                                "start_line": 173
+                                "start_line": 239
                             },
                             "While expanding the reference 'syscall_ptr' in:"
                         ],
@@ -4391,7 +4392,7 @@
                     "hints": [],
                     "inst": {
                         "end_col": 42,
-                        "end_line": 173,
+                        "end_line": 239,
                         "input_file": {
                             "filename": "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/starkware/starknet/common/syscalls.cairo"
                         },
@@ -4432,7 +4433,7 @@
                             "While trying to update the implicit return value 'syscall_ptr' in:"
                         ],
                         "start_col": 23,
-                        "start_line": 173
+                        "start_line": 239
                     }
                 },
                 "118": {
@@ -5491,7 +5492,7 @@
                                         "end_col": 45,
                                         "end_line": 1,
                                         "input_file": {
-                                            "filename": "autogen/starknet/arg_processor/29637b66643568891912d1ed3f5b810e37fc6dff63d2db9fba473c1883482e6f.cairo"
+                                            "filename": "autogen/starknet/arg_processor/5e1cc73f0b484f90bb02da164d88332b40c6f698801aa4d3c603dab22157e902.cairo"
                                         },
                                         "parent_location": [
                                             {
@@ -5502,10 +5503,10 @@
                                                 },
                                                 "parent_location": [
                                                     {
-                                                        "end_col": 44,
+                                                        "end_col": 57,
                                                         "end_line": 1,
                                                         "input_file": {
-                                                            "filename": "autogen/starknet/arg_processor/7f0b238f4e526821a97d8aaa2f9484df4b5bd00cbad10a761ae4225314096a56.cairo"
+                                                            "filename": "autogen/starknet/arg_processor/1b562308a65653425ce06491fa4b4539466f3251a07e73e099d0afe86a48900e.cairo"
                                                         },
                                                         "parent_location": [
                                                             {
@@ -5519,7 +5520,7 @@
                                                             },
                                                             "While handling calldata of"
                                                         ],
-                                                        "start_col": 22,
+                                                        "start_col": 35,
                                                         "start_line": 1
                                                     },
                                                     "While expanding the reference '__calldata_actual_size' in:"
@@ -5568,10 +5569,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 44,
+                        "end_col": 57,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/arg_processor/7f0b238f4e526821a97d8aaa2f9484df4b5bd00cbad10a761ae4225314096a56.cairo"
+                            "filename": "autogen/starknet/arg_processor/1b562308a65653425ce06491fa4b4539466f3251a07e73e099d0afe86a48900e.cairo"
                         },
                         "parent_location": [
                             {
@@ -5614,10 +5615,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 50,
+                        "end_col": 64,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/set_signing_key/f4a8893cfc7cc4f313b0c426fa25c38c6c57664957bc56a170a27945759c5102.cairo"
+                            "filename": "autogen/starknet/external/set_signing_key/c7060df96cb0acca1380ae43bf758cab727bfdf73cb5d34a93e24a9742817fda.cairo"
                         },
                         "parent_location": [
                             {
@@ -5684,10 +5685,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 96,
+                        "end_col": 110,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/set_signing_key/bf54f65e3c6b81daf1c2b60a8cb4034b53ce30386ebc03b148a9de60d6f5dd57.cairo"
+                            "filename": "autogen/starknet/external/set_signing_key/424b26e79f70343cc02557f1fbd25745138efb26a3dc5c8b593ca765b73138b7.cairo"
                         },
                         "parent_location": [
                             {
@@ -5754,10 +5755,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 98,
+                        "end_col": 112,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/set_signing_key/5fc167c3d8ad62579d6fff3348b16b5008843c3afd00129ecab00674256d9e3c.cairo"
+                            "filename": "autogen/starknet/external/set_signing_key/9aa866da402dc1b34ae86751a3cabb224b0d9ac08fe13c58bb079af4cd281bec.cairo"
                         },
                         "parent_location": [
                             {
@@ -5824,10 +5825,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 53,
+                        "end_col": 67,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/set_signing_key/d5f67cc7e69abbde284d945f017319bd8e156adfab63895c8d652f5c3e4f6c3a.cairo"
+                            "filename": "autogen/starknet/external/set_signing_key/e651458745e7cd218121c342e0915890767e2f59ddc2e315b8844ad0f47d582e.cairo"
                         },
                         "parent_location": [
                             {
@@ -7443,10 +7444,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 53,
+                        "end_col": 67,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/is_valid_signature/d5f67cc7e69abbde284d945f017319bd8e156adfab63895c8d652f5c3e4f6c3a.cairo"
+                            "filename": "autogen/starknet/external/is_valid_signature/e651458745e7cd218121c342e0915890767e2f59ddc2e315b8844ad0f47d582e.cairo"
                         },
                         "parent_location": [
                             {
@@ -7460,7 +7461,7 @@
                                         "end_col": 24,
                                         "end_line": 2,
                                         "input_file": {
-                                            "filename": "autogen/starknet/arg_processor/c80f2b4c1255618f4d2814b5aaf6356801f3519e3324c6e99cf5ef3fa2a2e246.cairo"
+                                            "filename": "autogen/starknet/arg_processor/3df46cbf6e1c961bf960d5e6d3ae6be29b265ebfbb64fde4e77f50e6604cac78.cairo"
                                         },
                                         "parent_location": [
                                             {
@@ -7530,7 +7531,7 @@
                                         "end_col": 50,
                                         "end_line": 2,
                                         "input_file": {
-                                            "filename": "autogen/starknet/arg_processor/c80f2b4c1255618f4d2814b5aaf6356801f3519e3324c6e99cf5ef3fa2a2e246.cairo"
+                                            "filename": "autogen/starknet/arg_processor/3df46cbf6e1c961bf960d5e6d3ae6be29b265ebfbb64fde4e77f50e6604cac78.cairo"
                                         },
                                         "parent_location": [
                                             {
@@ -7587,7 +7588,7 @@
                         "end_col": 50,
                         "end_line": 2,
                         "input_file": {
-                            "filename": "autogen/starknet/arg_processor/c80f2b4c1255618f4d2814b5aaf6356801f3519e3324c6e99cf5ef3fa2a2e246.cairo"
+                            "filename": "autogen/starknet/arg_processor/3df46cbf6e1c961bf960d5e6d3ae6be29b265ebfbb64fde4e77f50e6604cac78.cairo"
                         },
                         "parent_location": [
                             {
@@ -7649,7 +7650,7 @@
                                         "end_col": 40,
                                         "end_line": 8,
                                         "input_file": {
-                                            "filename": "autogen/starknet/arg_processor/c80f2b4c1255618f4d2814b5aaf6356801f3519e3324c6e99cf5ef3fa2a2e246.cairo"
+                                            "filename": "autogen/starknet/arg_processor/3df46cbf6e1c961bf960d5e6d3ae6be29b265ebfbb64fde4e77f50e6604cac78.cairo"
                                         },
                                         "parent_location": [
                                             {
@@ -7722,7 +7723,7 @@
                                         "end_col": 65,
                                         "end_line": 8,
                                         "input_file": {
-                                            "filename": "autogen/starknet/arg_processor/c80f2b4c1255618f4d2814b5aaf6356801f3519e3324c6e99cf5ef3fa2a2e246.cairo"
+                                            "filename": "autogen/starknet/arg_processor/3df46cbf6e1c961bf960d5e6d3ae6be29b265ebfbb64fde4e77f50e6604cac78.cairo"
                                         },
                                         "parent_location": [
                                             {
@@ -7779,10 +7780,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 65,
+                        "end_col": 69,
                         "end_line": 8,
                         "input_file": {
-                            "filename": "autogen/starknet/arg_processor/c80f2b4c1255618f4d2814b5aaf6356801f3519e3324c6e99cf5ef3fa2a2e246.cairo"
+                            "filename": "autogen/starknet/arg_processor/3df46cbf6e1c961bf960d5e6d3ae6be29b265ebfbb64fde4e77f50e6604cac78.cairo"
                         },
                         "parent_location": [
                             {
@@ -7830,10 +7831,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 44,
+                        "end_col": 57,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/arg_processor/7f0b238f4e526821a97d8aaa2f9484df4b5bd00cbad10a761ae4225314096a56.cairo"
+                            "filename": "autogen/starknet/arg_processor/1b562308a65653425ce06491fa4b4539466f3251a07e73e099d0afe86a48900e.cairo"
                         },
                         "parent_location": [
                             {
@@ -7881,10 +7882,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 53,
+                        "end_col": 67,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/is_valid_signature/d5f67cc7e69abbde284d945f017319bd8e156adfab63895c8d652f5c3e4f6c3a.cairo"
+                            "filename": "autogen/starknet/external/is_valid_signature/e651458745e7cd218121c342e0915890767e2f59ddc2e315b8844ad0f47d582e.cairo"
                         },
                         "parent_location": [
                             {
@@ -7898,7 +7899,7 @@
                                         "end_col": 38,
                                         "end_line": 3,
                                         "input_file": {
-                                            "filename": "autogen/starknet/arg_processor/c80f2b4c1255618f4d2814b5aaf6356801f3519e3324c6e99cf5ef3fa2a2e246.cairo"
+                                            "filename": "autogen/starknet/arg_processor/3df46cbf6e1c961bf960d5e6d3ae6be29b265ebfbb64fde4e77f50e6604cac78.cairo"
                                         },
                                         "parent_location": [
                                             {
@@ -7981,10 +7982,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 50,
+                        "end_col": 64,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/is_valid_signature/f4a8893cfc7cc4f313b0c426fa25c38c6c57664957bc56a170a27945759c5102.cairo"
+                            "filename": "autogen/starknet/external/is_valid_signature/c7060df96cb0acca1380ae43bf758cab727bfdf73cb5d34a93e24a9742817fda.cairo"
                         },
                         "parent_location": [
                             {
@@ -8057,10 +8058,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 96,
+                        "end_col": 110,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/is_valid_signature/bf54f65e3c6b81daf1c2b60a8cb4034b53ce30386ebc03b148a9de60d6f5dd57.cairo"
+                            "filename": "autogen/starknet/external/is_valid_signature/424b26e79f70343cc02557f1fbd25745138efb26a3dc5c8b593ca765b73138b7.cairo"
                         },
                         "parent_location": [
                             {
@@ -8133,10 +8134,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 98,
+                        "end_col": 112,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/is_valid_signature/5fc167c3d8ad62579d6fff3348b16b5008843c3afd00129ecab00674256d9e3c.cairo"
+                            "filename": "autogen/starknet/external/is_valid_signature/9aa866da402dc1b34ae86751a3cabb224b0d9ac08fe13c58bb079af4cd281bec.cairo"
                         },
                         "parent_location": [
                             {
@@ -8212,7 +8213,7 @@
                         "end_col": 42,
                         "end_line": 3,
                         "input_file": {
-                            "filename": "autogen/starknet/arg_processor/c80f2b4c1255618f4d2814b5aaf6356801f3519e3324c6e99cf5ef3fa2a2e246.cairo"
+                            "filename": "autogen/starknet/arg_processor/3df46cbf6e1c961bf960d5e6d3ae6be29b265ebfbb64fde4e77f50e6604cac78.cairo"
                         },
                         "parent_location": [
                             {
@@ -8437,73 +8438,49 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 40,
-                        "end_line": 2,
+                        "end_col": 53,
+                        "end_line": 5,
                         "input_file": {
-                            "filename": "autogen/starknet/arg_processor/816a1dcb01efb502eaa94e3e908f012344b713d1cb6eca46688ac7b2b2a82609.cairo"
+                            "filename": "autogen/starknet/arg_processor/3df46cbf6e1c961bf960d5e6d3ae6be29b265ebfbb64fde4e77f50e6604cac78.cairo"
                         },
                         "parent_location": [
                             {
-                                "end_col": 53,
+                                "end_col": 66,
                                 "end_line": 49,
                                 "input_file": {
                                     "filename": "contracts/test/SCSKGuardian.cairo"
                                 },
                                 "parent_location": [
                                     {
-                                        "end_col": 48,
-                                        "end_line": 5,
+                                        "end_col": 219,
+                                        "end_line": 1,
                                         "input_file": {
-                                            "filename": "autogen/starknet/arg_processor/c80f2b4c1255618f4d2814b5aaf6356801f3519e3324c6e99cf5ef3fa2a2e246.cairo"
+                                            "filename": "autogen/starknet/external/is_valid_signature/13fa325d8674aee108ad592202dc79d674a0c9d1874360c8595f0598ad772c71.cairo"
                                         },
                                         "parent_location": [
                                             {
-                                                "end_col": 66,
-                                                "end_line": 49,
+                                                "end_col": 24,
+                                                "end_line": 47,
                                                 "input_file": {
                                                     "filename": "contracts/test/SCSKGuardian.cairo"
                                                 },
-                                                "parent_location": [
-                                                    {
-                                                        "end_col": 219,
-                                                        "end_line": 1,
-                                                        "input_file": {
-                                                            "filename": "autogen/starknet/external/is_valid_signature/13fa325d8674aee108ad592202dc79d674a0c9d1874360c8595f0598ad772c71.cairo"
-                                                        },
-                                                        "parent_location": [
-                                                            {
-                                                                "end_col": 24,
-                                                                "end_line": 47,
-                                                                "input_file": {
-                                                                    "filename": "contracts/test/SCSKGuardian.cairo"
-                                                                },
-                                                                "start_col": 6,
-                                                                "start_line": 47
-                                                            },
-                                                            "While constructing the external wrapper for:"
-                                                        ],
-                                                        "start_col": 201,
-                                                        "start_line": 1
-                                                    },
-                                                    "While expanding the reference '__calldata_arg_sig' in:"
-                                                ],
-                                                "start_col": 55,
-                                                "start_line": 49
+                                                "start_col": 6,
+                                                "start_line": 47
                                             },
-                                            "While handling calldata argument 'sig'"
+                                            "While constructing the external wrapper for:"
                                         ],
-                                        "start_col": 34,
-                                        "start_line": 5
+                                        "start_col": 201,
+                                        "start_line": 1
                                     },
-                                    "While expanding the reference '__calldata_ptr' in:"
+                                    "While expanding the reference '__calldata_arg_sig' in:"
                                 ],
-                                "start_col": 39,
+                                "start_col": 55,
                                 "start_line": 49
                             },
-                            "While handling calldata argument 'sig_len'"
+                            "While handling calldata argument 'sig'"
                         ],
-                        "start_col": 22,
-                        "start_line": 2
+                        "start_col": 26,
+                        "start_line": 5
                     }
                 },
                 "200": {
@@ -9617,10 +9594,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 44,
+                        "end_col": 57,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/arg_processor/7f0b238f4e526821a97d8aaa2f9484df4b5bd00cbad10a761ae4225314096a56.cairo"
+                            "filename": "autogen/starknet/arg_processor/1b562308a65653425ce06491fa4b4539466f3251a07e73e099d0afe86a48900e.cairo"
                         },
                         "parent_location": [
                             {
@@ -9694,10 +9671,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 53,
+                        "end_col": 67,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/weight/d5f67cc7e69abbde284d945f017319bd8e156adfab63895c8d652f5c3e4f6c3a.cairo"
+                            "filename": "autogen/starknet/external/weight/e651458745e7cd218121c342e0915890767e2f59ddc2e315b8844ad0f47d582e.cairo"
                         },
                         "parent_location": [
                             {
@@ -9810,10 +9787,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 49,
+                        "end_col": 63,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/weight/5fde12919a619b4f3b6db54e029b6f16cf362872762815d37c1ecd8dc9763296.cairo"
+                            "filename": "autogen/starknet/external/weight/910226883b5574b28ea2537fe13a3852f331a56beabe1d4fd14748a9b4dbd7d0.cairo"
                         },
                         "parent_location": [
                             {
@@ -9881,10 +9858,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 50,
+                        "end_col": 64,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/weight/2b2b112e26c3beede5b9972951116a97636fe75acd4b9f33c1ffe390f55843c4.cairo"
+                            "filename": "autogen/starknet/external/weight/6629798b6d541e54a9dc778ffa54e7ef20b4f98b088671dd5070b7e0b547f0e6.cairo"
                         },
                         "parent_location": [
                             {
@@ -10023,10 +10000,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 47,
+                        "end_col": 61,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/weight/7998f829c4aa5ea19acd9325ec8f13445bd7eb3660e26c1acda6a694c86b221a.cairo"
+                            "filename": "autogen/starknet/external/weight/06e2dac6fec7b0245dd168190069dcb92ed8c79c7a1ccebce7b1343c3e526229.cairo"
                         },
                         "parent_location": [
                             {
@@ -10886,10 +10863,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 44,
+                        "end_col": 57,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/arg_processor/7f0b238f4e526821a97d8aaa2f9484df4b5bd00cbad10a761ae4225314096a56.cairo"
+                            "filename": "autogen/starknet/arg_processor/1b562308a65653425ce06491fa4b4539466f3251a07e73e099d0afe86a48900e.cairo"
                         },
                         "parent_location": [
                             {
@@ -10930,10 +10907,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 50,
+                        "end_col": 64,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/get_signing_key/f4a8893cfc7cc4f313b0c426fa25c38c6c57664957bc56a170a27945759c5102.cairo"
+                            "filename": "autogen/starknet/external/get_signing_key/c7060df96cb0acca1380ae43bf758cab727bfdf73cb5d34a93e24a9742817fda.cairo"
                         },
                         "parent_location": [
                             {
@@ -10998,10 +10975,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 96,
+                        "end_col": 110,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/get_signing_key/bf54f65e3c6b81daf1c2b60a8cb4034b53ce30386ebc03b148a9de60d6f5dd57.cairo"
+                            "filename": "autogen/starknet/external/get_signing_key/424b26e79f70343cc02557f1fbd25745138efb26a3dc5c8b593ca765b73138b7.cairo"
                         },
                         "parent_location": [
                             {
@@ -11066,10 +11043,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 53,
+                        "end_col": 67,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/get_signing_key/d5f67cc7e69abbde284d945f017319bd8e156adfab63895c8d652f5c3e4f6c3a.cairo"
+                            "filename": "autogen/starknet/external/get_signing_key/e651458745e7cd218121c342e0915890767e2f59ddc2e315b8844ad0f47d582e.cairo"
                         },
                         "parent_location": [
                             {
@@ -11496,10 +11473,10 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 47,
+                        "end_col": 61,
                         "end_line": 1,
                         "input_file": {
-                            "filename": "autogen/starknet/external/get_signing_key/7998f829c4aa5ea19acd9325ec8f13445bd7eb3660e26c1acda6a694c86b221a.cairo"
+                            "filename": "autogen/starknet/external/get_signing_key/06e2dac6fec7b0245dd168190069dcb92ed8c79c7a1ccebce7b1343c3e526229.cairo"
                         },
                         "parent_location": [
                             {
@@ -15436,9 +15413,52 @@
                 "type": "const",
                 "value": 21167594061783206823196716140
             },
+            "starkware.starknet.common.syscalls.DELEGATE_L1_HANDLER_SELECTOR": {
+                "type": "const",
+                "value": 23274015802972845247556842986379118667122
+            },
             "starkware.starknet.common.syscalls.DictAccess": {
                 "destination": "starkware.cairo.common.dict_access.DictAccess",
                 "type": "alias"
+            },
+            "starkware.starknet.common.syscalls.EMIT_EVENT_SELECTOR": {
+                "type": "const",
+                "value": 1280709301550335749748
+            },
+            "starkware.starknet.common.syscalls.EmitEvent": {
+                "full_name": "starkware.starknet.common.syscalls.EmitEvent",
+                "members": {
+                    "data": {
+                        "cairo_type": "felt*",
+                        "offset": 4
+                    },
+                    "data_len": {
+                        "cairo_type": "felt",
+                        "offset": 3
+                    },
+                    "keys": {
+                        "cairo_type": "felt*",
+                        "offset": 2
+                    },
+                    "keys_len": {
+                        "cairo_type": "felt",
+                        "offset": 1
+                    },
+                    "selector": {
+                        "cairo_type": "felt",
+                        "offset": 0
+                    }
+                },
+                "size": 5,
+                "type": "struct"
+            },
+            "starkware.starknet.common.syscalls.GET_BLOCK_NUMBER_SELECTOR": {
+                "type": "const",
+                "value": 1448089106835523001438702345020786
+            },
+            "starkware.starknet.common.syscalls.GET_BLOCK_TIMESTAMP_SELECTOR": {
+                "type": "const",
+                "value": 24294903732626645868215235778792757751152
             },
             "starkware.starknet.common.syscalls.GET_CALLER_ADDRESS_SELECTOR": {
                 "type": "const",
@@ -15455,6 +15475,80 @@
             "starkware.starknet.common.syscalls.GET_TX_SIGNATURE_SELECTOR": {
                 "type": "const",
                 "value": 1448089128652340074717162277007973
+            },
+            "starkware.starknet.common.syscalls.GetBlockNumber": {
+                "full_name": "starkware.starknet.common.syscalls.GetBlockNumber",
+                "members": {
+                    "request": {
+                        "cairo_type": "starkware.starknet.common.syscalls.GetBlockNumberRequest",
+                        "offset": 0
+                    },
+                    "response": {
+                        "cairo_type": "starkware.starknet.common.syscalls.GetBlockNumberResponse",
+                        "offset": 1
+                    }
+                },
+                "size": 2,
+                "type": "struct"
+            },
+            "starkware.starknet.common.syscalls.GetBlockNumberRequest": {
+                "full_name": "starkware.starknet.common.syscalls.GetBlockNumberRequest",
+                "members": {
+                    "selector": {
+                        "cairo_type": "felt",
+                        "offset": 0
+                    }
+                },
+                "size": 1,
+                "type": "struct"
+            },
+            "starkware.starknet.common.syscalls.GetBlockNumberResponse": {
+                "full_name": "starkware.starknet.common.syscalls.GetBlockNumberResponse",
+                "members": {
+                    "block_number": {
+                        "cairo_type": "felt",
+                        "offset": 0
+                    }
+                },
+                "size": 1,
+                "type": "struct"
+            },
+            "starkware.starknet.common.syscalls.GetBlockTimestamp": {
+                "full_name": "starkware.starknet.common.syscalls.GetBlockTimestamp",
+                "members": {
+                    "request": {
+                        "cairo_type": "starkware.starknet.common.syscalls.GetBlockTimestampRequest",
+                        "offset": 0
+                    },
+                    "response": {
+                        "cairo_type": "starkware.starknet.common.syscalls.GetBlockTimestampResponse",
+                        "offset": 1
+                    }
+                },
+                "size": 2,
+                "type": "struct"
+            },
+            "starkware.starknet.common.syscalls.GetBlockTimestampRequest": {
+                "full_name": "starkware.starknet.common.syscalls.GetBlockTimestampRequest",
+                "members": {
+                    "selector": {
+                        "cairo_type": "felt",
+                        "offset": 0
+                    }
+                },
+                "size": 1,
+                "type": "struct"
+            },
+            "starkware.starknet.common.syscalls.GetBlockTimestampResponse": {
+                "full_name": "starkware.starknet.common.syscalls.GetBlockTimestampResponse",
+                "members": {
+                    "block_timestamp": {
+                        "cairo_type": "felt",
+                        "offset": 0
+                    }
+                },
+                "size": 1,
+                "type": "struct"
             },
             "starkware.starknet.common.syscalls.GetCallerAddress": {
                 "full_name": "starkware.starknet.common.syscalls.GetCallerAddress",

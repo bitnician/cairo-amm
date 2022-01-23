@@ -16,6 +16,26 @@ from starkware.cairo.common.uint256 import (
     Uint256, uint256_add, uint256_sub, uint256_le, uint256_lt, uint256_mul, uint256_eq,
     uint256_unsigned_div_rem)
 
+@event
+func poolWhitelisted(pool : felt):
+end
+
+@event
+func liquidityAdded(
+        to : felt, tokenA : felt, tokenB : felt, amountA : Uint256, amountB : Uint256, pool : felt):
+end
+
+@event
+func liquidityRemoved(
+        to : felt, tokenA : felt, tokenB : felt, amountA : Uint256, amountB : Uint256, pool : felt):
+end
+
+@event
+func swapped(
+        swapper : felt, tokenIn : felt, tokenOut : felt, amountIn : Uint256, amountOut : Uint256,
+        pool : felt):
+end
+
 @storage_var
 func owner() -> (owner_address : felt):
 end
@@ -119,6 +139,8 @@ func whitelistPool{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check
     poolAddress.write(token0, token1, pool)
     poolAddress.write(token1, token0, pool)
 
+    poolWhitelisted.emit(pool)
+
     return ()
 end
 
@@ -157,6 +179,8 @@ func initLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check
     IERC20.transferFrom(tokenB, to, poolAddress, amountBDesired)
 
     IPool.mint(poolAddress, _owner, amountsSqrt, poolAddress)
+
+    liquidityAdded.emit(to, tokenA, tokenB, amountADesired, amountBDesired, poolAddress)
     return ()
 end
 
@@ -231,6 +255,8 @@ func addLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
 
     IPool.mint(poolAddress, caller, Uint256(0, 0), poolAddress)
 
+    liquidityAdded.emit(caller, tokenA, tokenB, amountA, amountB, poolAddress)
+
     return ()
 end
 
@@ -276,6 +302,8 @@ func removeLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_che
 
     assert enoughAmountA = 1
     assert enoughAmountB = 1
+
+    liquidityRemoved.emit(caller, tokenA, tokenB, amountA, amountB, poolAddress)
 
     return ()
 end
@@ -377,7 +405,7 @@ func _swap{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     alloc_locals
 
     let (local token0) = IPool.getToken0(pool)
-    local tokenOut
+
     local amount1Out : Uint256
     local amount0Out : Uint256
 
@@ -391,6 +419,8 @@ func _swap{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
 
     # swap
     IPool.swap(pool, amount0Out, amount1Out, to, pool)
+
+    swapped.emit(to, tokenIn, tokenOut, amountIn, amountOut, pool)
     return ()
 end
 
