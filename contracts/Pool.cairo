@@ -108,8 +108,7 @@ func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         assert amountsSqrtEqZero = 0
 
         ERC20_mint(to, amountsSqrt)
-        # liquidity = amountsSqrt
-        # _mint(ZERO_ADDRESS, Uint256(1000, 0))  # TODO: should lock MINIMUM_LIQUIDITY lp tokens?
+
         tempvar syscall_ptr = syscall_ptr
         tempvar pedersen_ptr = pedersen_ptr
         tempvar range_check_ptr = range_check_ptr
@@ -118,6 +117,9 @@ func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
 
         let (numeratorA : Uint256, aIsOverflow) = uint256_mul(amount0, _totalSupply)
         let (numeratorB : Uint256, bIsOverflow) = uint256_mul(amount1, _totalSupply)
+
+        assert (aIsOverflow) = Uint256(0, 0)
+        assert (bIsOverflow) = Uint256(0, 0)
 
         let (a, _) = uint256_unsigned_div_rem(numeratorA, _reserve0)
         let (b, _) = uint256_unsigned_div_rem(numeratorB, _reserve1)
@@ -169,14 +171,11 @@ func burn{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     let (numeratorA : Uint256, aIsOverflow) = uint256_mul(liquidity, balance0)
     let (numeratorB : Uint256, bIsOverflow) = uint256_mul(liquidity, balance1)
 
-    # TODO: check overflow
-    # assert (aIsOverflow) = 0
-    # assert (bIsOverflow) = 0
+    assert (aIsOverflow) = Uint256(0, 0)
+    assert (bIsOverflow) = Uint256(0, 0)
 
     let (amount0, _) = uint256_unsigned_div_rem(numeratorA, _totalSupply)
     let (amount1, _) = uint256_unsigned_div_rem(numeratorB, _totalSupply)
-    # let (amount0, _) = unsigned_div_rem(liquidity * balance0, totalSupply)
-    # let (amount1, _) = unsigned_div_rem(liquidity * balance1, totalSupply)
 
     let (amount0EqZero) = uint256_eq(amount0, Uint256(0, 0))
     let (amount1EqZero) = uint256_eq(amount1, Uint256(0, 0))
@@ -271,16 +270,26 @@ func swap{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     assert zeroAmountIn = 0
 
     # Check K formula
-    let (balanceInMul1000, isOverflow) = uint256_mul(balanceTokenIn, Uint256(1000, 0))
-    let (amountInMul3, isOverflow) = uint256_mul(amountIn, Uint256(3, 0))
+    let (balanceInMul1000, isOverflow_a) = uint256_mul(balanceTokenIn, Uint256(1000, 0))
+    let (amountInMul3, isOverflow_b) = uint256_mul(amountIn, Uint256(3, 0))
+
+    assert (isOverflow_a) = Uint256(0, 0)
+    assert (isOverflow_b) = Uint256(0, 0)
 
     let (balanceInAdjusted) = uint256_sub(balanceInMul1000, amountInMul3)
-    let (balanceOutAdjusted, isOverflow) = uint256_mul(balanceTokenOut, Uint256(1000, 0))
+    let (balanceOutAdjusted, isOverflow_c) = uint256_mul(balanceTokenOut, Uint256(1000, 0))
 
-    let (mulAdjusted, isOverflow) = uint256_mul(balanceInAdjusted, balanceOutAdjusted)
+    assert (isOverflow_c) = Uint256(0, 0)
 
-    let (mulReserves, isOverflow) = uint256_mul(reserveIn, reserve_out)
-    let (mulReservesMul10Pow6, isOverflow) = uint256_mul(mulReserves, Uint256(1000000, 0))
+    let (mulAdjusted, isOverflow_d) = uint256_mul(balanceInAdjusted, balanceOutAdjusted)
+
+    assert (isOverflow_d) = Uint256(0, 0)
+
+    let (mulReserves, isOverflow_e) = uint256_mul(reserveIn, reserve_out)
+    let (mulReservesMul10Pow6, isOverflow_f) = uint256_mul(mulReserves, Uint256(1000000, 0))
+
+    assert (isOverflow_e) = Uint256(0, 0)
+    assert (isOverflow_f) = Uint256(0, 0)
 
     let (kFormula) = uint256_le(mulReservesMul10Pow6, mulAdjusted)
 
