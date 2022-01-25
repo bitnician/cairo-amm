@@ -1,9 +1,6 @@
-node_modules
-.env
-
-#Hardhat files
-cache
-artifacts
-typechain-types
-
-scripts/test.ts
+*cache
+*.deployments.txt
+*env
+__pycache__
+.history
+.hypothesis/
