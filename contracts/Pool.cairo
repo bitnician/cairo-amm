@@ -3,7 +3,8 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.hash import hash2
-from starkware.cairo.common.math import assert_le, assert_nn_le, unsigned_div_rem, assert_not_zero
+from starkware.cairo.common.math import (
+    assert_le, assert_nn_le, unsigned_div_rem, assert_not_zero, sqrt)
 from starkware.starknet.common.syscalls import storage_read, storage_write
 from starkware.cairo.common.alloc import alloc
 from starkware.starknet.common.syscalls import get_caller_address
@@ -115,11 +116,11 @@ func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     else:
         assert amountsSqrtEqZero = 1
 
-        let (numeratorA : Uint256, aIsOverflow) = uint256_mul(amount0, _totalSupply)
-        let (numeratorB : Uint256, bIsOverflow) = uint256_mul(amount1, _totalSupply)
+        let (numeratorA : Uint256, isOverflow_a) = uint256_mul(amount0, _totalSupply)
+        assert (isOverflow_a) = Uint256(0, 0)
 
-        assert (aIsOverflow) = Uint256(0, 0)
-        assert (bIsOverflow) = Uint256(0, 0)
+        let (numeratorB : Uint256, isOverflow_b) = uint256_mul(amount1, _totalSupply)
+        assert (isOverflow_b) = Uint256(0, 0)
 
         let (a, _) = uint256_unsigned_div_rem(numeratorA, _reserve0)
         let (b, _) = uint256_unsigned_div_rem(numeratorB, _reserve1)
@@ -168,17 +169,18 @@ func burn{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
 
     let (_totalSupply : Uint256) = totalSupply()
 
-    let (numeratorA : Uint256, aIsOverflow) = uint256_mul(liquidity, balance0)
-    let (numeratorB : Uint256, bIsOverflow) = uint256_mul(liquidity, balance1)
+    let (numeratorA : Uint256, isOverflow_a) = uint256_mul(liquidity, balance0)
+    assert (isOverflow_a) = Uint256(0, 0)
 
-    assert (aIsOverflow) = Uint256(0, 0)
-    assert (bIsOverflow) = Uint256(0, 0)
+    let (numeratorB : Uint256, isOverflow_b) = uint256_mul(liquidity, balance1)
+    assert (isOverflow_a) = Uint256(0, 0)
 
     let (amount0, _) = uint256_unsigned_div_rem(numeratorA, _totalSupply)
     let (amount1, _) = uint256_unsigned_div_rem(numeratorB, _totalSupply)
 
     let (amount0EqZero) = uint256_eq(amount0, Uint256(0, 0))
     let (amount1EqZero) = uint256_eq(amount1, Uint256(0, 0))
+
     assert (amount0EqZero) = 0
     assert (amount1EqZero) = 0
 
@@ -271,24 +273,23 @@ func swap{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
 
     # Check K formula
     let (balanceInMul1000, isOverflow_a) = uint256_mul(balanceTokenIn, Uint256(1000, 0))
-    let (amountInMul3, isOverflow_b) = uint256_mul(amountIn, Uint256(3, 0))
-
     assert (isOverflow_a) = Uint256(0, 0)
+
+    let (amountInMul3, isOverflow_b) = uint256_mul(amountIn, Uint256(3, 0))
     assert (isOverflow_b) = Uint256(0, 0)
 
     let (balanceInAdjusted) = uint256_sub(balanceInMul1000, amountInMul3)
-    let (balanceOutAdjusted, isOverflow_c) = uint256_mul(balanceTokenOut, Uint256(1000, 0))
 
+    let (balanceOutAdjusted, isOverflow_c) = uint256_mul(balanceTokenOut, Uint256(1000, 0))
     assert (isOverflow_c) = Uint256(0, 0)
 
     let (mulAdjusted, isOverflow_d) = uint256_mul(balanceInAdjusted, balanceOutAdjusted)
-
     assert (isOverflow_d) = Uint256(0, 0)
 
     let (mulReserves, isOverflow_e) = uint256_mul(reserveIn, reserve_out)
-    let (mulReservesMul10Pow6, isOverflow_f) = uint256_mul(mulReserves, Uint256(1000000, 0))
-
     assert (isOverflow_e) = Uint256(0, 0)
+
+    let (mulReservesMul10Pow6, isOverflow_f) = uint256_mul(mulReserves, Uint256(1000000, 0))
     assert (isOverflow_f) = Uint256(0, 0)
 
     let (kFormula) = uint256_le(mulReservesMul10Pow6, mulAdjusted)

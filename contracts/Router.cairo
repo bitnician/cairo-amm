@@ -109,6 +109,7 @@ func quote{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     assert reserveBIsZero = 0
 
     let (amountAMulReserveB, isOverflow) = uint256_mul(amountA, reserveB)
+    assert (isOverflow) = Uint256(0, 0)
 
     let (amountB, _) = uint256_unsigned_div_rem(amountAMulReserveB, reserveA)
 
@@ -155,10 +156,13 @@ end
 # OR the amount is not valid OR the pool has already some amounts of liquidity.
 @external
 func initLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        to : felt, tokenA : felt, tokenB : felt, amountADesired : Uint256,
-        amountBDesired : Uint256, amountsSqrt : Uint256) -> ():
+        to : felt, tokenA : felt, tokenB : felt, amountADesired : Uint256, amountBDesired : Uint256,
+        amountsSqrt : Uint256) -> ():
     alloc_locals
     let (_owner) = onlyOwner()
+
+    let (desiredAmountsMultiplied, isOverflow) = uint256_mul(amountADesired, amountBDesired)
+    assert (isOverflow) = Uint256(0, 0)
 
     let (poolAddress) = getPoolAddress(tokenA, tokenB)
 
@@ -350,15 +354,17 @@ func getAmountIn{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     assert (enoughReserveOut) = 1
 
     let (reserveInMulAmountOut, _) = uint256_mul(reserveIn, amountOut)
-    let (numerator, _) = uint256_mul(reserveInMulAmountOut, Uint256(1000, 0))
+    let (numerator, isOverflow_a) = uint256_mul(reserveInMulAmountOut, Uint256(1000, 0))
+    assert (isOverflow_a) = Uint256(0, 0)
 
     let (reserveOutSubAmountOut) = uint256_sub(reserveOut, amountOut)
-    let (denominator, _) = uint256_mul(reserveOutSubAmountOut, Uint256(997, 0))
+    let (denominator, isOverflow_b) = uint256_mul(reserveOutSubAmountOut, Uint256(997, 0))
+    assert (isOverflow_b) = Uint256(0, 0)
 
     let (amountIn, _) = uint256_unsigned_div_rem(numerator, denominator)
 
-    let (res, isOverflow) = uint256_add(amountIn, Uint256(1, 0))
-    assert (isOverflow) = 0
+    let (res, isOverflow_c) = uint256_add(amountIn, Uint256(1, 0))
+    assert (isOverflow_c) = 0
 
     return (res)
 end
@@ -387,12 +393,17 @@ func getAmountOut{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     assert (enoughReserveIn) = 1
     assert (enoughReserveOut) = 1
 
-    let (amountInWithFee, _) = uint256_mul(amountIn, Uint256(997, 0))
-    let (reserveInMul1000, _) = uint256_mul(reserveIn, Uint256(1000, 0))
+    let (amountInWithFee, isOverflow_a) = uint256_mul(amountIn, Uint256(997, 0))
+    assert (isOverflow_a) = Uint256(0, 0)
 
-    let (numerator, _) = uint256_mul(amountInWithFee, reserveOut)
+    let (reserveInMul1000, isOverflow_b) = uint256_mul(reserveIn, Uint256(1000, 0))
+    assert (isOverflow_b) = Uint256(0, 0)
 
-    let (denominator, _) = uint256_add(reserveInMul1000, amountInWithFee)
+    let (numerator, isOverflow_c) = uint256_mul(amountInWithFee, reserveOut)
+    assert (isOverflow_b) = Uint256(0, 0)
+
+    let (denominator, isOverflow_d) = uint256_add(reserveInMul1000, amountInWithFee)
+    assert isOverflow_d = 0
 
     let (amountOut, _) = uint256_unsigned_div_rem(numerator, denominator)
 
