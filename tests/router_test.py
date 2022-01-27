@@ -123,7 +123,7 @@ async def whitelistPool(contract_factory):
 
 
 async def addLiquidity(
-    contract_factory, token_0_amount, token_1_amount, amountsSqrt=uint(0)
+    contract_factory, token_0_amount, token_1_amount, init=False
 ):
     (
         starknet,
@@ -151,20 +151,7 @@ async def addLiquidity(
         [spender, *token_1_amount],
     )
 
-    if amountsSqrt == uint(0):
-        # add liquidity
-        await deployer.send_transaction(
-            deployer_account,
-            router.contract_address,
-            "addLiquidity",
-            [
-                token_0.contract_address,
-                token_1.contract_address,
-                *token_0_amount,
-                *token_1_amount,
-            ],
-        )
-    else:
+    if init:
         # init liquidity
         await deployer.send_transaction(
             deployer_account,
@@ -176,7 +163,19 @@ async def addLiquidity(
                 token_1.contract_address,
                 *token_0_amount,
                 *token_1_amount,
-                *amountsSqrt,
+            ],
+        )
+    else:
+        # add liquidity
+        await deployer.send_transaction(
+            deployer_account,
+            router.contract_address,
+            "addLiquidity",
+            [
+                token_0.contract_address,
+                token_1.contract_address,
+                *token_0_amount,
+                *token_1_amount,
             ],
         )
 
@@ -205,10 +204,6 @@ async def test_whitelistPool(contract_factory):
     ).call()
     assert execution_result.result.address == pool.contract_address
 
-    await router.onlyWhitelistedPool(pool.contract_address).call()
-
-    assert_revert(router.onlyWhitelistedPool(123).call())
-
 
 @pytest.mark.asyncio
 async def test_initLiquidity(contract_factory):
@@ -231,7 +226,7 @@ async def test_initLiquidity(contract_factory):
         deployer_account.contract_address
     ).call()
 
-    await addLiquidity(contract_factory, token_0_amount, token_1_amount, amountsSqrt)
+    await addLiquidity(contract_factory, token_0_amount, token_1_amount, init=True)
 
     lp_token0_updated_balance = await token_0.balanceOf(
         deployer_account.contract_address
@@ -271,7 +266,7 @@ async def test_removeLiquidity(contract_factory):
 
     pool = await whitelistPool(contract_factory)
 
-    await addLiquidity(contract_factory, token_0_amount, token_1_amount, amountsSqrt)
+    await addLiquidity(contract_factory, token_0_amount, token_1_amount, init=True)
 
     amountAMin = uint(token_0_amount[0] - 100)
     amountBMin = uint(token_1_amount[0] - 100)
@@ -337,7 +332,7 @@ async def test_getAmountIn(contract_factory):
     amountIn = getAmountIn(amountOut, token_0_amount, token_1_amount)
 
     pool = await whitelistPool(contract_factory)
-    await addLiquidity(contract_factory, token_0_amount, token_1_amount, amountsSqrt)
+    await addLiquidity(contract_factory, token_0_amount, token_1_amount, init=True)
 
     execution_info = await router.getAmountIn(
         token_0.contract_address, token_1.contract_address, amountOut
@@ -361,7 +356,7 @@ async def test_getAmountOut(contract_factory):
     amountOut = getAmountOut(amountIn, token_0_amount, token_1_amount)
 
     pool = await whitelistPool(contract_factory)
-    await addLiquidity(contract_factory, token_0_amount, token_1_amount, amountsSqrt)
+    await addLiquidity(contract_factory, token_0_amount, token_1_amount, init=True)
 
     execution_info = await router.getAmountOut(
         token_0.contract_address, token_1.contract_address, amountIn
@@ -383,7 +378,7 @@ async def test_exactInput(contract_factory):
 
     pool = await whitelistPool(contract_factory)
 
-    await addLiquidity(contract_factory, token_0_amount, token_1_amount, amountsSqrt)
+    await addLiquidity(contract_factory, token_0_amount, token_1_amount, init=True)
 
     amountIn = uint(100)
     tokenIn = token_0.contract_address

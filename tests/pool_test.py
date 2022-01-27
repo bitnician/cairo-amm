@@ -85,9 +85,9 @@ async def test_mint(contract_factory):
 
     pool = await deploy_pool(contract_factory)
 
-    token_0_amount = uint(1000000000000000000)  # 1e18
-    token_1_amount = uint(4000000000000000000)  # 4e18
-    amountsSqrt = uint(2000000000000000000)  # 2e18
+    token_0_amount = uint(5990000000000000)  # 1e18
+    token_1_amount = uint(15000000)  # 4e18
+    amountsSqrt = uint(299749895746)  # 2e18
     to = deployer_account.contract_address
 
     # Add liquidity
@@ -109,7 +109,7 @@ async def test_mint(contract_factory):
         deployer_account,
         pool.contract_address,
         "mint",
-        [to, *amountsSqrt, pool.contract_address],
+        [to,  pool.contract_address],
     )
 
     execution_info = await pool.balanceOf(to).call()
@@ -159,7 +159,7 @@ async def test_burn(contract_factory):
         deployer_account,
         pool.contract_address,
         "mint",
-        [to, *amountsSqrt, pool.contract_address],
+        [to, pool.contract_address],
     )
 
     # burn LP
@@ -203,7 +203,6 @@ async def test_swap_exactInput(contract_factory):
 
     token_0_amount = uint(5000000000000000000)  # 5e18
     token_1_amount = uint(10000000000000000000)  # 10e18
-    amountsSqrt = uint(3000000000000000000)  # 3e18
     swapAmount = uint(1000000000000000000)  # 1e18
     outputAmount = getAmountOut(swapAmount, token_0_amount, token_1_amount)
 
@@ -225,7 +224,7 @@ async def test_swap_exactInput(contract_factory):
         deployer_account,
         pool.contract_address,
         "mint",
-        [deployer_account.contract_address, *amountsSqrt, pool.contract_address],
+        [deployer_account.contract_address, pool.contract_address],
     )
 
     # Send input tokens
@@ -283,7 +282,6 @@ async def test_swap_exactOutput(contract_factory):
 
     token_0_amount = uint(5000000000000000000)  # 5e18
     token_1_amount = uint(10000000000000000000)  # 10e18
-    amountsSqrt = uint(3000000000000000000)  # 3e18
     swapAmount = uint(1000000000000000000)  # 1e18
     inputAmount = getAmountIn(swapAmount, token_0_amount, token_1_amount)
 
@@ -305,7 +303,7 @@ async def test_swap_exactOutput(contract_factory):
         deployer_account,
         pool.contract_address,
         "mint",
-        [deployer_account.contract_address, *amountsSqrt, pool.contract_address],
+        [deployer_account.contract_address, pool.contract_address],
     )
 
     await deployer.send_transaction(

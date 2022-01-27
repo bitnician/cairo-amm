@@ -134,13 +134,12 @@
     {
         "inputs": [
             {
-                "name": "pool",
+                "name": "newOwner",
                 "type": "felt"
             }
         ],
-        "name": "onlyWhitelistedPool",
+        "name": "transferOwnership",
         "outputs": [],
-        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -220,10 +219,6 @@
             },
             {
                 "name": "amountBDesired",
-                "type": "Uint256"
-            },
-            {
-                "name": "amountsSqrt",
                 "type": "Uint256"
             }
         ],

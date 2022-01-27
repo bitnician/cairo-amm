@@ -166,8 +166,8 @@ end
 # OR the amount is not valid OR the pool has already some amounts of liquidity.
 @external
 func initLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        to : felt, tokenA : felt, tokenB : felt, amountADesired : Uint256, amountBDesired : Uint256,
-        amountsSqrt : Uint256) -> ():
+        to : felt, tokenA : felt, tokenB : felt, amountADesired : Uint256,
+        amountBDesired : Uint256) -> ():
     alloc_locals
     let (_owner) = onlyOwner()
 
@@ -192,7 +192,7 @@ func initLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check
     IERC20.transferFrom(tokenA, to, poolAddress, amountADesired)
     IERC20.transferFrom(tokenB, to, poolAddress, amountBDesired)
 
-    IPool.mint(poolAddress, _owner, amountsSqrt, poolAddress)
+    IPool.mint(poolAddress, _owner, poolAddress)
 
     liquidityAdded.emit(to, tokenA, tokenB, amountADesired, amountBDesired, poolAddress)
     return ()
@@ -267,7 +267,7 @@ func addLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     IERC20.transferFrom(tokenA, caller, poolAddress, amountA)
     IERC20.transferFrom(tokenB, caller, poolAddress, amountB)
 
-    IPool.mint(poolAddress, caller, Uint256(0, 0), poolAddress)
+    IPool.mint(poolAddress, caller, poolAddress)
 
     liquidityAdded.emit(caller, tokenA, tokenB, amountA, amountB, poolAddress)
 
