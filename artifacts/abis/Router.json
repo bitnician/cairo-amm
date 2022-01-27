@@ -1,0 +1,392 @@
+[
+    {
+        "members": [
+            {
+                "name": "low",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "high",
+                "offset": 1,
+                "type": "felt"
+            }
+        ],
+        "name": "Uint256",
+        "size": 2,
+        "type": "struct"
+    },
+    {
+        "data": [
+            {
+                "name": "pool",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "poolWhitelisted",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "to",
+                "type": "felt"
+            },
+            {
+                "name": "tokenA",
+                "type": "felt"
+            },
+            {
+                "name": "tokenB",
+                "type": "felt"
+            },
+            {
+                "name": "amountA",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountB",
+                "type": "Uint256"
+            },
+            {
+                "name": "pool",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "liquidityAdded",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "to",
+                "type": "felt"
+            },
+            {
+                "name": "tokenA",
+                "type": "felt"
+            },
+            {
+                "name": "tokenB",
+                "type": "felt"
+            },
+            {
+                "name": "amountA",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountB",
+                "type": "Uint256"
+            },
+            {
+                "name": "pool",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "liquidityRemoved",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "swapper",
+                "type": "felt"
+            },
+            {
+                "name": "tokenIn",
+                "type": "felt"
+            },
+            {
+                "name": "tokenOut",
+                "type": "felt"
+            },
+            {
+                "name": "amountIn",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountOut",
+                "type": "Uint256"
+            },
+            {
+                "name": "pool",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "swapped",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "name": "owner_address",
+                "type": "felt"
+            }
+        ],
+        "name": "constructor",
+        "outputs": [],
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "name": "pool",
+                "type": "felt"
+            }
+        ],
+        "name": "onlyWhitelistedPool",
+        "outputs": [],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "tokenA",
+                "type": "felt"
+            },
+            {
+                "name": "tokenB",
+                "type": "felt"
+            }
+        ],
+        "name": "getPoolAddress",
+        "outputs": [
+            {
+                "name": "address",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "amountA",
+                "type": "Uint256"
+            },
+            {
+                "name": "reserveA",
+                "type": "Uint256"
+            },
+            {
+                "name": "reserveB",
+                "type": "Uint256"
+            }
+        ],
+        "name": "quote",
+        "outputs": [
+            {
+                "name": "amountB",
+                "type": "Uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "pool",
+                "type": "felt"
+            }
+        ],
+        "name": "whitelistPool",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "to",
+                "type": "felt"
+            },
+            {
+                "name": "tokenA",
+                "type": "felt"
+            },
+            {
+                "name": "tokenB",
+                "type": "felt"
+            },
+            {
+                "name": "amountADesired",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountBDesired",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountsSqrt",
+                "type": "Uint256"
+            }
+        ],
+        "name": "initLiquidity",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "tokenA",
+                "type": "felt"
+            },
+            {
+                "name": "tokenB",
+                "type": "felt"
+            },
+            {
+                "name": "amountADesired",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountBDesired",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountAMin",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountBMin",
+                "type": "Uint256"
+            }
+        ],
+        "name": "addLiquidity",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "tokenA",
+                "type": "felt"
+            },
+            {
+                "name": "tokenB",
+                "type": "felt"
+            },
+            {
+                "name": "liquidityAmount",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountAMin",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountBMin",
+                "type": "Uint256"
+            },
+            {
+                "name": "to",
+                "type": "felt"
+            }
+        ],
+        "name": "removeLiquidity",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "tokenIn",
+                "type": "felt"
+            },
+            {
+                "name": "tokenOut",
+                "type": "felt"
+            },
+            {
+                "name": "amountOut",
+                "type": "Uint256"
+            }
+        ],
+        "name": "getAmountIn",
+        "outputs": [
+            {
+                "name": "amountIn",
+                "type": "Uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "tokenIn",
+                "type": "felt"
+            },
+            {
+                "name": "tokenOut",
+                "type": "felt"
+            },
+            {
+                "name": "amountIn",
+                "type": "Uint256"
+            }
+        ],
+        "name": "getAmountOut",
+        "outputs": [
+            {
+                "name": "amountOut",
+                "type": "Uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "tokenIn",
+                "type": "felt"
+            },
+            {
+                "name": "tokenOut",
+                "type": "felt"
+            },
+            {
+                "name": "amountIn",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountOutMin",
+                "type": "Uint256"
+            }
+        ],
+        "name": "exactInput",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "tokenIn",
+                "type": "felt"
+            },
+            {
+                "name": "tokenOut",
+                "type": "felt"
+            },
+            {
+                "name": "amountOut",
+                "type": "Uint256"
+            },
+            {
+                "name": "amountIn_max",
+                "type": "Uint256"
+            }
+        ],
+        "name": "exactOutput",
+        "outputs": [],
+        "type": "function"
+    }
+]
