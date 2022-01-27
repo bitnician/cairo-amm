@@ -108,6 +108,15 @@ func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     if totalSupplyEqZero == 1:
         assert amountsSqrtEqZero = 0
 
+        let (amount0Mulamount1 : Uint256, isOverflow_a) = uint256_mul(amount0, amount1)
+        assert (isOverflow_a) = Uint256(0, 0)
+
+        let (amountsSqrtPowTwo : Uint256, isOverflow_b) = uint256_mul(amountsSqrt, amountsSqrt)
+        assert (isOverflow_b) = Uint256(0, 0)
+
+        let (amountsSqrtIsValid) = uint256_eq(amountsSqrtPowTwo, amount0Mulamount1)
+        assert (amountsSqrtIsValid) = 1
+
         ERC20_mint(to, amountsSqrt)
 
         tempvar syscall_ptr = syscall_ptr
@@ -116,11 +125,11 @@ func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     else:
         assert amountsSqrtEqZero = 1
 
-        let (numeratorA : Uint256, isOverflow_a) = uint256_mul(amount0, _totalSupply)
-        assert (isOverflow_a) = Uint256(0, 0)
+        let (numeratorA : Uint256, isOverflow_c) = uint256_mul(amount0, _totalSupply)
+        assert (isOverflow_c) = Uint256(0, 0)
 
-        let (numeratorB : Uint256, isOverflow_b) = uint256_mul(amount1, _totalSupply)
-        assert (isOverflow_b) = Uint256(0, 0)
+        let (numeratorB : Uint256, isOverflow_d) = uint256_mul(amount1, _totalSupply)
+        assert (isOverflow_d) = Uint256(0, 0)
 
         let (a, _) = uint256_unsigned_div_rem(numeratorA, _reserve0)
         let (b, _) = uint256_unsigned_div_rem(numeratorB, _reserve1)
