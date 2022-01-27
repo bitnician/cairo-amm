@@ -68,11 +68,21 @@ end
 # @notice It accepts a pool contract address as argument and check if the given address is whitelisted.
 # @param pool the address of the pool contract.
 # @dev It throws an error if the given address is not whitelisted.
-@view
 func onlyWhitelistedPool{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         pool : felt) -> ():
     let (address) = whitlistedPool.read(pool)
     assert_not_zero(address)
+
+    return ()
+end
+
+# @notice it transfers the ownership of the contract to the given address.
+# @param newOwner : new owner address
+@external
+func transferOwnership{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        newOwner : felt) -> ():
+    let (oldOwner) = onlyOwner()
+    owner.write(value=newOwner)
 
     return ()
 end
