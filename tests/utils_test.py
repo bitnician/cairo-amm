@@ -14,6 +14,10 @@ def event_loop():
 async def test_str_to_felt():
     usdt_felt = str_to_felt("USDT")
     eth_felt = str_to_felt("ETH")
+    rap_felt = str_to_felt("RAP")
+    ra_pool_token_felt = str_to_felt("RA-Pool-Token")
 
     assert usdt_felt == 1431520340
     assert eth_felt == 4543560
+    assert rap_felt == 5390672
+    assert ra_pool_token_felt == 6516880633314881834280318362990
