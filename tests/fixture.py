@@ -39,7 +39,7 @@ def get_contract_files():
     return account_contract_file, erc20_contract_file, router_contract_file, pool_contract_file
 
 
-async def deploy_token(starknet, name, symbol, decimals, supply, owner):
+async def deploy_token(starknet, name, symbol, decimals, supply, owner):  # pylint: disable=too-many-arguments
     _, erc20_contract_file, _, _ = get_contract_files()
 
     token = await starknet.deploy(
