@@ -2,7 +2,7 @@
 import os
 
 from starkware.starknet.testing.starknet import Starknet
-from utils.signer import Signer
+from utils.Signer import Signer
 from utils.helper import uint, str_to_felt
 
 
