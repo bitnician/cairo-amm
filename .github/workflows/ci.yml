@@ -30,4 +30,4 @@ jobs:
         pylint --rcfile=.pylintrc $(git ls-files '*.py')  
     - name: Test with pytest
       run: |
-        pytest test/
+        pytest tests/
