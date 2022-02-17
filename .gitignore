@@ -1,0 +1,6 @@
+*cache
+*.deployments.txt
+*env
+__pycache__
+.history
+.hypothesis/
