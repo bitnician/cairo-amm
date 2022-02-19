@@ -11,7 +11,7 @@ from starkware.starknet.common.syscalls import get_caller_address
 from starkware.cairo.common.math_cmp import is_not_zero, is_le
 from starkware.cairo.common.uint256 import (
     Uint256, uint256_add, uint256_sub, uint256_le, uint256_lt, uint256_mul, uint256_eq,
-    uint256_unsigned_div_rem)
+    uint256_unsigned_div_rem, uint256_sqrt)
 from contracts.utils.interfaces import IERC20, IPool
 
 from contracts.token.ERC20_base import (
@@ -52,9 +52,9 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
         token0Address : felt, token1Address : felt):
     token0.write(value=token0Address)
     token1.write(value=token1Address)
-    # name : RA-Pool-Token
-    # symbol : RAP
-    ERC20_initializer(826545801111111084584111107101110, 826580, Uint256(0, 0), 1)
+    # name : Pool-Token
+    # symbol : PTOK
+    ERC20_initializer(379844936063829741888878, 1347702603, Uint256(0, 0), 1)
 
     return ()
 end
@@ -83,7 +83,7 @@ end
 
 @external
 func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        to : felt, amountsSqrt : Uint256, poolAddress : felt):
+        to : felt, poolAddress : felt):
     alloc_locals
 
     let (_reserve0 : Uint256) = reserve0.read()
@@ -101,21 +101,14 @@ func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     let (_totalSupply : Uint256) = totalSupply()
 
     let (totalSupplyEqZero) = uint256_eq(_totalSupply, Uint256(0, 0))
-    let (amountsSqrtEqZero) = uint256_eq(amountsSqrt, Uint256(0, 0))
 
     local liquidity
 
     if totalSupplyEqZero == 1:
-        assert amountsSqrtEqZero = 0
-
         let (amount0Mulamount1 : Uint256, isOverflow_a) = uint256_mul(amount0, amount1)
         assert (isOverflow_a) = Uint256(0, 0)
 
-        let (amountsSqrtPowTwo : Uint256, isOverflow_b) = uint256_mul(amountsSqrt, amountsSqrt)
-        assert (isOverflow_b) = Uint256(0, 0)
-
-        let (amountsSqrtIsValid) = uint256_eq(amountsSqrtPowTwo, amount0Mulamount1)
-        assert (amountsSqrtIsValid) = 1
+        let (amountsSqrt) = uint256_sqrt(amount0Mulamount1)
 
         ERC20_mint(to, amountsSqrt)
 
@@ -123,13 +116,11 @@ func mint{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         tempvar pedersen_ptr = pedersen_ptr
         tempvar range_check_ptr = range_check_ptr
     else:
-        assert amountsSqrtEqZero = 1
+        let (numeratorA : Uint256, isOverflow_b) = uint256_mul(amount0, _totalSupply)
+        assert (isOverflow_b) = Uint256(0, 0)
 
-        let (numeratorA : Uint256, isOverflow_c) = uint256_mul(amount0, _totalSupply)
+        let (numeratorB : Uint256, isOverflow_c) = uint256_mul(amount1, _totalSupply)
         assert (isOverflow_c) = Uint256(0, 0)
-
-        let (numeratorB : Uint256, isOverflow_d) = uint256_mul(amount1, _totalSupply)
-        assert (isOverflow_d) = Uint256(0, 0)
 
         let (a, _) = uint256_unsigned_div_rem(numeratorA, _reserve0)
         let (b, _) = uint256_unsigned_div_rem(numeratorB, _reserve1)

@@ -68,11 +68,21 @@ end
 # @notice It accepts a pool contract address as argument and check if the given address is whitelisted.
 # @param pool the address of the pool contract.
 # @dev It throws an error if the given address is not whitelisted.
-@view
 func onlyWhitelistedPool{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         pool : felt) -> ():
     let (address) = whitlistedPool.read(pool)
     assert_not_zero(address)
+
+    return ()
+end
+
+# @notice it transfers the ownership of the contract to the given address.
+# @param newOwner : new owner address
+@external
+func transferOwnership{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        newOwner : felt) -> ():
+    let (oldOwner) = onlyOwner()
+    owner.write(value=newOwner)
 
     return ()
 end
@@ -156,8 +166,8 @@ end
 # OR the amount is not valid OR the pool has already some amounts of liquidity.
 @external
 func initLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        to : felt, tokenA : felt, tokenB : felt, amountADesired : Uint256, amountBDesired : Uint256,
-        amountsSqrt : Uint256) -> ():
+        to : felt, tokenA : felt, tokenB : felt, amountADesired : Uint256,
+        amountBDesired : Uint256) -> ():
     alloc_locals
     let (_owner) = onlyOwner()
 
@@ -182,7 +192,7 @@ func initLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check
     IERC20.transferFrom(tokenA, to, poolAddress, amountADesired)
     IERC20.transferFrom(tokenB, to, poolAddress, amountBDesired)
 
-    IPool.mint(poolAddress, _owner, amountsSqrt, poolAddress)
+    IPool.mint(poolAddress, _owner, poolAddress)
 
     liquidityAdded.emit(to, tokenA, tokenB, amountADesired, amountBDesired, poolAddress)
     return ()
@@ -257,7 +267,7 @@ func addLiquidity{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     IERC20.transferFrom(tokenA, caller, poolAddress, amountA)
     IERC20.transferFrom(tokenB, caller, poolAddress, amountB)
 
-    IPool.mint(poolAddress, caller, Uint256(0, 0), poolAddress)
+    IPool.mint(poolAddress, caller, poolAddress)
 
     liquidityAdded.emit(caller, tokenA, tokenB, amountA, amountB, poolAddress)
 

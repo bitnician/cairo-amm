@@ -40,7 +40,7 @@ namespace IPool:
     func getToken1() -> (res : felt):
     end
 
-    func mint(to : felt, amountsSqrt : Uint256, pool : felt):
+    func mint(to : felt, pool : felt):
     end
 
     func burn(to : felt, pool : felt) -> (amount0 : Uint256, amount1 : Uint256):
@@ -69,7 +69,7 @@ namespace IRouter:
 
     func initLiquidity(
             to : felt, tokenA : felt, tokenB : felt, amountADesired : Uint256,
-            amountBDesired : Uint256, amountsSqrt : Uint256) -> ():
+            amountBDesired : Uint256) -> ():
     end
 
     func addLiquidity(

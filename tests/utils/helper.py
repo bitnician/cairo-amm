@@ -1,21 +1,24 @@
-
-def getAmountIn(amountOut, reserveIn, reserve_out):
-
-    numerator = reserveIn[0] * amountOut[0] * 1000
-    denominator = (reserve_out[0] - amountOut[0]) * 997
-    amountIn = (numerator // denominator) + 1
-
-    return (amountIn, 0)
+from starkware.starkware_utils.error_handling import StarkException
+from starkware.starknet.definitions.error_codes import StarknetErrorCode
 
 
-def getAmountOut(amountIn, reserveIn, reserve_out):
+def get_amount_in(amount_out, reserve_in, reserve_out):
 
-    amountInWithFee = amountIn[0] * 997
-    numerator = amountInWithFee * reserve_out[0]
-    denominator = (reserveIn[0] * 1000) + amountInWithFee
-    amountOut = (numerator // denominator)
+    numerator = reserve_in[0] * amount_out[0] * 1000
+    denominator = (reserve_out[0] - amount_out[0]) * 997
+    amount_in = (numerator // denominator) + 1
 
-    return (amountOut, 0)
+    return (amount_in, 0)
+
+
+def get_amount_out(amount_in, reserve_in, reserve_out):
+
+    amount_in_with_fee = amount_in[0] * 997
+    numerator = amount_in_with_fee * reserve_out[0]
+    denominator = (reserve_in[0] * 1000) + amount_in_with_fee
+    amount_out = (numerator // denominator)
+
+    return (amount_out, 0)
 
 
 def str_to_felt(text):
@@ -23,8 +26,8 @@ def str_to_felt(text):
     return int.from_bytes(b_text, "big")
 
 
-def uint(a):
-    return(a, 0)
+def uint(num):
+    return(num, 0)
 
 
 async def assert_revert(fun):
@@ -32,5 +35,5 @@ async def assert_revert(fun):
         await fun
         assert False
     except StarkException as err:
-        _, error = err.args
+        _, error = err.args  # pylint: disable=unbalanced-tuple-unpacking
         assert error['code'] == StarknetErrorCode.TRANSACTION_FAILED
